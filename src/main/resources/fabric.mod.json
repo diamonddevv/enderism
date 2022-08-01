@@ -1,25 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "enderism",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Enderism",
+  "description": "Small End Expansion Mod",
   "authors": [
-    "Me!"
+    "DiamondDev",
+    "kaeg_",
+    "Hood3d4rt",
+    "iGaboDabo"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/diamonddevv/",
+    "sources": "https://github.com/diamonddevv/enderism"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/enderism/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.diamonddev.enderism.EnderismMod"
     ]
   },
   "mixins": [
@@ -33,6 +36,6 @@
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
+
   }
 }

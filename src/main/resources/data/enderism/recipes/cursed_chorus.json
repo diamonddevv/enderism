@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#@#",
+    " # "
+  ],
+  "key": {
+    "@": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "#": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "enderism:cursed_chorus_fruit"
+  }
+}

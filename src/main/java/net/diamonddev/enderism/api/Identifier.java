@@ -1,4 +1,4 @@
-package net.diamonddev.enderism.util;
+package net.diamonddev.enderism.api;
 
 import net.diamonddev.enderism.EnderismMod;
 
