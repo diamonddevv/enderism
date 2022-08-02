@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "enderism:block/chorus_magnetite_end",
+    "end": "enderism:block/chorus_magnetite_top",
     "side": "enderism:block/chorus_magnetite_side"
   }
 }

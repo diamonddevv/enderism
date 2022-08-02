@@ -1,0 +1,18 @@
+{
+  "entity.cursed_chorus.bind.chorus_magnetite": {
+    "subtitle": "subtitle.enderism.cursed_chorus_bind",
+    "sounds": [
+      "minecraft:block/sculk_catalyst/break1",
+      "minecraft:block/sculk_catalyst/break2",
+      "minecraft:block/sculk_catalyst/break3"
+    ]
+  },
+  "entity.cursed_chorus.bind.player": {
+    "subtitle": "subtitle.enderism.cursed_chorus_bind",
+    "sounds": [
+      "minecraft:block/sculk_catalyst/place1",
+      "minecraft:block/sculk_catalyst/place2",
+      "minecraft:block/sculk_catalyst/place3"
+    ]
+  }
+}

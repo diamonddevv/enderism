@@ -13,7 +13,7 @@ import net.minecraft.util.registry.Registry;
 
 public class BlockInit implements Registerable {
 
-    public static Block CHORUS_MAGNETITE = new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).luminance(3).hardness(1.5f).strength(1.2f));
+    public static Block CHORUS_MAGNETITE = new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT).luminance(8).hardness(1.5f).strength(1.2f));
 
     @Override
     public void register() {

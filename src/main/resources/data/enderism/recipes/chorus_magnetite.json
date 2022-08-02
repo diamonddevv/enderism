@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "~@~",
+    "###"
+  ],
+  "key": {
+    "@": {
+      "item": "minecraft:lodestone"
+    },
+    "#": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "~": {
+      "item": "enderism:cursed_chorus_fruit"
+    }
+  },
+  "result": {
+    "item": "enderism:chorus_magnetite"
+  }
+}
