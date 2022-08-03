@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -15,6 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -23,9 +23,13 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 public class CursedChorusItem extends Item {
@@ -36,6 +40,7 @@ public class CursedChorusItem extends Item {
     private final String KEY_COORDS = "enderism.coords";
     private final String KEY_PLAYERBOUND = "enderism.playerbound";
     private final String KEY_MAGNETITEBOUND = "enderism.magnetitebound";
+    private final String KEY_DIMENSION = "enderism.dimension";
 
     public PlayerEntity getPlayer(ItemStack stack, World world) {
         for (PlayerEntity p : world.getPlayers()) {
@@ -48,11 +53,9 @@ public class CursedChorusItem extends Item {
     public String getBoundedPlayerName(ItemStack stack) {
         return stack.getOrCreateNbt().getString(KEY_NAME);
     }
-
     public int[] getListCoords(ItemStack stack) {
         return stack.getOrCreateNbt().getIntArray(KEY_COORDS);
     }
-
     public boolean isPlayerbound(ItemStack stack) {
         return stack.getOrCreateNbt().getBoolean(KEY_PLAYERBOUND);
     }
@@ -72,7 +75,7 @@ public class CursedChorusItem extends Item {
         stack.setNbt(nbt);
     }
 
-    public void addNBT(ItemStack stack, BlockPos blockcoords) {
+    public void addNBT(ItemStack stack, BlockPos blockcoords, DimensionType dimensionType) { // todo: interdimensional travel with chorus magnetite
         // Chorus Magnetite Bound Method
         String name = "Chorus Magnetite at (" + blockcoords.getX() + ", " + blockcoords.getY() + ", " + blockcoords.getZ() + ")";
         int[] ints = getIntArrFromBP(blockcoords);
@@ -100,14 +103,26 @@ public class CursedChorusItem extends Item {
 
         if (isPlayerbound(stack)) { // Player Bind
             if (!world.isClient()) {
-                if (Arrays.stream(Objects.requireNonNull(world.getServer()).getPlayerNames())
-                        .anyMatch(Predicate.isEqual(getPlayer(stack, world).getGameProfile().getName()))) {
-                    Vec3d coords = getPlayer(stack, world).getPos();
+                if (
+                        Arrays.stream(Objects.requireNonNull(world.getServer()).getPlayerNames())
+                        .anyMatch(Predicate.isEqual(getPlayer(stack, world).getGameProfile().getName()))
+                                &&
+                                getPlayer(stack, world).getWorld().getDimension() == user.getWorld().getDimension()
 
-                    world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 2f);
-                    user.teleport(coords.x, coords.y, coords.z, true);
-                    world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
-                    stack.setNbt(null);
+                ) { // Check player is online and in this dimension
+                    Vec3d coords = getPlayer(stack, world).getPos();
+                    ServerWorld targetWorld = Objects.requireNonNull(
+                            getPlayer(stack, world).getServer()).getWorld(getPlayer(stack, world).getWorld().getRegistryKey()
+                    );
+
+                    if (targetWorld != Objects.requireNonNull(user.getServer()).getWorld(user.getWorld().getRegistryKey())) {
+                        teleport(user, world, stack, coords);
+                    } else {
+                        user.moveToWorld(targetWorld);
+                        teleport(user, world, stack, coords);
+                    }
+                } else {
+                    failTeleport(user, world, stack);
                 }
             }
         } else if (isMagnetiteBound(stack)) { // Chorus Magnetite Bind
@@ -116,9 +131,7 @@ public class CursedChorusItem extends Item {
                 Vec3d coords = new Vec3d(ia[0], ia[1], ia[2]);
                 BlockPos pos = new BlockPos(coords);
 
-                System.out.println(world.getBlockState(pos).getBlock() == BlockInit.CHORUS_MAGNETITE);
-
-                // Check Magnetite Still Exists
+                // Check Magnetite Still Exists and is in this dimension
                 if (world.getBlockState(pos) == BlockInit.CHORUS_MAGNETITE.getDefaultState()) {
 
                     world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 2f);
@@ -126,9 +139,7 @@ public class CursedChorusItem extends Item {
                     world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
                     stack.setNbt(null);
                 } else {
-                    user.damage(DamageSource.MAGIC, 6f);
-                    world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, SoundCategory.PLAYERS, 1f, 0.1f);
-                    stack.setNbt(null);
+                    failTeleport(user, world, stack);
                 }
             }
         }
@@ -160,7 +171,7 @@ public class CursedChorusItem extends Item {
         ItemStack stack = context.getStack();
 
         if (block == BlockInit.CHORUS_MAGNETITE) {
-            addNBT(stack, pos);
+            addNBT(stack, pos, world.getDimension());
             Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
             world.playSound(null, vec.x, vec.y, vec.z, SoundEventInit.CHORUS_MAGNETITE_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
             for (int i = 0; i < 5; i++) {
@@ -198,4 +209,16 @@ public class CursedChorusItem extends Item {
         return new int[]{bp.getX(), bp.getY() + 1, bp.getZ()};
     }
 
+    private void failTeleport(LivingEntity user, World world, ItemStack stack) {
+        user.damage(DamageSource.MAGIC, 6f);
+        world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, SoundCategory.PLAYERS, 1f, 0.1f);
+        stack.setNbt(null);
+    }
+
+    private void teleport(LivingEntity user, World world, ItemStack stack, Vec3d coords) {
+        world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 2f);
+        user.teleport(coords.x, coords.y, coords.z, true);
+        world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
+        stack.setNbt(null);
+    }
 }

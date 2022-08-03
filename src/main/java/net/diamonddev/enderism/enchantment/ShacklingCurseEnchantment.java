@@ -6,14 +6,18 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 
-public class UpthrustEnchantment extends Enchantment {
-    public UpthrustEnchantment() {
+public class ShacklingCurseEnchantment extends Enchantment {
+    public ShacklingCurseEnchantment() {
         super(Rarity.VERY_RARE, EnchantmentTarget.WEARABLE, new EquipmentSlot[]{EquipmentSlot.CHEST});
+    }
+
+    protected ShacklingCurseEnchantment(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
+        super(weight, type, slotTypes);
     }
 
     @Override
     public int getMaxLevel() {
-        return 4;
+        return 1;
     }
 
     @Override
@@ -22,7 +26,7 @@ public class UpthrustEnchantment extends Enchantment {
     }
 
     @Override
-    public boolean isTreasure() {
-        return false;
+    public boolean isCursed() {
+        return true;
     }
 }
