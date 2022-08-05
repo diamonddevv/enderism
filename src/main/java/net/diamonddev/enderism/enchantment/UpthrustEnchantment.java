@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 
 public class UpthrustEnchantment extends Enchantment {
     public UpthrustEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTarget.WEARABLE, new EquipmentSlot[]{EquipmentSlot.CHEST});
+        super(Rarity.RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override
     public int getMaxLevel() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class UpthrustEnchantment extends Enchantment {
 
     @Override
     public boolean isTreasure() {
-        return false;
+        return true;
     }
 }

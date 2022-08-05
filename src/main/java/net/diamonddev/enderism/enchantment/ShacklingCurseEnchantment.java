@@ -8,11 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class ShacklingCurseEnchantment extends Enchantment {
     public ShacklingCurseEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTarget.WEARABLE, new EquipmentSlot[]{EquipmentSlot.CHEST});
-    }
-
-    protected ShacklingCurseEnchantment(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
-        super(weight, type, slotTypes);
+        super(Rarity.VERY_RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override

@@ -1,9 +1,10 @@
 {
   "item.enderism.cursed_chorus_fruit": "Cursed Chorus Fruit",
   "item.enderism.cursed_chorus_fruit.bound": "Bound to: %s",
-  "item.enderism.cursed_chorus_fruit.unbound": "Unbound",
+  "item.enderism.cursed_chorus_fruit.unbound": "§7Unbound",
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
+  "block.enderism.fibrous_chorus": "Fibrous Chorus",
 
   "enchantment.enderism.upthrust": "Upthrust",
   "enchantment.enderism.aerodynamics": "Aerodynamics",

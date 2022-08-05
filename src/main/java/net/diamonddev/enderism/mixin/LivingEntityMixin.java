@@ -3,20 +3,24 @@ package net.diamonddev.enderism.mixin;
 
 import net.diamonddev.enderism.api.EnderismEnchantHelper;
 import net.diamonddev.enderism.init.EnchantInit;
+import net.diamonddev.enderism.init.GameruleInit;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static net.minecraft.util.math.Direction.Axis.*;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -36,11 +40,14 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow
     private int jumpingCooldown;
 
-    @Shadow protected abstract void jump();
+    @Shadow
+    protected abstract void jump();
 
-    @Shadow public abstract boolean canMoveVoluntarily();
 
-    @Shadow public abstract void setNoDrag(boolean noDrag);
+    @Shadow
+    public abstract void setNoDrag(boolean noDrag);
+
+    @Shadow public abstract boolean isFallFlying();
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -85,8 +92,12 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "tickFallFlying", at = @At("HEAD"), cancellable = true)
-    private void supplyAerodynamicsDrag(CallbackInfo ci) {
-        this.setNoDrag(EnderismEnchantHelper.hasEnchantment(EnchantInit.AERODYNAMICS, this.getEquippedStack(EquipmentSlot.CHEST)));
+    @Inject(method = "tickFallFlying", at = @At("HEAD"))
+    private void supplyUpthrustDragPrevention(CallbackInfo ci) {
+        this.setNoDrag(
+                this.jumping && EnderismEnchantHelper.hasEnchantment(EnchantInit.UPTHRUST, this.getEquippedStack(EquipmentSlot.CHEST))
+                        && this.world.getGameRules().getBoolean(GameruleInit.UPTHRUST_NO_DRAG) && this.isFallFlying()
+        );
     }
+
 }
