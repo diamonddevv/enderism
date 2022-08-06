@@ -1,15 +1,25 @@
 package net.diamonddev.enderism.block;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SlimeBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
-public class FibrousChorusBlock extends Block {
+public class FibrousChorusBlock extends SlimeBlock {
     private final float bounce;
 
     public FibrousChorusBlock(float bounce, Settings settings) {
         super(settings);
         this.bounce = bounce;
+    }
+
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        super.onLandedUpon(world, state, pos, entity, fallDistance);
     }
 
     @Override
@@ -22,11 +32,10 @@ public class FibrousChorusBlock extends Block {
     }
 
     private void propel(Entity entity) {
-        float yVel = entity.fallDistance;
-        System.out.println(Math.min(yVel * bounce, 5));
-        entity.setVelocity(0.0, Math.min(yVel * bounce, 5), 0.0);
-        entity.velocityModified = true;
+        Vec3d vec3d = entity.getVelocity();
+        if (vec3d.y < 0.0) {
+            double d = entity instanceof LivingEntity ? 1.0 : 0.8;
+            entity.setVelocity(vec3d.x, vec3d.y * d * this.bounce, vec3d.z);
+        }
     }
-
-
 }

@@ -7,8 +7,8 @@ import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 
 public class ShacklingCurseEnchantment extends Enchantment {
-    public ShacklingCurseEnchantment() {
-        super(Rarity.VERY_RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
+    public ShacklingCurseEnchantment(EnchantmentTarget target) {
+        super(Rarity.VERY_RARE, target, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override

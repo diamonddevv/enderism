@@ -7,8 +7,8 @@ import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 
 public class UpthrustEnchantment extends Enchantment {
-    public UpthrustEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
+    public UpthrustEnchantment(EnchantmentTarget target) {
+        super(Rarity.RARE, target, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override

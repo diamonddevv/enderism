@@ -4,12 +4,9 @@
   "version": "${version}",
 
   "name": "Enderism",
-  "description": "Small End Expansion Mod",
+  "description": "End Expansion Mod",
   "authors": [
-    "DiamondDev",
-    "kaeg_",
-    "Hood3d4rt",
-    "iGaboDabo"
+    "DiamondDev"
   ],
   "contact": {
     "homepage": "https://github.com/diamonddevv/",
@@ -23,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.diamonddev.enderism.EnderismMod"
+    ],
+    "mm:early_risers": [
+      "net.diamonddev.enderism.asm.EarlyRiser"
     ]
   },
   "mixins": [
@@ -33,9 +33,8 @@
     "fabricloader": ">=0.14.6",
     "fabric": "*",
     "minecraft": "~1.19",
-    "java": ">=17"
+    "java": ">=17",
+    "mm": ">=2.3"
   },
-  "suggests": {
-
-  }
+  "accessWidener" : "enderism.accesswidener"
 }

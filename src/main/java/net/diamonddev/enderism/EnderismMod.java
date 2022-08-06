@@ -2,7 +2,6 @@ package net.diamonddev.enderism;
 
 import net.diamonddev.enderism.init.*;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.FabricLoader;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
