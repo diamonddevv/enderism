@@ -1,41 +1,52 @@
 package net.diamonddev.enderism.block;
 
+import net.diamonddev.enderism.init.SoundEventInit;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SlimeBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class FibrousChorusBlock extends SlimeBlock {
-    private final float bounce;
+import java.util.Random;
 
-    public FibrousChorusBlock(float bounce, Settings settings) {
+public class FibrousChorusBlock extends Block {
+    private final float bounce;
+    private final float maxBounce;
+
+    public FibrousChorusBlock(float bounce, float maxBounce, Settings settings) {
         super(settings);
         this.bounce = bounce;
+        this.maxBounce = maxBounce;
     }
 
     @Override
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        super.onLandedUpon(world, state, pos, entity, fallDistance);
-    }
-
-    @Override
-    public void onEntityLand(BlockView world, Entity entity) {
         if (entity.bypassesLandingEffects()) {
-            super.onEntityLand(world, entity);
+            super.onLandedUpon(world, state, pos, entity, fallDistance);
         } else {
+            entity.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
             this.propel(entity);
         }
-    }
+    } // todo: fix?
 
     private void propel(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
-            entity.setVelocity(vec3d.x, vec3d.y * d * this.bounce, vec3d.z);
+            entity.setVelocity(vec3d.x, Math.min(-vec3d.y * bounce / d, maxBounce), vec3d.z);
+            entity.getWorld().playSound(
+                    null,
+                    entity.getBlockPos(),
+                    SoundEventInit.FIBROUS_CHORUS_BOUNCE,
+                    SoundCategory.BLOCKS,
+                    1.0f,
+                    new Random().nextFloat(0.1f, 1.5f)
+            );
         }
     }
 }

@@ -9,11 +9,13 @@ public class SoundEventInit implements Registerable {
 
     public static SoundEvent CHORUS_MAGNETITE_BIND;
     public static SoundEvent PLAYER_BIND;
+    public static SoundEvent FIBROUS_CHORUS_BOUNCE;
 
     @Override
     public void register() {
         CHORUS_MAGNETITE_BIND = create("entity.cursed_chorus.bind.chorus_magnetite");
         PLAYER_BIND = create("entity.cursed_chorus.bind.player");
+        FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
     }
 
     private SoundEvent create(String name) {

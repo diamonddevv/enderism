@@ -14,5 +14,12 @@
       "minecraft:block/sculk_catalyst/place2",
       "minecraft:block/sculk_catalyst/place3"
     ]
+  },
+  "block.fibrous_chorus.bounce": {
+    "subtitle": "subtitle.enderism.fibrous_chorus_bounce",
+    "sounds": [
+      "enderism:block/fibrous_chorus_bounce0",
+      "enderism:block/fibrous_chorus_bounce1"
+    ]
   }
 }

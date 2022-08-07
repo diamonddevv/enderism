@@ -1,14 +1,14 @@
 {
   "item.enderism.cursed_chorus_fruit": "Cursed Chorus Fruit",
-  "item.enderism.cursed_chorus_fruit.bound": "Bound to: %s",
+  "item.enderism.cursed_chorus_fruit.bound": "§7Bound to: %s",
   "item.enderism.cursed_chorus_fruit.unbound": "§7Unbound",
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
 
   "enchantment.enderism.upthrust": "Upthrust",
-  "enchantment.enderism.aerodynamics": "Aerodynamics",
   "enchantment.enderism.shackling_curse": "Curse of Shackling",
 
-  "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds"
+  "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
+  "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces"
 }
