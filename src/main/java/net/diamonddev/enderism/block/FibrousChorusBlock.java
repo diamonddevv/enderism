@@ -30,23 +30,35 @@ public class FibrousChorusBlock extends Block {
             super.onLandedUpon(world, state, pos, entity, fallDistance);
         } else {
             entity.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
-            this.propel(entity);
+            this.sound(entity, world);
         }
     } // todo: fix?
+
+    @Override
+    public void onEntityLand(BlockView world, Entity entity) {
+        if (entity.bypassesLandingEffects()) {
+            super.onEntityLand(world, entity);
+        } else {
+            this.propel(entity);
+        }
+    }
 
     private void propel(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
             entity.setVelocity(vec3d.x, Math.min(-vec3d.y * bounce / d, maxBounce), vec3d.z);
-            entity.getWorld().playSound(
-                    null,
-                    entity.getBlockPos(),
-                    SoundEventInit.FIBROUS_CHORUS_BOUNCE,
-                    SoundCategory.BLOCKS,
-                    1.0f,
-                    new Random().nextFloat(0.1f, 1.5f)
-            );
         }
+    }
+
+    private void sound(Entity entity, World world) {
+        entity.getWorld().playSound(
+                null,
+                entity.getBlockPos(),
+                SoundEventInit.FIBROUS_CHORUS_BOUNCE,
+                SoundCategory.BLOCKS,
+                1.0f,
+                new Random().nextFloat(0.1f, 1.5f)
+        );
     }
 }
