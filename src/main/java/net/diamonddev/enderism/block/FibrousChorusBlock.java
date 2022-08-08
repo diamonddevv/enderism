@@ -30,9 +30,9 @@ public class FibrousChorusBlock extends Block {
             super.onLandedUpon(world, state, pos, entity, fallDistance);
         } else {
             entity.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
-            this.sound(entity, world);
+            this.sound(entity);
         }
-    } // todo: fix?
+    }
 
     @Override
     public void onEntityLand(BlockView world, Entity entity) {
@@ -51,13 +51,13 @@ public class FibrousChorusBlock extends Block {
         }
     }
 
-    private void sound(Entity entity, World world) {
+    private void sound(Entity entity) {
         entity.getWorld().playSound(
                 null,
                 entity.getBlockPos(),
                 SoundEventInit.FIBROUS_CHORUS_BOUNCE,
                 SoundCategory.BLOCKS,
-                1.0f,
+                1.8f,
                 new Random().nextFloat(0.1f, 1.5f)
         );
     }
