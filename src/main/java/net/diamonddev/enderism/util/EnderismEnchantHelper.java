@@ -1,4 +1,4 @@
-package net.diamonddev.enderism.api;
+package net.diamonddev.enderism.util;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

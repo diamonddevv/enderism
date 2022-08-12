@@ -3,12 +3,22 @@
   "item.enderism.cursed_chorus_fruit.bound": "§7Bound to: %s",
   "item.enderism.cursed_chorus_fruit.unbound": "§7Unbound",
 
+  "item.minecraft.potion.effect.void_recall_short": "Potion of Void Recalling",
+  "item.minecraft.potion.effect.void_recall_long": "Lengthened Potion of Void Recalling",
+  "item.minecraft.splash_potion.effect.void_recall_short": "Splash Potion of Void Recalling",
+  "item.minecraft.splash_potion.effect.void_recall_long": "Lengthened Splash Potion of Void Recalling",
+  "item.minecraft.lingering_potion.effect.void_recall_short": "Lingering Potion of Void Recalling",
+  "item.minecraft.lingering_potion.effect.void_recall_long": "Lengthened Lingering Potion of Void Recalling",
+
+
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
 
   "enchantment.enderism.upthrust": "Upthrust",
   "enchantment.enderism.shackling_curse": "Curse of Shackling",
   "enchantment.enderism.velocity_protection": "Velocity Protection",
+
+  "effect.enderism.void_recall": "Void Recall",
 
   "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
   "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces"

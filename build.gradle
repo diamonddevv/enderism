@@ -33,6 +33,10 @@ dependencies {
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fasm_version}"
 	include "com.github.Chocohead:Fabric-ASM:${project.fasm_version}"
 
+	// Reflections, im honestly surprised minecraft doesn't just use this tbh lol
+	implementation "org.reflections:reflections:${project.reflections}"
+	include "org.reflections:reflections:${project.reflections}"
+
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

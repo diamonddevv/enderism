@@ -1,7 +1,8 @@
 package net.diamonddev.enderism.mixin;
 
 
-import net.diamonddev.enderism.api.EnderismEnchantHelper;
+import net.diamonddev.enderism.init.EffectInit;
+import net.diamonddev.enderism.util.EnderismEnchantHelper;
 import net.diamonddev.enderism.init.EnchantInit;
 import net.diamonddev.enderism.init.GameruleInit;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -9,18 +10,22 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.minecraft.util.math.Direction.Axis.*;
+import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -48,6 +53,10 @@ public abstract class LivingEntityMixin extends Entity {
     public abstract void setNoDrag(boolean noDrag);
 
     @Shadow public abstract boolean isFallFlying();
+
+    @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
+
+    @Shadow public abstract boolean teleport(double x, double y, double z, boolean particleEffects);
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -98,6 +107,25 @@ public abstract class LivingEntityMixin extends Entity {
                 this.jumping && EnderismEnchantHelper.hasEnchantment(EnchantInit.UPTHRUST, this.getEquippedStack(EquipmentSlot.CHEST))
                         && this.world.getGameRules().getBoolean(GameruleInit.UPTHRUST_NO_DRAG) && this.isFallFlying()
         );
+    }
+
+
+    @Inject(method = "tickInVoid", at = @At("HEAD"))
+    private void tickVoidRecall(CallbackInfo ci) {
+        if (this.hasStatusEffect(EffectInit.VOID_RECALL)) {
+            if (this.getEntityWorld().getDimensionKey() == DimensionTypes.THE_END) {
+                try {
+                    if (Objects.requireNonNull(world.getServer()).getWorld(World.END) != null) {
+                        ServerWorld.createEndSpawnPlatform(Objects.requireNonNull(world.getServer().getWorld(World.END)));
+                        BlockPos b = ServerWorld.END_SPAWN_POS;
+                        this.fallDistance = 0;
+                        this.teleport(b.getX(), b.getY(), b.getZ());
+                        this.getWorld().playSound(null, b, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 2, 1);
+                        this.refreshPositionAfterTeleport(b.getX(), b.getY(), b.getZ());
+                    }
+                } catch (NullPointerException ignored) {}
+            }
+        }
     }
 
 }
