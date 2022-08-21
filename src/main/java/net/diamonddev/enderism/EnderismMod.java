@@ -1,13 +1,14 @@
 package net.diamonddev.enderism;
 
-import net.diamonddev.enderism.api.Registerable;
+import net.diamonddev.enderism.api.AbstractModIntegration;
+import net.diamonddev.enderism.api.IdentifierBuilder;
+import net.diamonddev.enderism.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
-import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.lang.reflect.*;
-import java.util.Set;
+
+import static net.diamonddev.enderism.api.AbstractModIntegration.INTEGRATIONS;
 
 public class EnderismMod implements ModInitializer {
 	public static final String modid = "enderism";
@@ -20,21 +21,26 @@ public class EnderismMod implements ModInitializer {
 
 		// Start Registration
 		long startTime = System.currentTimeMillis();
+		//
 
-		Reflections reflections = new Reflections("net.diamonddev.enderism");
-		Set<Class<? extends Registerable>> registrars = reflections.getSubTypesOf(Registerable.class);
+		new BlockInit().register();
+		new ItemInit().register();
+		new EffectInit().register();
+		new EnchantInit().register();
+		new GameruleInit().register();
+		new PotionInit().register();
+		new SoundEventInit().register();
+		new IntegrationInit().register();
 
-		for (Class<? extends Registerable> registerableClass : registrars) {
-			Registerable instance = null;
-			try {
-				instance = registerableClass.getConstructor().newInstance();
-			} catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-					 NoSuchMethodException e) {
-				throw new RuntimeException(e);
+
+		// integrations
+		for (AbstractModIntegration ami : INTEGRATIONS) {
+			if (ami.getModLoaded()) {
+				ami.onInitializeWithMod();
 			}
-			instance.register();
 		}
 
+		//
 		double time = System.currentTimeMillis() - startTime;
 		// Finish Registration
 

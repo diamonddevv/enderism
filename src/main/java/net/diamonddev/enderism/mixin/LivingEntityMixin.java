@@ -1,10 +1,12 @@
 package net.diamonddev.enderism.mixin;
 
 
+import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
 import net.diamonddev.enderism.init.EffectInit;
 import net.diamonddev.enderism.util.EnderismEnchantHelper;
 import net.diamonddev.enderism.init.EnchantInit;
 import net.diamonddev.enderism.init.GameruleInit;
+import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -26,6 +28,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
+
+import static net.diamonddev.enderism.init.GameruleInit.UPTHRUST_BOOSTS_PER_LEVEL;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -56,8 +60,6 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
-    @Shadow public abstract boolean teleport(double x, double y, double z, boolean particleEffects);
-
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -79,12 +81,12 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void performUpthrustBoost(CallbackInfo ci) {
         if (this.hasStackEquipped(EquipmentSlot.CHEST)) {
-            if (this.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) {
+            if (ElytraEnchantTarget.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
                 ItemStack stack = this.getEquippedStack(EquipmentSlot.CHEST);
                 if (ElytraItem.isUsable(stack)) {
                     if (EnderismEnchantHelper.hasEnchantment(EnchantInit.UPTHRUST, stack)) {
                         int level = EnchantmentHelper.getLevel(EnchantInit.UPTHRUST, stack);
-                        if (this.jumpingCooldown > 0 && boostCount <= level + 1) {
+                        if (this.jumpingCooldown > 0 && boostCount <= level * this.world.getGameRules().getInt(UPTHRUST_BOOSTS_PER_LEVEL)) {
                             this.jump();
                             this.jumpingCooldown = 10;
                         }

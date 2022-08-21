@@ -9,6 +9,8 @@
   "item.minecraft.splash_potion.effect.void_recall_long": "Lengthened Splash Potion of Void Recalling",
   "item.minecraft.lingering_potion.effect.void_recall_short": "Lingering Potion of Void Recalling",
   "item.minecraft.lingering_potion.effect.void_recall_long": "Lengthened Lingering Potion of Void Recalling",
+  "item.minecraft.tipped_arrow.effect.void_recall_short": "Tipped Arrow of Void Recalling",
+  "item.minecraft.tipped_arrow.effect.void_recall_long": "Lengthened Tipped Arrow of Void Recalling",
 
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",

@@ -28,14 +28,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Fabric ASM. Used for making the Elytra Enchantment Target work, because Mojank. Thanks to QupletsQu-Enchantments (https://github.com/Quplet/Qu-Enchantments)
+	// Fabric ASM. Used for making the Elytra Enchantment Target work, because Mojank. Thanks to Quplets Qu-Enchantments (https://github.com/Quplet/Qu-Enchantments)
 	// because they used this mod and i used their code to help me figure out how to add a Jar-in-a-Jar dependency and get this api working. :)
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fasm_version}"
 	include "com.github.Chocohead:Fabric-ASM:${project.fasm_version}"
-
-	// Reflections, im honestly surprised minecraft doesn't just use this tbh lol
-	implementation "org.reflections:reflections:${project.reflections}"
-	include "org.reflections:reflections:${project.reflections}"
 
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
@@ -61,7 +57,7 @@ java {
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.
 	// If you remove this line, sources will not be generated.
-	withSourcesJar() // no, ok maybe just maybe
+	withSourcesJar()
 }
 
 jar {
