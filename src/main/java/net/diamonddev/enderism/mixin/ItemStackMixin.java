@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ItemStackMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void preventEatUnboundCursedChorus(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    private void enderism$preventEatUnboundCursedChorus(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (user != null) {
             if (user.getStackInHand(hand).getItem() instanceof CursedChorusItem) {
                 if (!user.getStackInHand(hand).hasNbt()) {
@@ -28,7 +28,7 @@ public class ItemStackMixin {
     }
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void preventFireworkUseWhileFallFlying(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    private void enderism$preventFireworkUseWhileFallFlying(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (!world.getGameRules().getBoolean(GameruleInit.ELYTRA_FIREWORKS)) {
             if (user.isFallFlying() && user.getStackInHand(hand).getItem() instanceof FireworkRocketItem) {
                 cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));

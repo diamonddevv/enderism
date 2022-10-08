@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.enchantment;
 
+import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -18,7 +19,7 @@ public class ShacklingCurseEnchantment extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof ElytraItem;
+        return ElytraEnchantTarget.isEnchantableElytraItem(stack.getItem());
     }
 
     @Override

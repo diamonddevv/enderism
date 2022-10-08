@@ -1,14 +1,10 @@
 package net.diamonddev.enderism;
 
-import net.diamonddev.enderism.api.AbstractModIntegration;
-import net.diamonddev.enderism.api.IdentifierBuilder;
 import net.diamonddev.enderism.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static net.diamonddev.enderism.api.AbstractModIntegration.INTEGRATIONS;
 
 public class EnderismMod implements ModInitializer {
 	public static final String modid = "enderism";
@@ -30,15 +26,6 @@ public class EnderismMod implements ModInitializer {
 		new GameruleInit().register();
 		new PotionInit().register();
 		new SoundEventInit().register();
-		new IntegrationInit().register();
-
-
-		// integrations
-		for (AbstractModIntegration ami : INTEGRATIONS) {
-			if (ami.getModLoaded()) {
-				ami.onInitializeWithMod();
-			}
-		}
 
 		//
 		double time = System.currentTimeMillis() - startTime;
