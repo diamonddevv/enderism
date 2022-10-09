@@ -48,7 +48,7 @@ public class ChorusFruitPieBlock extends Block {
 
                 // Decrement Property
                 int i = state.get(SLICES);
-                if (i > this.sliceCount) {
+                if (i != 1) {
                     world.setBlockState(pos, state.with(SLICES, i - 1));
                 } else {
                     world.removeBlock(pos, false);

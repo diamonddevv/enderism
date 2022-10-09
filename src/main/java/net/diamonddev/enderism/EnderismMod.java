@@ -1,6 +1,7 @@
 package net.diamonddev.enderism;
 
 import net.diamonddev.enderism.init.*;
+import net.diamonddev.enderism.integration.Integrations;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ public class EnderismMod implements ModInitializer {
 		// Start Registration
 		long startTime = System.currentTimeMillis();
 		//
+		new Integrations().register();
 
 		new BlockInit().register();
 		new ItemInit().register();

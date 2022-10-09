@@ -1,6 +1,7 @@
 package net.diamonddev.enderism.enchantment;
 
 import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
+import net.diamonddev.enderism.integration.AileronIntegration;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,6 +21,11 @@ public class UpthrustEnchantment extends Enchantment {
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
         return ElytraEnchantTarget.isEnchantableElytraItem(stack.getItem());
+    }
+
+    @Override
+    protected boolean canAccept(Enchantment other) {
+        return other != AileronIntegration.SMOKESTACK || other != AileronIntegration.CLOUDSKIPPER;
     }
 
     @Override
