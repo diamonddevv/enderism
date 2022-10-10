@@ -85,10 +85,14 @@ public abstract class LivingEntityMixin extends Entity {
         } else {
             this.ticksOnGround = 0;
         }
+
+        if (this.isSneaking()) {
+            System.out.println(this.maxBoostCount.get() + " - " + this.dataTracker.get(boostCount));
+        }
     }
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void enderism$resetUpthrustBoostCount(CallbackInfo ci) {
-        if (this.ticksOnGround > 5) {
+        if (this.ticksOnGround >= 5) {
             dataTracker.set(boostCount, 0);
         }
     }
