@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 
 public class BetterEndIntegration extends AbstractModIntegration {
-    public BetterEndIntegration() {
-        super("betterend");
+    public BetterEndIntegration(String associatedModName) {
+        super("betterend", associatedModName);
     }
 
     public static final ArrayList<Item> betterEndElytras = new ArrayList<>();

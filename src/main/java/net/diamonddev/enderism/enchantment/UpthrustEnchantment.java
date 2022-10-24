@@ -1,12 +1,16 @@
 package net.diamonddev.enderism.enchantment;
 
+import net.diamonddev.enderism.api.Identifier;
 import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
 import net.diamonddev.enderism.integration.AileronIntegration;
+import net.diamonddev.enderism.integration.Integrations;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.registry.Registry;
 
 public class UpthrustEnchantment extends Enchantment {
     public UpthrustEnchantment(EnchantmentTarget target) {
@@ -25,7 +29,8 @@ public class UpthrustEnchantment extends Enchantment {
 
     @Override
     protected boolean canAccept(Enchantment other) {
-        return other != AileronIntegration.SMOKESTACK || other != AileronIntegration.CLOUDSKIPPER;
+        net.minecraft.util.Identifier id = Identifier.getIdentifierFromRegistry(Registry.ENCHANTMENT, other);
+        return id == Integrations.AILERON.buildIdentifier("cloudskipper") || id == Integrations.AILERON.buildIdentifier("smokestack");
     }
 
     @Override

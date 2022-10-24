@@ -12,6 +12,11 @@
   "item.minecraft.tipped_arrow.effect.void_recall_short": "Tipped Arrow of Void Recalling",
   "item.minecraft.tipped_arrow.effect.void_recall_long": "Lengthened Tipped Arrow of Void Recalling",
 
+  "item.minecraft.potion.effect.choruskirmish": "Potion of Choruskirmishing",
+  "item.minecraft.splash_potion.effect.choruskirmish": "Splash Potion of Choruskirmishing",
+  "item.minecraft.lingering_potion.effect.choruskirmish": "Lingering Potion of Choruskirmishing",
+  "item.minecraft.tipped_arrow.effect.choruskirmish": "Tipped Arrow of Choruskirmishing",
+
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
@@ -24,6 +29,7 @@
   "enchantment.enderism.velocity_protection": "Velocity Protection",
 
   "effect.enderism.void_recall": "Void Recall",
+  "effect.enderism.choruskirmish": "Choruskirmish",
 
   "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
   "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces"

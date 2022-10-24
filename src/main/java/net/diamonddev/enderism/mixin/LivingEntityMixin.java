@@ -4,6 +4,7 @@ package net.diamonddev.enderism.mixin;
 import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
 import net.diamonddev.enderism.init.EffectInit;
 import net.diamonddev.enderism.init.EnchantInit;
+import net.diamonddev.enderism.init.GameruleInit;
 import net.diamonddev.enderism.util.DirtyObject;
 import net.diamonddev.enderism.util.EnderismEnchantHelper;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -11,25 +12,33 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ChorusFruitItem;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionTypes;
+import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
@@ -78,7 +87,7 @@ public abstract class LivingEntityMixin extends Entity {
         dataTracker.set(boostCount, dataTracker.get(boostCount) + 1);
     }
 
-    @Inject(method = "tickMovement", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At("TAIL"))
     private void enderism$tickOnGround(CallbackInfo ci) {
         if (this.isOnGround()) {
             this.ticksOnGround++;
@@ -103,6 +112,7 @@ public abstract class LivingEntityMixin extends Entity {
                         int level = EnchantmentHelper.getLevel(EnchantInit.UPTHRUST, stack);
                         if (this.ticksOnGround > 5) {
                             maxBoostCount.set(level * 2);
+                            maxBoostCount.clean();
                         }
                         if (this.jumpingCooldown > 0 && dataTracker.get(boostCount) <= maxBoostCount.get()) {
                             maxBoostCount.clean();
@@ -134,5 +144,35 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
     }
+
+    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
+    private void enderism$callChoruskirmish(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+        LivingEntity user = (LivingEntity) (Object) this;
+        int chance = this.world.getGameRules().getInt(GameruleInit.CHORUSKIRMISH_CHANCE);
+        if (user.hasStatusEffect(EffectInit.CHORUSKIRMISH) && random.nextFloat() <= chance / 100.0f) { // Literally just the chorus fruit code lol
+            double d = user.getX();
+            double e = user.getY();
+            double f = user.getZ();
+
+            for (int i = 0; i < 16; ++i) {
+                double g = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
+                double h = MathHelper.clamp(user.getY() + (double) (user.getRandom().nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + ((ServerWorld) world).getLogicalHeight() - 1));
+                double j = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
+                if (user.hasVehicle()) {
+                    user.stopRiding();
+                }
+
+                Vec3d vec3d = user.getPos();
+                if (user.teleport(g, h, j, true)) {
+                    world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(user));
+                    SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                    world.playSound(null, d, e, f, soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    user.playSound(soundEvent, 1.0F, 1.0F);
+                    break;
+                }
+            }
+        }
+    }
+
 
 }
