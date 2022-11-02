@@ -21,8 +21,5 @@ vec4 colorMix(vec4 ogC, vec4 inC, float intensity) {
 
 void main() {
     vec4 InTexel = texture(DiffuseSampler, texCoord);
-
-    vec4 col = Color * sin(STime);
-
-    fragColor = vec4(OutColor * STime, 1.0);
+    fragColor = colorMix(InTexel, Color, Intensity * sin(STime));
 }
