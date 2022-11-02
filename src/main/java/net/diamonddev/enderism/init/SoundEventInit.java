@@ -1,11 +1,11 @@
 package net.diamonddev.enderism.init;
 
-import net.diamonddev.enderism.api.Identifier;
-import net.diamonddev.enderism.api.Registerable;
+import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class SoundEventInit implements Registerable {
+public class SoundEventInit implements RegistryInitializer {
 
     public static SoundEvent CHORUS_MAGNETITE_BIND;
     public static SoundEvent PLAYER_BIND;

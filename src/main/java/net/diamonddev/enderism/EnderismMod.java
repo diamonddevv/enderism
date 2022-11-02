@@ -2,6 +2,7 @@ package net.diamonddev.enderism;
 
 import net.diamonddev.enderism.init.*;
 import net.diamonddev.enderism.integration.Integrations;
+import net.diamonddev.libgenetics.common.api.v1.util.IdentifierBuilder;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import org.slf4j.Logger;
@@ -11,6 +12,8 @@ public class EnderismMod implements ModInitializer {
 	public static final String modid = "enderism";
 	private static final String version = FabricLoaderImpl.INSTANCE.getModContainer(modid).orElseThrow().getMetadata().getVersion().getFriendlyString();
 	public static final Logger logger = LoggerFactory.getLogger(modid);
+
+	public static IdentifierBuilder id = new IdentifierBuilder("enderism");
 
 	@Override
 	public void onInitialize() {

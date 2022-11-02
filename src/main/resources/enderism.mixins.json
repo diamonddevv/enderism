@@ -6,12 +6,10 @@
   "mixins": [
     "BrewingRecipeInvoker",
     "ElytraItemMixin",
-    "EnchantmentTargetMixin",
     "ItemStackMixin",
     "LivingEntityMixin"
   ],
   "client": [
-    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

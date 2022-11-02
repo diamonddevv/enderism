@@ -1,12 +1,10 @@
 package net.diamonddev.enderism.mixin;
 
-
-import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
 import net.diamonddev.enderism.init.EffectInit;
 import net.diamonddev.enderism.init.EnchantInit;
 import net.diamonddev.enderism.init.GameruleInit;
-import net.diamonddev.enderism.util.DirtyObject;
-import net.diamonddev.enderism.util.EnderismEnchantHelper;
+import net.diamonddev.libgenetics.common.api.v1.enchantment.EnchantHelper;
+import net.diamonddev.libgenetics.common.api.v1.util.DirtyObject;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -17,9 +15,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.passive.FoxEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ChorusFruitItem;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -105,10 +100,10 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void enderism$performUpthrust(CallbackInfo ci) {
         if (this.hasStackEquipped(EquipmentSlot.CHEST)) {
-            if (ElytraEnchantTarget.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
+            if (EnchantInit.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
                 ItemStack stack = this.getEquippedStack(EquipmentSlot.CHEST);
                 if (ElytraItem.isUsable(stack)) {
-                    if (EnderismEnchantHelper.hasEnchantment(EnchantInit.UPTHRUST, stack)) {
+                    if (EnchantHelper.hasEnchantment(EnchantInit.UPTHRUST, stack)) {
                         int level = EnchantmentHelper.getLevel(EnchantInit.UPTHRUST, stack);
                         if (this.ticksOnGround > 5) {
                             maxBoostCount.set(level * 2);

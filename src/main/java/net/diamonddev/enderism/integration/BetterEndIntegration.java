@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.integration;
 
+import net.diamonddev.libgenetics.common.api.v1.integration.AbstractModIntegration;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
@@ -12,8 +13,9 @@ public class BetterEndIntegration extends AbstractModIntegration {
     }
 
     public static final ArrayList<Item> betterEndElytras = new ArrayList<>();
+
     @Override
-    public void onModsLoaded() {
+    public void init() {
         betterEndElytras.add(getRegistryEntry(Registry.ITEM, "armored_elytra"));
         betterEndElytras.add(getRegistryEntry(Registry.ITEM, "elytra_crystalite"));
     }

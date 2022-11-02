@@ -1,18 +1,22 @@
 package net.diamonddev.enderism.init;
 
 import com.chocohead.mm.api.ClassTinkerers;
-import net.diamonddev.enderism.api.Identifier;
-import net.diamonddev.enderism.api.Registerable;
+import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.enchantment.ShacklingCurseEnchantment;
 import net.diamonddev.enderism.enchantment.UpthrustEnchantment;
 import net.diamonddev.enderism.enchantment.VelocityProtectionEnchantment;
+import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.item.ElytraItem;
+import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
-public class EnchantInit implements Registerable {
+import static net.diamonddev.enderism.integration.BetterEndIntegration.betterEndElytras;
+import static net.diamonddev.libgenetics.common.api.v1.enchantment.target.EnchantmentTargets.ELYTRA;
 
-    private static final EnchantmentTarget ELYTRA = ClassTinkerers.getEnum(EnchantmentTarget.class, "ELYTRA");
+public class EnchantInit implements RegistryInitializer {
+
 
     public static Enchantment UPTHRUST = new UpthrustEnchantment(ELYTRA);
     public static Enchantment SHACKLING_CURSE = new ShacklingCurseEnchantment(ELYTRA);
@@ -20,8 +24,13 @@ public class EnchantInit implements Registerable {
 
     @Override
     public void register() {
-        Registry.register(Registry.ENCHANTMENT, new Identifier("upthrust"), UPTHRUST);
-        Registry.register(Registry.ENCHANTMENT, new Identifier("shackling_curse"), SHACKLING_CURSE);
-        Registry.register(Registry.ENCHANTMENT, new Identifier("velocity_protection"), VELOCITY_PROT);
+        Registry.register(Registry.ENCHANTMENT, EnderismMod.id.build("upthrust"), UPTHRUST);
+        Registry.register(Registry.ENCHANTMENT, EnderismMod.id.build("shackling_curse"), SHACKLING_CURSE);
+        Registry.register(Registry.ENCHANTMENT, EnderismMod.id.build("velocity_protection"), VELOCITY_PROT);
+    }
+
+
+    public static boolean isEnchantableElytraItem(Item item) {
+        return item instanceof ElytraItem || item instanceof FabricElytraItem || betterEndElytras.contains(item);
     }
 }

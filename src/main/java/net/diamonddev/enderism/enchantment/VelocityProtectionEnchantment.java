@@ -1,12 +1,15 @@
 package net.diamonddev.enderism.enchantment;
 
-import net.diamonddev.enderism.enchantment.target.ElytraEnchantTarget;
+import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+
+import static net.diamonddev.enderism.integration.BetterEndIntegration.betterEndElytras;
 
 public class VelocityProtectionEnchantment extends Enchantment {
     public VelocityProtectionEnchantment(EnchantmentTarget type) {
@@ -30,7 +33,7 @@ public class VelocityProtectionEnchantment extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return ElytraEnchantTarget.isEnchantableElytraItem(stack.getItem());
+        return stack.getItem() instanceof ElytraItem || stack.getItem() instanceof FabricElytraItem || betterEndElytras.contains(stack.getItem());
     }
 
     @Override

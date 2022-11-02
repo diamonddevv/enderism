@@ -1,24 +1,20 @@
 package net.diamonddev.enderism.integration;
 
-import net.diamonddev.enderism.api.Registerable;
+import net.diamonddev.libgenetics.common.api.v1.integration.ModIntegrationAPI;
+import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 
-public class Integrations implements Registerable {
+public class Integrations implements RegistryInitializer {
 
     private static final String associatedModName = "Enderism";
 
-    public static BetterEndIntegration BETTER_END;
-    public static AileronIntegration AILERON;
+    public static BetterEndIntegration BETTER_END = new BetterEndIntegration(associatedModName);
+    public static AileronIntegration AILERON = new AileronIntegration(associatedModName);
 
 
     @Override
     public void register() {
-        BETTER_END = new BetterEndIntegration(associatedModName);
-        AILERON = new AileronIntegration(associatedModName);
 
-        AbstractModIntegration.integrations.forEach((integration) -> {
-            if (integration.getModLoaded()) {
-                integration.integrationlogger.info("Mod (" + integration.modid + ") Found - Integration Started!");
-            }
-        });
+        ModIntegrationAPI.register(BETTER_END);
+        ModIntegrationAPI.register(AILERON);
     }
 }

@@ -21,8 +21,8 @@
     "main": [
       "net.diamonddev.enderism.EnderismMod"
     ],
-    "mm:early_risers": [
-      "net.diamonddev.enderism.asm.EarlyRiser"
+    "client": [
+      "net.diamonddev.enderism.client.EnderismClient"
     ]
   },
   "mixins": [
@@ -33,8 +33,7 @@
     "fabricloader": ">=0.14.6",
     "fabric": "*",
     "minecraft": "~1.19",
-    "java": ">=17",
-    "mm": ">=2.3"
+    "java": ">=17"
   },
   "accessWidener" : "enderism.accesswidener"
 }
