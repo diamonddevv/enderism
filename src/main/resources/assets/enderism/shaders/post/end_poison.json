@@ -4,13 +4,17 @@
   ],
   "passes": [
     {
-      "name": "enderism:convolve",
+      "name": "enderism:overlay_color",
       "intarget": "minecraft:main",
       "outtarget": "swap",
       "uniforms": [
         {
           "name": "Color",
           "values": [ 0.471, 0.0, 0.0, 1.0 ]
+        },
+        {
+          "name": "Intensity",
+          "values": [ 0.75 ]
         }
       ]
     },

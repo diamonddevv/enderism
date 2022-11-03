@@ -17,7 +17,6 @@ public class EnderismMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		logger.info("Initialising " + modid + " with version " + version);
 
 		// Start Registration
 		long startTime = System.currentTimeMillis();
@@ -36,6 +35,6 @@ public class EnderismMod implements ModInitializer {
 		double time = System.currentTimeMillis() - startTime;
 		// Finish Registration
 
-		logger.info("Everything from " + modid + " has been loaded! Have Fun! (Time Elapsed: " + time + " milliseconds)");
+		logger.info("Everything from mod " + modid + " (with version '" + version + "') has been loaded! Have Fun! (Time Elapsed: " + time + " milliseconds)");
 	}
 }

@@ -36,8 +36,7 @@ public class ChorusFruitPieBlock extends Block {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(SLICES, this.sliceCount);
     }
-
-    @Override
+    @Override @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             if (player.canConsume(false) || player.getAbilities().creativeMode) {

@@ -17,6 +17,7 @@ public class EnderismClient implements ClientModInitializer {
     private static final ManagedShaderEffect END_POISON_SHADER = ShaderEffectManager.getInstance()
             .manage(EnderismMod.id.build("shaders/post/end_poison.json"));
     private static final Uniform1f sTime = END_POISON_SHADER.findUniform1f("STime");
+    private static final Uniform1f sLevel = END_POISON_SHADER.findUniform1f("SLevel");
 
     @Override
     public void onInitializeClient() {
@@ -24,6 +25,7 @@ public class EnderismClient implements ClientModInitializer {
             if (MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasStatusEffect(EffectInit.END_POISON) && MinecraftClient.getInstance().world != null) {
                 END_POISON_SHADER.render(tickDelta);
                 sTime.set((MinecraftClient.getInstance().world.getTime() + tickDelta) / 20);
+                sLevel.set((MinecraftClient.getInstance().player.getStatusEffect(EffectInit.END_POISON).getAmplifier() + 1));
             }
         });
     }
