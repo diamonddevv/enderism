@@ -19,6 +19,17 @@
       ]
     },
     {
+      "name": "enderism:vertex_shift",
+      "intarget": "swap",
+      "outtarget": "minecraft:main",
+      "uniforms": [
+        {
+          "name": "Strength",
+          "values": [ 100.0 ]
+        }
+      ]
+    },
+    {
       "name": "blit",
       "intarget": "swap",
       "outtarget": "minecraft:main"
