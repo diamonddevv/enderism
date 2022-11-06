@@ -9,23 +9,20 @@
       "outtarget": "swap",
       "uniforms": [
         {
-          "name": "Color",
-          "values": [ 0.471, 0.0, 0.0, 1.0 ]
+          "name": "ColorA",
+          "values": [ 0.471, 0.0, 0.0 ]
+        },
+        {
+          "name": "ColorB",
+          "values": [ 0.459, 0.0 ,0.443 ]
+        },
+        {
+          "name": "ColorC",
+          "values": [ 0.463, 0.008, 0.71 ]
         },
         {
           "name": "Intensity",
           "values": [ 0.75 ]
-        }
-      ]
-    },
-    {
-      "name": "enderism:vertex_shift",
-      "intarget": "swap",
-      "outtarget": "minecraft:main",
-      "uniforms": [
-        {
-          "name": "Strength",
-          "values": [ 100.0 ]
         }
       ]
     },
