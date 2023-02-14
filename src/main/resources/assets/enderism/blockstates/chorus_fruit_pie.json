@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "slices=6": {
+      "model": "enderism:block/chorus_fruit_pie"
+    }
+  }
+}

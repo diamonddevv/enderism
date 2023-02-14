@@ -1,7 +1,7 @@
 package net.diamonddev.enderism.item;
 
-import net.diamonddev.enderism.init.BlockInit;
-import net.diamonddev.enderism.init.SoundEventInit;
+import net.diamonddev.enderism.registry.BlockInit;
+import net.diamonddev.enderism.registry.SoundEventInit;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,7 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -87,7 +86,7 @@ public class CursedChorusItem extends Item {
         stack.setNbt(nbt);
     }
     public CursedChorusItem() {
-        super(new FabricItemSettings().maxCount(1).group(ItemGroup.FOOD).food(
+        super(new FabricItemSettings().maxCount(1).food(
                 new FoodComponent.Builder()
                         .saturationModifier(0.1f).hunger(10)
                         .alwaysEdible()

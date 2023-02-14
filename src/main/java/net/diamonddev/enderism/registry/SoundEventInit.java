@@ -1,9 +1,10 @@
-package net.diamonddev.enderism.init;
+package net.diamonddev.enderism.registry;
 
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class SoundEventInit implements RegistryInitializer {
 
@@ -20,6 +21,6 @@ public class SoundEventInit implements RegistryInitializer {
 
     private SoundEvent create(String name) {
         Identifier id = new Identifier(name);
-        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
+        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 }

@@ -7,9 +7,11 @@
     "BrewingRecipeInvoker",
     "ElytraItemMixin",
     "ItemStackMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "StatusEffectAccessor"
   ],
   "client": [
+    "ItemColorsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

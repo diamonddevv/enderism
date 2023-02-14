@@ -1,4 +1,4 @@
-package net.diamonddev.enderism.init;
+package net.diamonddev.enderism.registry;
 
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;

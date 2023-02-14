@@ -1,6 +1,6 @@
 package net.diamonddev.enderism.block;
 
-import net.diamonddev.enderism.init.SoundEventInit;
+import net.diamonddev.enderism.registry.SoundEventInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;

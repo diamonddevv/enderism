@@ -1,6 +1,5 @@
-package net.diamonddev.enderism.init;
+package net.diamonddev.enderism.registry;
 
-import com.chocohead.mm.api.ClassTinkerers;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.enchantment.ShacklingCurseEnchantment;
 import net.diamonddev.enderism.enchantment.UpthrustEnchantment;
@@ -10,9 +9,9 @@ import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
-import static net.diamonddev.enderism.integration.BetterEndIntegration.betterEndElytras;
 import static net.diamonddev.libgenetics.common.api.v1.enchantment.target.EnchantmentTargets.ELYTRA;
 
 public class EnchantInit implements RegistryInitializer {
@@ -24,13 +23,13 @@ public class EnchantInit implements RegistryInitializer {
 
     @Override
     public void register() {
-        Registry.register(Registry.ENCHANTMENT, EnderismMod.id.build("upthrust"), UPTHRUST);
-        Registry.register(Registry.ENCHANTMENT, EnderismMod.id.build("shackling_curse"), SHACKLING_CURSE);
-        Registry.register(Registry.ENCHANTMENT, EnderismMod.id.build("velocity_protection"), VELOCITY_PROT);
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("upthrust"), UPTHRUST);
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("shackling_curse"), SHACKLING_CURSE);
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("velocity_protection"), VELOCITY_PROT);
     }
 
 
     public static boolean isEnchantableElytraItem(Item item) {
-        return item instanceof ElytraItem || item instanceof FabricElytraItem || betterEndElytras.contains(item);
+        return item instanceof ElytraItem || item instanceof FabricElytraItem;
     }
 }

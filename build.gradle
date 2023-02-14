@@ -39,16 +39,10 @@ dependencies {
 
 	// Fabric ASM. Used for making the Elytra Enchantment Target work, because Mojank. Thanks to Quplets Qu-Enchantments (https://github.com/Quplet/Qu-Enchantments)
 	// because they used this mod and i used their code to help me figure out how to add a Jar-in-a-Jar dependency and get this api working. :)
-	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fasm_version}"
-	include "com.github.Chocohead:Fabric-ASM:${project.fasm_version}"
+	include modImplementation("com.github.Chocohead:Fabric-ASM:${project.fasm_version}")
 
-	// libgenetics
-	modImplementation "com.github.diamonddevv:libgenetics:${project.lg_ver}"
-	include "com.github.diamonddevv:libgenetics:${project.lg_ver}"
-
-	// satin
-	modImplementation "io.github.ladysnake:satin:${satin_version}"
-	include "io.github.ladysnake:satin:${satin_version}"
+	// libGenetics
+	include modImplementation ("com.github.diamonddevv:libgenetics:${project.libgenetics_version}");
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

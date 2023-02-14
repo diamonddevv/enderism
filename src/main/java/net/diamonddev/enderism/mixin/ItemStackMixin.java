@@ -1,6 +1,6 @@
 package net.diamonddev.enderism.mixin;
 
-import net.diamonddev.enderism.init.GameruleInit;
+import net.diamonddev.enderism.registry.GameruleInit;
 import net.diamonddev.enderism.item.CursedChorusItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FireworkRocketItem;

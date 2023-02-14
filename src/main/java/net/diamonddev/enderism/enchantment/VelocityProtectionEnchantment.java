@@ -9,8 +9,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 
-import static net.diamonddev.enderism.integration.BetterEndIntegration.betterEndElytras;
-
 public class VelocityProtectionEnchantment extends Enchantment {
     public VelocityProtectionEnchantment(EnchantmentTarget type) {
         super(Rarity.UNCOMMON, type, new EquipmentSlot[]{EquipmentSlot.CHEST});
@@ -33,7 +31,7 @@ public class VelocityProtectionEnchantment extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof ElytraItem || stack.getItem() instanceof FabricElytraItem || betterEndElytras.contains(stack.getItem());
+        return stack.getItem() instanceof ElytraItem || stack.getItem() instanceof FabricElytraItem;
     }
 
     @Override

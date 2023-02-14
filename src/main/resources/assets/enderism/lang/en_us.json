@@ -3,6 +3,8 @@
   "item.enderism.cursed_chorus_fruit.bound": "§7Bound to: %s",
   "item.enderism.cursed_chorus_fruit.unbound": "§7Unbound",
 
+  "item.enderism.charm": "Charm",
+
   "item.minecraft.potion.effect.void_recall_short": "Potion of Void Recalling",
   "item.minecraft.potion.effect.void_recall_long": "Lengthened Potion of Void Recalling",
   "item.minecraft.splash_potion.effect.void_recall_short": "Splash Potion of Void Recalling",
@@ -30,7 +32,6 @@
 
   "effect.enderism.void_recall": "Void Recall",
   "effect.enderism.choruskirmish": "Choruskirmish",
-  "effect.enderism.end_poison": "End Poisoning",
 
   "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
   "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces"

@@ -1,8 +1,10 @@
 package net.diamonddev.enderism.mixin;
 
-import net.diamonddev.enderism.init.EffectInit;
-import net.diamonddev.enderism.init.EnchantInit;
-import net.diamonddev.enderism.init.GameruleInit;
+import net.diamonddev.enderism.nbt.EnderismNbt;
+import net.diamonddev.enderism.registry.EffectInit;
+import net.diamonddev.enderism.registry.EnchantInit;
+import net.diamonddev.enderism.registry.GameruleInit;
+import net.diamonddev.enderism.util.EnderismUtil;
 import net.diamonddev.libgenetics.common.api.v1.enchantment.EnchantHelper;
 import net.diamonddev.libgenetics.common.api.v1.util.DirtyObject;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,18 +17,17 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionTypes;
-import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -144,27 +145,25 @@ public abstract class LivingEntityMixin extends Entity {
     private void enderism$callChoruskirmish(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         LivingEntity user = (LivingEntity) (Object) this;
         int chance = this.world.getGameRules().getInt(GameruleInit.CHORUSKIRMISH_CHANCE);
-        if (user.hasStatusEffect(EffectInit.CHORUSKIRMISH) && random.nextFloat() <= chance / 100.0f) { // Literally just the chorus fruit code lol
-            double d = user.getX();
-            double e = user.getY();
-            double f = user.getZ();
+        if (user.hasStatusEffect(EffectInit.CHORUSKIRMISH) && random.nextFloat() <= chance / 100.0f) {
+            int i = user.getStatusEffect(EffectInit.CHORUSKIRMISH).getAmplifier();
+            EnderismUtil.chorusTeleport(user, 16, 16 * i);
+        }
+    }
 
-            for (int i = 0; i < 16; ++i) {
-                double g = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
-                double h = MathHelper.clamp(user.getY() + (double) (user.getRandom().nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + ((ServerWorld) world).getLogicalHeight() - 1));
-                double j = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
-                if (user.hasVehicle()) {
-                    user.stopRiding();
-                }
+    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
+    private void enderism$applyCharmEffect(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+        LivingEntity user = source.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) source.getSource();
 
-                Vec3d vec3d = user.getPos();
-                if (user.teleport(g, h, j, true)) {
-                    world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(user));
-                    SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
-                    world.playSound(null, d, e, f, soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                    user.playSound(soundEvent, 1.0F, 1.0F);
-                    break;
-                }
+        if (user != null) {
+            ItemStack stack = user.getStackInHand(Hand.OFF_HAND);
+
+            stack.damage(1, user, player -> {});
+
+            if (EnderismNbt.CharmEffectManager.has(stack)) {
+                LivingEntity thisEntity = (LivingEntity) (Object) this;
+                StatusEffectInstance instance = EnderismNbt.CharmEffectManager.get(stack);
+                thisEntity.addStatusEffect(instance, user);
             }
         }
     }

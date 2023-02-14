@@ -7,8 +7,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 
-import static net.diamonddev.enderism.integration.BetterEndIntegration.betterEndElytras;
-
 public class ShacklingCurseEnchantment extends Enchantment {
     public ShacklingCurseEnchantment(EnchantmentTarget target) {
         super(Rarity.VERY_RARE, target, new EquipmentSlot[]{EquipmentSlot.CHEST});
@@ -21,7 +19,7 @@ public class ShacklingCurseEnchantment extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof ElytraItem || stack.getItem() instanceof FabricElytraItem || betterEndElytras.contains(stack.getItem());
+        return stack.getItem() instanceof ElytraItem || stack.getItem() instanceof FabricElytraItem;
     }
 
     @Override
