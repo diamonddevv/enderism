@@ -68,8 +68,14 @@ public class EnderismMod implements ModInitializer {
 				content.addAfter(ItemInit.CURSED_CHORUS, getBlockItem(BlockInit.CHORUS_FRUIT_PIE));
 			});
 
+			ItemGroupEvents.modifyEntriesEvent(TOOLS).register(content -> {
+				content.addAfter(Items.GOAT_HORN, ItemInit.PURPUR_FLUTE);
+			});
+
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
-				CharmItem.addAllCharms(content, ItemInit.CHARM);
+				CharmItem.addAllCharms(content, ItemInit.ENDSTONE_CHARM);
+				CharmItem.addAllCharms(content, ItemInit.PURPUR_CHARM);
+				CharmItem.addAllCharms(content, ItemInit.OBSIDIAN_CHARM);
 			});
 		}
 	}

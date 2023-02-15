@@ -3,7 +3,9 @@
   "item.enderism.cursed_chorus_fruit.bound": "§7Bound to: %s",
   "item.enderism.cursed_chorus_fruit.unbound": "§7Unbound",
 
-  "item.enderism.charm": "Charm",
+  "item.enderism.end_stone_charm": "End Stone Charm",
+  "item.enderism.purpur_charm": "Purpur Charm",
+  "item.enderism.obsidian_charm": "Obsidian Charm",
 
   "item.minecraft.potion.effect.void_recall_short": "Potion of Void Recalling",
   "item.minecraft.potion.effect.void_recall_long": "Lengthened Potion of Void Recalling",
