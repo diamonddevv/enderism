@@ -1,5 +1,8 @@
 package net.diamonddev.enderism.item;
 
+import net.diamonddev.enderism.item.music.MusicSheetInstrument;
+import net.diamonddev.enderism.item.music.MusicSheetItem;
+import net.diamonddev.enderism.util.EnderismUtil;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -24,14 +27,19 @@ public abstract class InstrumentItem extends Item {
         }
 
         ItemStack stackInHand = user.getStackInHand(hand);
+        ItemStack other = user.getStackInHand(EnderismUtil.otherHand(hand));
 
-        world.playSoundFromEntity(null, user, this.getSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
+        if (other.getItem() instanceof MusicSheetItem sheet) {
+            sheet.play(getInstrument(), world, user);
+        } else {
+            world.playSoundFromEntity(null, user, this.getSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
+        }
 
         return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
     }
 
-    abstract int getCooldownTicks();
-    abstract SoundEvent getSoundEvent();
+    public abstract int getCooldownTicks();
+    public abstract SoundEvent getSoundEvent();
 
-    abstract Instrument getInstrument();
+    public abstract MusicSheetInstrument getInstrument();
 }

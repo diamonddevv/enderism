@@ -144,7 +144,7 @@ public class CursedChorusItem extends Item {
 
         if (stack.getItem() instanceof CursedChorusItem) {
             if (target instanceof PlayerEntity) {
-                target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEventInit.PLAYER_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
+                target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEventInit.CURSED_CHORUS_FRUIT_PLAYER_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
                 addNBT(stack,((PlayerEntity) target).getGameProfile().getName(), target.getUuid());
             }
         }
@@ -165,7 +165,7 @@ public class CursedChorusItem extends Item {
         if (block == BlockInit.CHORUS_MAGNETITE) {
             addNBT(stack, pos);
             Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
-            world.playSound(null, vec.x + 0.5, vec.y, vec.z + 0.5, SoundEventInit.CHORUS_MAGNETITE_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
+            world.playSound(null, vec.x + 0.5, vec.y, vec.z + 0.5, SoundEventInit.CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
             for (int i = 0; i < 5; i++) {
                 world.addParticle(ParticleTypes.WITCH, vec.x + 0.5, vec.y + 0.5, vec.z + 0.5, 1, 1, 1);
             }

@@ -8,15 +8,19 @@ import net.minecraft.util.Identifier;
 
 public class SoundEventInit implements RegistryInitializer {
 
-    public static SoundEvent CHORUS_MAGNETITE_BIND;
-    public static SoundEvent PLAYER_BIND;
+    public static SoundEvent CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND;
+    public static SoundEvent CURSED_CHORUS_FRUIT_PLAYER_BIND;
     public static SoundEvent FIBROUS_CHORUS_BOUNCE;
+
+    public static SoundEvent OCTARIAN_BURP;
 
     @Override
     public void register() {
-        CHORUS_MAGNETITE_BIND = create("entity.cursed_chorus.bind.chorus_magnetite");
-        PLAYER_BIND = create("entity.cursed_chorus.bind.player");
+        CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND = create("item.cursed_chorus.bind.chorus_magnetite");
+        CURSED_CHORUS_FRUIT_PLAYER_BIND = create("item.cursed_chorus.bind.player");
         FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
+
+        OCTARIAN_BURP = create("test.octarian_burp");
     }
 
     private SoundEvent create(String name) {
