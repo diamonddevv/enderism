@@ -1,8 +1,10 @@
 package net.diamonddev.enderism.item;
 
+import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.BlockInit;
 import net.diamonddev.enderism.registry.SoundEventInit;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
@@ -16,6 +18,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -31,60 +34,6 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class CursedChorusItem extends Item {
-
-
-    private final String KEY_UUID = "enderism.uuid";
-    private final String KEY_NAME = "enderism.name";
-    private final String KEY_COORDS = "enderism.coords";
-    private final String KEY_PLAYERBOUND = "enderism.playerbound";
-    private final String KEY_MAGNETITEBOUND = "enderism.magnetitebound";
-
-    public PlayerEntity getPlayer(ItemStack stack, World world) {
-        for (PlayerEntity p : Objects.requireNonNull(world.getServer()).getPlayerManager().getPlayerList()) {
-            if (p.getUuid().compareTo(stack.getOrCreateNbt().getUuid(KEY_UUID)) == 0) {
-                return p;
-            }
-        }
-        return null;
-    }
-    public String getBoundedPlayerName(ItemStack stack) {
-        return stack.getOrCreateNbt().getString(KEY_NAME);
-    }
-    public int[] getListCoords(ItemStack stack) {
-        return stack.getOrCreateNbt().getIntArray(KEY_COORDS);
-    }
-    public boolean isPlayerbound(ItemStack stack) {
-        return stack.getOrCreateNbt().getBoolean(KEY_PLAYERBOUND);
-    }
-    public boolean isMagnetiteBound(ItemStack stack) {
-        return stack.getOrCreateNbt().getBoolean(KEY_MAGNETITEBOUND);
-    }
-
-    public void addNBT(ItemStack stack, String name, UUID uuid) {
-        // Playerbound Method
-
-        stack.setNbt(null);
-        NbtCompound nbt = new NbtCompound();
-        nbt.putBoolean(KEY_PLAYERBOUND, true);
-        nbt.putBoolean(KEY_MAGNETITEBOUND, false);
-        nbt.putString(KEY_NAME, name);
-        nbt.putUuid(KEY_UUID, uuid);
-        stack.setNbt(nbt);
-    }
-
-    public void addNBT(ItemStack stack, BlockPos blockcoords) { // todo: interdimensional travel with chorus magnetite
-        // Chorus Magnetite Bound Method
-        String name = "Chorus Magnetite at (" + blockcoords.getX() + ", " + blockcoords.getY() + ", " + blockcoords.getZ() + ")";
-        int[] ints = getIntArrFromBP(blockcoords);
-
-        stack.setNbt(null);
-        NbtCompound nbt = new NbtCompound();
-        nbt.putBoolean(KEY_PLAYERBOUND, false);
-        nbt.putBoolean(KEY_MAGNETITEBOUND, true);
-        nbt.putString(KEY_NAME, name);
-        nbt.putIntArray(KEY_COORDS, ints);
-        stack.setNbt(nbt);
-    }
     public CursedChorusItem() {
         super(new FabricItemSettings().maxCount(1).food(
                 new FoodComponent.Builder()
@@ -95,18 +44,29 @@ public class CursedChorusItem extends Item {
                         .build()));
     }
 
+    public static void addCursedChorus(FabricItemGroupEntries content, CursedChorusItem itemInstance) {
+        content.addAfter(Items.CHORUS_FRUIT, itemInstance.getDefaultStack());
+    }
+
+    @Override
+    public ItemStack getDefaultStack() {
+        ItemStack stack = new ItemStack(this);
+        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
+        return stack;
+    }
+
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) { // todo: interdimensional travel
 
-        if (isPlayerbound(stack)) { // Player Bind
+        if (EnderismNbt.CursedChorusBindManager.isPlayerbound(stack)) { // Player Bind
             if (!world.isClient()) {
-                if (getPlayer(stack, world) != null) {
+                if (EnderismNbt.CursedChorusBindManager.getBoundPlayer(stack, world) != null) {
                     if (
                             Arrays.stream(Objects.requireNonNull(world.getServer()).getPlayerNames())
-                                    .anyMatch(Predicate.isEqual(getPlayer(stack, world).getGameProfile().getName()))
+                                    .anyMatch(Predicate.isEqual(EnderismNbt.CursedChorusBindManager.getBoundPlayer(stack, world).getGameProfile().getName()))
 
                     ) { // Check player is online
-                        Vec3d coords = getPlayer(stack, world).getPos();
+                        Vec3d coords = EnderismNbt.CursedChorusBindManager.getBoundPlayer(stack, world).getPos();
                         teleport(user, world, stack, coords);
                     } else {
                         failTeleport(user, world, stack);
@@ -115,18 +75,16 @@ public class CursedChorusItem extends Item {
                     failTeleport(user, world, stack);
                 }
             }
-        } else if (isMagnetiteBound(stack)) { // Chorus Magnetite Bind
+        } else if (EnderismNbt.CursedChorusBindManager.isMagnetiteBound(stack)) { // Chorus Magnetite Bind
             if (!world.isClient()) {
-                int[] ia = getListCoords(stack);
-                Vec3d coords = new Vec3d(ia[0], ia[1], ia[2]);
+                Vec3d coords = EnderismNbt.CursedChorusBindManager.getBoundVector(stack);
                 BlockPos pos = new BlockPos(coords);
 
                 // Check Magnetite Still Exists and is in this dimension
                 if (world.getBlockState(pos).getBlock() == BlockInit.CHORUS_MAGNETITE) {
 
                     world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 2f);
-                    coords = new Vec3d(ia[0], ia[1] + 1, ia[2]);
-                    teleport(user, world, stack, coords);
+                    teleport(user, world, stack, alterVectorForMagnetite(coords));
                     world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
                     stack.setNbt(null);
 
@@ -135,6 +93,9 @@ public class CursedChorusItem extends Item {
                 }
             }
         }
+
+        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
+
         return super.finishUsing(stack, world, user);
     }
 
@@ -143,9 +104,9 @@ public class CursedChorusItem extends Item {
         // Handle adding an entity bind to the fruit
 
         if (stack.getItem() instanceof CursedChorusItem) {
-            if (target instanceof PlayerEntity) {
+            if (target instanceof PlayerEntity player) {
                 target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEventInit.CURSED_CHORUS_FRUIT_PLAYER_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
-                addNBT(stack,((PlayerEntity) target).getGameProfile().getName(), target.getUuid());
+                EnderismNbt.CursedChorusBindManager.setPlayerBind(player, stack);
             }
         }
 
@@ -163,7 +124,7 @@ public class CursedChorusItem extends Item {
         ItemStack stack = context.getStack();
 
         if (block == BlockInit.CHORUS_MAGNETITE) {
-            addNBT(stack, pos);
+            EnderismNbt.CursedChorusBindManager.setMagnetiteBind(pos, stack);
             Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
             world.playSound(null, vec.x + 0.5, vec.y, vec.z + 0.5, SoundEventInit.CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
             for (int i = 0; i < 5; i++) {
@@ -176,41 +137,56 @@ public class CursedChorusItem extends Item {
 
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return stack.hasNbt();
+        return EnderismNbt.CursedChorusBindManager.isBound(stack);
     }
 
-    @Override
-    public ItemStack getDefaultStack() {
-        ItemStack s = new ItemStack(this);
-        s.getOrCreateNbt();
-        return s;
-    }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (stack.hasNbt() && world != null) {
-            tooltip.add(Text.translatable("item.enderism.cursed_chorus_fruit.bound", getBoundedPlayerName(stack)));
-        } else if (!stack.hasNbt() && world != null) {
-            tooltip.add(Text.translatable("item.enderism.cursed_chorus_fruit.unbound"));
-        } else {
-            tooltip.add(Text.literal("Something went wrong with this tooltip, oops!").formatted(Formatting.RED));
-        }
+        tooltip.add(getTooltipData(stack, world));
     }
 
-    private int[] getIntArrFromBP(BlockPos bp) {
-        return new int[]{bp.getX(), bp.getY(), bp.getZ()};
+    private static MutableText getTooltipData(ItemStack stack, World world) {
+        MutableText text = Text.translatable("item.enderism.cursed_chorus_fruit.bound");
+
+        if (EnderismNbt.CursedChorusBindManager.isMagnetiteBound(stack)) {
+            Vec3d pos = EnderismNbt.CursedChorusBindManager.getBoundVector(stack);
+            text.append(Text.translatable(BlockInit.CHORUS_MAGNETITE.getTranslationKey()));
+            text.append(" ").append(Text.translatable("enderism.generic_terms.at")).append(" ");
+            text.append("[" + pos.x + ", " + pos.y + ", " + pos.z + "]");
+
+            return text;
+
+        } else if (EnderismNbt.CursedChorusBindManager.isPlayerbound(stack)) {
+            PlayerEntity player = EnderismNbt.CursedChorusBindManager.getBoundPlayer(stack, world);
+            text.append(player.getName());
+
+            return text;
+
+        } else if (!EnderismNbt.CursedChorusBindManager.isBound(stack)) {
+            return Text.translatable("item.enderism.cursed_chorus_fruit.unbound");
+        }
+        return getFailedTooltip();
+    }
+
+    private static MutableText getFailedTooltip() {
+        return Text.literal("Something went wrong with this tooltip, oops!").formatted(Formatting.RED);
     }
 
     private void failTeleport(LivingEntity user, World world, ItemStack stack) {
         user.damage(DamageSource.MAGIC, 6f);
         world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, SoundCategory.PLAYERS, 1f, 0.1f);
-        stack.setNbt(null);
+        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
     }
 
     private void teleport(LivingEntity user, World world, ItemStack stack, Vec3d coords) {
         world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 2f);
-        user.teleport(coords.x + 0.5, coords.y, coords.z + 0.5, true);
+        user.teleport(coords.x, coords.y, coords.z, true);
         world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
-        stack.setNbt(null);
+        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
+    }
+
+    private static Vec3d alterVectorForMagnetite(Vec3d vec) {
+        return new Vec3d(vec.x + 0.5, vec.y + 1, vec.z + 0.5);
     }
 }

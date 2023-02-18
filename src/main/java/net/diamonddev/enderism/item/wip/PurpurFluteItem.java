@@ -1,7 +1,7 @@
-package net.diamonddev.enderism.item;
+package net.diamonddev.enderism.item.wip;
 
-import net.diamonddev.enderism.item.music.MusicSheetInstrument;
-import net.diamonddev.enderism.item.music.MusicSheetInstrumentConstants;
+import net.diamonddev.enderism.item.wip.music.MusicSheetInstrument;
+import net.diamonddev.enderism.item.wip.music.MusicSheetInstrumentConstants;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
@@ -22,7 +22,7 @@ public class PurpurFluteItem extends InstrumentItem {
 
     @Override
     public MusicSheetInstrument getInstrument() {
-        return MusicSheetInstrumentConstants.OCTARIAN_BURP;
+        return MusicSheetInstrumentConstants.FLUTE;
 //        return MusicSheetInstrument.fromInstrument(Instrument.FLUTE);
     }
 }

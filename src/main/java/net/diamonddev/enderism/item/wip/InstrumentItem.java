@@ -1,9 +1,8 @@
-package net.diamonddev.enderism.item;
+package net.diamonddev.enderism.item.wip;
 
-import net.diamonddev.enderism.item.music.MusicSheetInstrument;
-import net.diamonddev.enderism.item.music.MusicSheetItem;
+import net.diamonddev.enderism.item.wip.music.MusicSheetInstrument;
+import net.diamonddev.enderism.item.wip.music.MusicSheetItem;
 import net.diamonddev.enderism.util.EnderismUtil;
-import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.mixin;
 
+import net.diamonddev.enderism.item.ShulkerShellmetItem;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.EffectInit;
 import net.diamonddev.enderism.registry.EnchantInit;
@@ -33,6 +34,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -168,5 +170,12 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
+    @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
+    private boolean enderism$redirectLevitationCheckWithShellmet(LivingEntity instance, StatusEffect effect) {
+        if (instance.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ShulkerShellmetItem) {
+            return false;
+        }
+        return instance.hasStatusEffect(effect);
+    }
 
 }

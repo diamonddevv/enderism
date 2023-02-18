@@ -1,11 +1,13 @@
 package net.diamonddev.enderism;
 
 import net.diamonddev.enderism.item.CharmItem;
+import net.diamonddev.enderism.item.CursedChorusItem;
 import net.diamonddev.enderism.registry.*;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -64,15 +66,18 @@ public class EnderismMod implements ModInitializer {
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(FOOD_AND_DRINK).register(content -> {
-				content.addAfter(Items.CHORUS_FRUIT, ItemInit.CURSED_CHORUS);
+				CursedChorusItem.addCursedChorus(content, ItemInit.CURSED_CHORUS);
+
 				content.addAfter(ItemInit.CURSED_CHORUS, getBlockItem(BlockInit.CHORUS_FRUIT_PIE));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(TOOLS).register(content -> {
-				content.addAfter(Items.GOAT_HORN, ItemInit.PURPUR_FLUTE);
+//				content.addAfter(Items.GOAT_HORN, ItemInit.PURPUR_FLUTE);
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
+				content.addAfter(Items.TURTLE_HELMET, ItemInit.SHULKER_SHELLMET);
+
 				CharmItem.addAllCharms(content, ItemInit.ENDSTONE_CHARM);
 				CharmItem.addAllCharms(content, ItemInit.PURPUR_CHARM);
 				CharmItem.addAllCharms(content, ItemInit.OBSIDIAN_CHARM);

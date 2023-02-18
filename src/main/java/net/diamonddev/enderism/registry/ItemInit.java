@@ -3,8 +3,9 @@ package net.diamonddev.enderism.registry;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.item.CursedChorusItem;
-import net.diamonddev.enderism.item.music.MusicSheetItem;
-import net.diamonddev.enderism.item.PurpurFluteItem;
+import net.diamonddev.enderism.item.ShulkerShellmetItem;
+import net.diamonddev.enderism.item.wip.music.MusicSheetItem;
+import net.diamonddev.enderism.item.wip.PurpurFluteItem;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.registry.Registries;
@@ -14,6 +15,8 @@ public class ItemInit implements RegistryInitializer {
 
 
     public static CursedChorusItem CURSED_CHORUS = new CursedChorusItem();
+
+    public static ShulkerShellmetItem SHULKER_SHELLMET = new ShulkerShellmetItem();
 
     public static PurpurFluteItem PURPUR_FLUTE = new PurpurFluteItem(new FabricItemSettings());
     public static MusicSheetItem TEST_SHEET = new MusicSheetItem(new FabricItemSettings(), () -> "5-8,8,3,1");
@@ -25,6 +28,8 @@ public class ItemInit implements RegistryInitializer {
     @Override
     public void register() {
         Registry.register(Registries.ITEM, EnderismMod.id("cursed_chorus_fruit"), CURSED_CHORUS);
+
+        Registry.register(Registries.ITEM, EnderismMod.id("shulker_shellmet"), SHULKER_SHELLMET);
 
         Registry.register(Registries.ITEM, EnderismMod.id("purpur_flute"), PURPUR_FLUTE);
         Registry.register(Registries.ITEM, EnderismMod.id("test_sheet"), TEST_SHEET);

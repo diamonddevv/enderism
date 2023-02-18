@@ -6,11 +6,16 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.event.GameEvent;
 
+import java.util.UUID;
+
 public class EnderismUtil {
+
+    public static final UUID UUID_ZERO = new UUID(0, 0);
 
     public static void chorusTeleport(LivingEntity user) {
         chorusTeleport(user, 16, 16.0);
@@ -41,5 +46,9 @@ public class EnderismUtil {
 
     public static Hand otherHand(Hand hand) {
         return hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
+    }
+
+    public static Vec3d toVec(BlockPos pos) {
+        return new Vec3d(pos.getX(), pos.getY(), pos.getZ());
     }
 }
