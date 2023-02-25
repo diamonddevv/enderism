@@ -36,6 +36,23 @@ public class CharmItem extends Item {
         }
     }
 
+    public static ItemStack createCharm(StatusEffectInstance sei, CharmItem instance) {
+        ItemStack stack = new ItemStack(instance);
+        EnderismNbt.CharmEffectManager.set(stack, sei);
+        return stack;
+    }
+
+    public static ItemStack createEmptyCharm(CharmItem instance) {
+        ItemStack stack = new ItemStack(instance);
+        EnderismNbt.CharmEffectManager.setHas(stack, false);
+        return stack;
+    }
+
+    @Override
+    public ItemStack getDefaultStack() {
+        return createEmptyCharm(this);
+    }
+
     public static int getColor(ItemStack stack) {
         if (EnderismNbt.CharmEffectManager.has(stack)) {
             return EnderismNbt.CharmEffectManager.get(stack).getEffectType().getColor();

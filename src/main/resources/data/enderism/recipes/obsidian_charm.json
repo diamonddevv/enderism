@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "*#*",
+    "#@#",
+    "*#*"
+  ],
+  "key": {
+    "@": {
+      "item": "enderism:purpur_charm"
+    },
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "*": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "enderism:obsidian_charm"
+  }
+}

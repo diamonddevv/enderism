@@ -12,11 +12,11 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public class PotionInit implements RegistryInitializer {
+public class InitPotions implements RegistryInitializer {
 
-    public static Potion VOID_RECALL_SHORT = new Potion(new StatusEffectInstance(EffectInit.VOID_RECALL, 3000)); // 2m 30s
-    public static Potion VOID_RECALL_LONG = new Potion(new StatusEffectInstance(EffectInit.VOID_RECALL, 6000)); // 5m
-    public static Potion CHORUSKIRMISH = new Potion(new StatusEffectInstance(EffectInit.CHORUSKIRMISH, 600)); // 30s
+    public static Potion VOID_RECALL_SHORT = new Potion(new StatusEffectInstance(InitEffects.VOID_RECALL, 3000)); // 2m 30s
+    public static Potion VOID_RECALL_LONG = new Potion(new StatusEffectInstance(InitEffects.VOID_RECALL, 6000)); // 5m
+    public static Potion CHORUSKIRMISH = new Potion(new StatusEffectInstance(InitEffects.CHORUSKIRMISH, 600)); // 30s
 
 
     @Override

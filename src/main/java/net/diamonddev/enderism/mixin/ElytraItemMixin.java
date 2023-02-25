@@ -1,6 +1,6 @@
 package net.diamonddev.enderism.mixin;
 
-import net.diamonddev.enderism.registry.EnchantInit;
+import net.diamonddev.enderism.registry.InitEnchants;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ public class ElytraItemMixin {
 
     @Inject(method = "isUsable", at = @At("HEAD"), cancellable = true)
     private static void enderism$preventFallFlyingIfShackled(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (EnchantmentHelper.getLevel(EnchantInit.SHACKLING_CURSE, stack) > 0) {
+        if (EnchantmentHelper.getLevel(InitEnchants.SHACKLING_CURSE, stack) > 0) {
             cir.setReturnValue(false);
         }
     }

@@ -1,6 +1,6 @@
 package net.diamonddev.enderism.mixin;
 
-import net.diamonddev.enderism.registry.GameruleInit;
+import net.diamonddev.enderism.registry.InitGamerules;
 import net.diamonddev.enderism.item.CursedChorusItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FireworkRocketItem;
@@ -29,7 +29,7 @@ public class ItemStackMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void enderism$preventFireworkUseWhileFallFlying(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (!world.getGameRules().getBoolean(GameruleInit.ELYTRA_FIREWORKS)) {
+        if (!world.getGameRules().getBoolean(InitGamerules.ELYTRA_FIREWORKS)) {
             if (user.isFallFlying() && user.getStackInHand(hand).getItem() instanceof FireworkRocketItem) {
                 cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
             }

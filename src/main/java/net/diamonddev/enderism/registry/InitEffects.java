@@ -8,7 +8,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-public class EffectInit implements RegistryInitializer {
+public class InitEffects implements RegistryInitializer {
 
     public static StatusEffect VOID_RECALL = new VoidRecallEffect();
     public static StatusEffect CHORUSKIRMISH = new ChoruskirmishEffect();

@@ -14,7 +14,7 @@ import net.minecraft.registry.Registry;
 
 import static net.diamonddev.libgenetics.common.api.v1.enchantment.target.EnchantmentTargets.ELYTRA;
 
-public class EnchantInit implements RegistryInitializer {
+public class InitEnchants implements RegistryInitializer {
 
 
     public static Enchantment UPTHRUST = new UpthrustEnchantment(ELYTRA);

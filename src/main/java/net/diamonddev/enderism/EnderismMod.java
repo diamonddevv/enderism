@@ -7,13 +7,12 @@ import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static net.diamonddev.enderism.registry.BlockInit.getBlockItem;
+import static net.diamonddev.libgenetics.common.api.v1.interfaces.BlockRegistryHelper.getBlockItem;
 import static net.minecraft.item.ItemGroups.*;
 
 public class EnderismMod implements ModInitializer {
@@ -28,13 +27,14 @@ public class EnderismMod implements ModInitializer {
 		long startTime = System.currentTimeMillis();
 		//
 
-		new BlockInit().register();
-		new ItemInit().register();
-		new EffectInit().register();
-		new EnchantInit().register();
-		new GameruleInit().register();
-		new PotionInit().register();
-		new SoundEventInit().register();
+		new InitBlocks().register();
+		new InitItems().register();
+		new InitEffects().register();
+		new InitEnchants().register();
+		new InitGamerules().register();
+		new InitPotions().register();
+		new InitSoundEvents().register();
+		new InitResourceListener().register();
 
 
 		new ItemGroupEditor().register();
@@ -61,14 +61,14 @@ public class EnderismMod implements ModInitializer {
 
 		private static void place() {
 			ItemGroupEvents.modifyEntriesEvent(FUNCTIONAL).register(content -> {
-				content.addAfter(Items.LODESTONE, getBlockItem(BlockInit.CHORUS_MAGNETITE));
-				content.addAfter(getBlockItem(BlockInit.CHORUS_MAGNETITE), getBlockItem(BlockInit.FIBROUS_CHORUS));
+				content.addAfter(Items.LODESTONE, getBlockItem(InitBlocks.CHORUS_MAGNETITE));
+				content.addAfter(getBlockItem(InitBlocks.CHORUS_MAGNETITE), getBlockItem(InitBlocks.FIBROUS_CHORUS));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(FOOD_AND_DRINK).register(content -> {
-				CursedChorusItem.addCursedChorus(content, ItemInit.CURSED_CHORUS);
+				CursedChorusItem.addCursedChorus(content, InitItems.CURSED_CHORUS);
 
-				content.addAfter(ItemInit.CURSED_CHORUS, getBlockItem(BlockInit.CHORUS_FRUIT_PIE));
+				content.addAfter(InitItems.CURSED_CHORUS, getBlockItem(InitBlocks.CHORUS_FRUIT_PIE));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(TOOLS).register(content -> {
@@ -76,11 +76,11 @@ public class EnderismMod implements ModInitializer {
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
-				content.addAfter(Items.TURTLE_HELMET, ItemInit.SHULKER_SHELLMET);
+				content.addAfter(Items.TURTLE_HELMET, InitItems.SHULKER_SHELLMET);
 
-				CharmItem.addAllCharms(content, ItemInit.ENDSTONE_CHARM);
-				CharmItem.addAllCharms(content, ItemInit.PURPUR_CHARM);
-				CharmItem.addAllCharms(content, ItemInit.OBSIDIAN_CHARM);
+				CharmItem.addAllCharms(content, InitItems.ENDSTONE_CHARM);
+				CharmItem.addAllCharms(content, InitItems.PURPUR_CHARM);
+				CharmItem.addAllCharms(content, InitItems.OBSIDIAN_CHARM);
 			});
 		}
 	}

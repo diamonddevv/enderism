@@ -11,8 +11,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
-public class ItemInit implements RegistryInitializer {
-
+public class InitItems implements RegistryInitializer {
 
     public static CursedChorusItem CURSED_CHORUS = new CursedChorusItem();
 

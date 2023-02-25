@@ -1,7 +1,7 @@
 package net.diamonddev.enderism.mixin;
 
 import net.diamonddev.enderism.item.CharmItem;
-import net.diamonddev.enderism.registry.ItemInit;
+import net.diamonddev.enderism.registry.InitItems;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +21,6 @@ public class ItemColorsMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private static void enderism$provideItemColors(BlockColors blockColors, CallbackInfoReturnable<ItemColors> cir, ItemColors itemColors) {
-        itemColors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : CharmItem.getColor(stack), ItemInit.ENDSTONE_CHARM, ItemInit.PURPUR_CHARM, ItemInit.OBSIDIAN_CHARM);
+        itemColors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : CharmItem.getColor(stack), InitItems.ENDSTONE_CHARM, InitItems.PURPUR_CHARM, InitItems.OBSIDIAN_CHARM);
     }
 }

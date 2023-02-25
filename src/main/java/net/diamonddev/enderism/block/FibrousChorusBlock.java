@@ -1,6 +1,6 @@
 package net.diamonddev.enderism.block;
 
-import net.diamonddev.enderism.registry.SoundEventInit;
+import net.diamonddev.enderism.registry.InitSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -55,7 +55,7 @@ public class FibrousChorusBlock extends Block {
         entity.getWorld().playSound(
                 null,
                 entity.getBlockPos(),
-                SoundEventInit.FIBROUS_CHORUS_BOUNCE,
+                InitSoundEvents.FIBROUS_CHORUS_BOUNCE,
                 SoundCategory.BLOCKS,
                 1.8f,
                 new Random().nextFloat(0.1f, 1.5f)

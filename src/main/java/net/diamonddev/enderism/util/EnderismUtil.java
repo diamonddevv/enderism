@@ -1,11 +1,20 @@
 package net.diamonddev.enderism.util;
 
+import net.diamonddev.enderism.nbt.EnderismNbt;
+import net.diamonddev.enderism.registry.InitResourceListener;
+import net.diamonddev.enderism.resource.type.CharmRecipeResourceType;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResource;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -50,5 +59,24 @@ public class EnderismUtil {
 
     public static Vec3d toVec(BlockPos pos) {
         return new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    public static <T> T registryGetOrElse(Registry<T> registry, Identifier id, T elseReturned) {
+        if (registry.containsId(id)) return registry.get(id); else return elseReturned;
+    }
+
+    public static boolean canInfuseCharm(ItemStack stack) {
+        boolean r = false;
+
+        for (DataLoaderResource res : InitResourceListener.ENDERISM_CHARMS.getManager().CACHE.get(InitResourceListener.CHARM_TYPE)) {
+            Item item = EnderismUtil.registryGetOrElse(Registries.ITEM, res.getIdentifier(CharmRecipeResourceType.INGREDIENT), null);
+            if (item != null) {
+                if (stack.getItem() == item) {
+                    if (!EnderismNbt.CharmEffectManager.has(stack)) r = true;
+                }
+            }
+        }
+
+        return r;
     }
 }

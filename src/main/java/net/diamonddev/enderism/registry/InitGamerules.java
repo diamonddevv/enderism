@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.GameRules;
 
-public class GameruleInit implements RegistryInitializer {
+public class InitGamerules implements RegistryInitializer {
 
     public static GameRules.Key<GameRules.BooleanRule> UPTHRUST_NO_DRAG;
     public static GameRules.Key<GameRules.BooleanRule> ELYTRA_FIREWORKS;

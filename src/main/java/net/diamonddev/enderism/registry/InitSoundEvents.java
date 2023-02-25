@@ -7,7 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
-public class SoundEventInit implements RegistryInitializer {
+public class InitSoundEvents implements RegistryInitializer {
 
     public static SoundEvent CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND;
     public static SoundEvent CURSED_CHORUS_FRUIT_PLAYER_BIND;

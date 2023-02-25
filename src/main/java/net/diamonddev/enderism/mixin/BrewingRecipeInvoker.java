@@ -19,4 +19,16 @@ public interface BrewingRecipeInvoker {
     static void invokeRegisterPotionRecipe(Potion input, Item item, Potion output) {
         throw new AssertionError();
     }
+
+    /**
+     * Call this method to add a Brewing Stand Item Recipe.
+     *
+     * @param input Base Item
+     * @param ingredient Input Item
+     * @param output Output Item
+     */
+    @Invoker("registerItemRecipe")
+    static void invokeRegisterPotionRecipe(Item input, Item ingredient, Item output) {
+        throw new AssertionError();
+    }
 }

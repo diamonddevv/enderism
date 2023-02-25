@@ -2,9 +2,9 @@ package net.diamonddev.enderism.mixin;
 
 import net.diamonddev.enderism.item.ShulkerShellmetItem;
 import net.diamonddev.enderism.nbt.EnderismNbt;
-import net.diamonddev.enderism.registry.EffectInit;
-import net.diamonddev.enderism.registry.EnchantInit;
-import net.diamonddev.enderism.registry.GameruleInit;
+import net.diamonddev.enderism.registry.InitEffects;
+import net.diamonddev.enderism.registry.InitEnchants;
+import net.diamonddev.enderism.registry.InitGamerules;
 import net.diamonddev.enderism.util.EnderismUtil;
 import net.diamonddev.libgenetics.common.api.v1.enchantment.EnchantHelper;
 import net.diamonddev.libgenetics.common.api.v1.util.DirtyObject;
@@ -103,11 +103,11 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void enderism$performUpthrust(CallbackInfo ci) {
         if (this.hasStackEquipped(EquipmentSlot.CHEST)) {
-            if (EnchantInit.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
+            if (InitEnchants.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
                 ItemStack stack = this.getEquippedStack(EquipmentSlot.CHEST);
                 if (ElytraItem.isUsable(stack)) {
-                    if (EnchantHelper.hasEnchantment(EnchantInit.UPTHRUST, stack)) {
-                        int level = EnchantmentHelper.getLevel(EnchantInit.UPTHRUST, stack);
+                    if (EnchantHelper.hasEnchantment(InitEnchants.UPTHRUST, stack)) {
+                        int level = EnchantmentHelper.getLevel(InitEnchants.UPTHRUST, stack);
                         if (this.ticksOnGround > 5) {
                             maxBoostCount.set(level * 2);
                             maxBoostCount.clean();
@@ -127,7 +127,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "tickInVoid", at = @At("HEAD"))
     private void enderism$tickVoidRecall(CallbackInfo ci) {
-        if (this.hasStatusEffect(EffectInit.VOID_RECALL)) {
+        if (this.hasStatusEffect(InitEffects.VOID_RECALL)) {
             if (this.getEntityWorld().getDimensionKey() == DimensionTypes.THE_END) {
                 try {
                     if (Objects.requireNonNull(world.getServer()).getWorld(World.END) != null) {
@@ -146,9 +146,9 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
     private void enderism$callChoruskirmish(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         LivingEntity user = (LivingEntity) (Object) this;
-        int chance = this.world.getGameRules().getInt(GameruleInit.CHORUSKIRMISH_CHANCE);
-        if (user.hasStatusEffect(EffectInit.CHORUSKIRMISH) && random.nextFloat() <= chance / 100.0f) {
-            int i = user.getStatusEffect(EffectInit.CHORUSKIRMISH).getAmplifier();
+        int chance = this.world.getGameRules().getInt(InitGamerules.CHORUSKIRMISH_CHANCE);
+        if (user.hasStatusEffect(InitEffects.CHORUSKIRMISH) && random.nextFloat() <= chance / 100.0f) {
+            int i = user.getStatusEffect(InitEffects.CHORUSKIRMISH).getAmplifier();
             EnderismUtil.chorusTeleport(user, 16, 16 * i);
         }
     }

@@ -1,2 +1,7 @@
 accessWidener	v1	named
+
+# Enchantment Target
 extendable   class   net/minecraft/enchantment/EnchantmentTarget
+
+# Brewing Stand Potion Slot
+extendable  class   net/minecraft/screen/BrewingStandScreenHandler$PotionSlot

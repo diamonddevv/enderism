@@ -1,0 +1,11 @@
+{
+  "resource_type": "enderism:charm_recipe",
+
+  "ingredient": "minecraft:sugar",
+
+  "out_effect": {
+    "effect": "minecraft:speed",
+    "amplifier": 0,
+    "duration": 200
+  }
+}
