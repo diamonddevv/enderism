@@ -20,9 +20,9 @@ public class InitItems implements RegistryInitializer {
     public static PurpurFluteItem PURPUR_FLUTE = new PurpurFluteItem(new FabricItemSettings());
     public static MusicSheetItem TEST_SHEET = new MusicSheetItem(new FabricItemSettings(), () -> "5-8,8,3,1");
 
-    public static CharmItem ENDSTONE_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(50));
-    public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(75));
-    public static CharmItem OBSIDIAN_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(100));
+    public static CharmItem ENDSTONE_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(25));
+    public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(38));
+    public static CharmItem OBSIDIAN_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(50));
 
     @Override
     public void register() {

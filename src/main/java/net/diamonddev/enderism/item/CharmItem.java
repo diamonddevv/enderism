@@ -2,6 +2,7 @@ package net.diamonddev.enderism.item;
 
 import net.diamonddev.enderism.mixin.StatusEffectAccessor;
 import net.diamonddev.enderism.nbt.EnderismNbt;
+import net.diamonddev.enderism.registry.InitConfig;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffect;
@@ -9,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -29,10 +31,18 @@ public class CharmItem extends Item {
         EnderismNbt.CharmEffectManager.setHas(emptyStack, false);
         content.add(emptyStack);
 
-        for (StatusEffect effect : Registries.STATUS_EFFECT) {
-            ItemStack stack = new ItemStack(itemInstance);
-            EnderismNbt.CharmEffectManager.set(stack, new StatusEffectInstance(effect, 200, 0));
-            content.add(stack);
+        if (InitConfig.ENDERISM.charmConfig.creativeHasAllCharms) {
+            for (StatusEffect effect : Registries.STATUS_EFFECT) {
+                ItemStack stack = new ItemStack(itemInstance);
+                EnderismNbt.CharmEffectManager.set(stack, new StatusEffectInstance(effect, 200, 0));
+                content.add(stack);
+            }
+        } else {
+            for (Potion potion : Registries.POTION) {
+                ItemStack stack = new ItemStack(itemInstance);
+                StatusEffectInstance sei = potion.getEffects().get(0);
+                EnderismNbt.CharmEffectManager.set(stack, sei);
+            }
         }
     }
 

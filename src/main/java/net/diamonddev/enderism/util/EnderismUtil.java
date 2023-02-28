@@ -1,11 +1,11 @@
 package net.diamonddev.enderism.util;
 
-import net.diamonddev.enderism.nbt.EnderismNbt;
+import net.diamonddev.enderism.registry.InitConfig;
 import net.diamonddev.enderism.registry.InitResourceListener;
 import net.diamonddev.enderism.resource.type.CharmRecipeResourceType;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResource;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -65,18 +65,17 @@ public class EnderismUtil {
         if (registry.containsId(id)) return registry.get(id); else return elseReturned;
     }
 
-    public static boolean canInfuseCharm(ItemStack stack) {
-        boolean r = false;
-
-        for (DataLoaderResource res : InitResourceListener.ENDERISM_CHARMS.getManager().CACHE.get(InitResourceListener.CHARM_TYPE)) {
-            Item item = EnderismUtil.registryGetOrElse(Registries.ITEM, res.getIdentifier(CharmRecipeResourceType.INGREDIENT), null);
-            if (item != null) {
-                if (stack.getItem() == item) {
-                    if (!EnderismNbt.CharmEffectManager.has(stack)) r = true;
-                }
+    public static boolean isValidCharmCraftIngredient(ItemStack ingredient) {
+        if (InitConfig.ENDERISM.charmConfig.charmCraftsUsePotions) {
+            return false; // skip because it uses potions
+        } else {
+            for (DataLoaderResource res : InitResourceListener.ENDERISM_CHARMS.getManager().CACHE.get(InitResourceListener.CHARM_TYPE)) {
+                ItemConvertible item = registryGetOrElse(Registries.ITEM, res.getIdentifier(CharmRecipeResourceType.INGREDIENT), null);
+                if (item != null) {
+                    if (ingredient.getItem() == item) return true;
+                } else return false;
             }
         }
-
-        return r;
+        return false;
     }
 }

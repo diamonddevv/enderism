@@ -27,6 +27,8 @@ public class EnderismMod implements ModInitializer {
 		long startTime = System.currentTimeMillis();
 		//
 
+		new InitConfig().register();
+
 		new InitBlocks().register();
 		new InitItems().register();
 		new InitEffects().register();
@@ -72,7 +74,7 @@ public class EnderismMod implements ModInitializer {
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(TOOLS).register(content -> {
-//				content.addAfter(Items.GOAT_HORN, ItemInit.PURPUR_FLUTE);
+
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {

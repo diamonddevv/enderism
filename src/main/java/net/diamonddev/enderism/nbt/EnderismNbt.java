@@ -1,18 +1,15 @@
 package net.diamonddev.enderism.nbt;
 
 import net.diamonddev.enderism.util.EnderismUtil;
+import net.diamonddev.libgenetics.common.api.v1.nbt.CompoundedNbtComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class EnderismNbt {
 
