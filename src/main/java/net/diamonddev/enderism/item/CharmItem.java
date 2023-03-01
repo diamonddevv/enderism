@@ -40,8 +40,11 @@ public class CharmItem extends Item {
         } else {
             for (Potion potion : Registries.POTION) {
                 ItemStack stack = new ItemStack(itemInstance);
-                StatusEffectInstance sei = potion.getEffects().get(0);
-                EnderismNbt.CharmEffectManager.set(stack, sei);
+                if (!potion.getEffects().isEmpty()) {
+                    StatusEffectInstance sei = potion.getEffects().get(0);
+                    EnderismNbt.CharmEffectManager.set(stack, sei);
+                    content.add(stack);
+                }
             }
         }
     }

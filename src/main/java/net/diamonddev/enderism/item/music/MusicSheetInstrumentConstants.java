@@ -1,4 +1,4 @@
-package net.diamonddev.enderism.item.wip.music;
+package net.diamonddev.enderism.item.music;
 
 import net.minecraft.block.enums.Instrument;
 

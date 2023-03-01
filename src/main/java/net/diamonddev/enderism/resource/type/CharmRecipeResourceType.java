@@ -3,7 +3,9 @@ package net.diamonddev.enderism.resource.type;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.diamonddev.enderism.EnderismMod;
+import net.diamonddev.enderism.item.music.SerializedNotes;
 import net.diamonddev.enderism.util.EnderismUtil;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResource;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResourceType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -26,6 +28,10 @@ public class CharmRecipeResourceType implements DataLoaderResourceType {
 
     public static final String INGREDIENT = "ingredient";
     public static final String OUTEFFECT = "out_effect";
+
+    public static SerializedNotes getAsNotes(DataLoaderResource resource) {
+        return resource.getAsClass(SerializedNotes.class);
+    }
     @Override
     public Identifier getId() {
         return EnderismMod.id("charm_recipe");

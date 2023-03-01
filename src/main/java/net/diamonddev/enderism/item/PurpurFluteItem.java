@@ -1,7 +1,8 @@
-package net.diamonddev.enderism.item.wip;
+package net.diamonddev.enderism.item;
 
-import net.diamonddev.enderism.item.wip.music.MusicSheetInstrument;
-import net.diamonddev.enderism.item.wip.music.MusicSheetInstrumentConstants;
+import net.diamonddev.enderism.item.music.InstrumentItem;
+import net.diamonddev.enderism.item.music.MusicSheetInstrument;
+import net.diamonddev.enderism.item.music.MusicSheetInstrumentConstants;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 

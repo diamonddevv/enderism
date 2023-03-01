@@ -1,7 +1,5 @@
-package net.diamonddev.enderism.item.wip;
+package net.diamonddev.enderism.item.music;
 
-import net.diamonddev.enderism.item.wip.music.MusicSheetInstrument;
-import net.diamonddev.enderism.item.wip.music.MusicSheetItem;
 import net.diamonddev.enderism.util.EnderismUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -29,7 +27,10 @@ public abstract class InstrumentItem extends Item {
         ItemStack other = user.getStackInHand(EnderismUtil.otherHand(hand));
 
         if (other.getItem() instanceof MusicSheetItem sheet) {
-            sheet.play(getInstrument(), world, user);
+            NoteWrapper wrapper = MusicSheetItem.getWrapper(other);
+            if (wrapper != null) {
+                sheet.play(wrapper, getInstrument(), world, user);
+            }
         } else {
             world.playSoundFromEntity(null, user, this.getSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
         }
