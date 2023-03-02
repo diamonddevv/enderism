@@ -29,8 +29,12 @@
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
   "block.enderism.chorus_fruit_pie": "Chorus Fruit Pie",
+
   "block.enderism.chorus_jam": "Chorus Jam",
-  "block.enderism.chorus_jam_bread": "Chorus Jam on Bread",
+  "item.enderism.chorus_jam_bread": "Chorus Jam on Bread",
+
+  "item.enderism.music_sheet": "Music Sheet",
+  "item.enderism.purpur_flute": "Purpur Flute",
 
   "enchantment.enderism.upthrust": "Upthrust",
   "enchantment.enderism.shackling_curse": "Curse of Shackling",

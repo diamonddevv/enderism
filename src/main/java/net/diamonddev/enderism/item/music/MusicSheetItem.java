@@ -43,7 +43,20 @@ public class MusicSheetItem extends Item {
 
     public void play(NoteWrapper wrapper, MusicSheetInstrument instrument, World world, PlayerEntity user) {
         if (world.isClient) {
-            // todo
+            int ticks = 0;
+            int scheduledTick = 0;
+
+            int notesPlayed = 0;
+            while (notesPlayed <= wrapper.notation.size()) {
+                ticks++;
+                for (NoteProvider note : wrapper.notation) {
+                    if (ticks == scheduledTick) {
+                        user.playSound(instrument.sound(), 5.0f, (float) note.pitch());
+                        scheduledTick += wrapper.tickDiff;
+                        notesPlayed++;
+                    }
+                }
+            }
         }
     }
 
