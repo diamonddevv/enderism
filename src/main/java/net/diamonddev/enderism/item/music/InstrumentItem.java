@@ -27,19 +27,19 @@ public abstract class InstrumentItem extends Item {
         ItemStack other = user.getStackInHand(EnderismUtil.otherHand(hand));
 
         if (other.getItem() instanceof MusicSheetItem sheet) {
-            NoteWrapper wrapper = MusicSheetItem.getWrapper(other);
+            MusicSheetDataWrapper wrapper = MusicSheetItem.getWrapper(other);
             if (wrapper != null) {
                 sheet.play(wrapper, getInstrument(), world, user);
             }
         } else {
-            world.playSoundFromEntity(null, user, this.getSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
+            world.playSoundFromEntity(null, user, this.getDefaultSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
         }
 
         return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
     }
 
     public abstract int getCooldownTicks();
-    public abstract SoundEvent getSoundEvent();
+    public abstract SoundEvent getDefaultSoundEvent();
 
     public abstract MusicSheetInstrument getInstrument();
 }

@@ -3,19 +3,14 @@ package net.diamonddev.enderism.item.music;
 import net.diamonddev.enderism.registry.InitResourceListener;
 import net.diamonddev.enderism.resource.type.CharmRecipeResourceType;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResource;
-import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResourceManager;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.text.Text;
+import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.function.IntUnaryOperator;
 
 public class MusicSheetItem extends Item {
 
@@ -23,16 +18,16 @@ public class MusicSheetItem extends Item {
         super(settings);
     }
 
-    public static NoteWrapper getWrapper(ItemStack stack) {
+    public static MusicSheetDataWrapper getWrapper(ItemStack stack) {
         if (stack.getItem() instanceof MusicSheetItem) {
             String name = stack.getName().getString();
 
-            NoteWrapper wrapper = null;
+            MusicSheetDataWrapper wrapper = null;
 
             for (DataLoaderResource res : InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().CACHE.getOrCreateKey(InitResourceListener.MUSIC_TYPE)) {
-                SerializedNotes notes = CharmRecipeResourceType.getAsNotes(res);
-                if (Objects.equals(name, notes.id)) {
-                    wrapper = new NoteWrapper(notes);
+                SerializedMusicSheet musicSheet = CharmRecipeResourceType.getAsNotes(res);
+                if (Objects.equals(name, musicSheet.name)) {
+                    wrapper = new MusicSheetDataWrapper(musicSheet);
                     break;
                 }
             }
@@ -41,21 +36,12 @@ public class MusicSheetItem extends Item {
         } return null;
     }
 
-    public void play(NoteWrapper wrapper, MusicSheetInstrument instrument, World world, PlayerEntity user) {
+    public void play(MusicSheetDataWrapper wrapper, MusicSheetInstrument instrument, World world, PlayerEntity user) {
         if (world.isClient) {
-            int ticks = 0;
-            int scheduledTick = 0;
+            if (wrapper.getSoundFromHash(instrument).isPresent()) {
 
-            int notesPlayed = 0;
-            while (notesPlayed <= wrapper.notation.size()) {
-                ticks++;
-                for (NoteProvider note : wrapper.notation) {
-                    if (ticks == scheduledTick) {
-                        user.playSound(instrument.sound(), 5.0f, (float) note.pitch());
-                        scheduledTick += wrapper.tickDiff;
-                        notesPlayed++;
-                    }
-                }
+            } else {
+
             }
         }
     }

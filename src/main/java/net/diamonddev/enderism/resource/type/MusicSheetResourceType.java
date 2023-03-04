@@ -9,9 +9,8 @@ import java.util.ArrayList;
 public class MusicSheetResourceType implements DataLoaderResourceType {
 
 
-    public static final String NAME = "name";
-    public static final String TBN = "ticksBetweenNotes";
-    public static final String NOTES = "notes";
+    public static final String NAME = "id";
+    public static final String SOUNDS = "sounds";
     @Override
     public Identifier getId() {
         return EnderismMod.id("music_sheet");
@@ -20,7 +19,6 @@ public class MusicSheetResourceType implements DataLoaderResourceType {
     @Override
     public void addJsonKeys(ArrayList<String> keys) {
         keys.add(NAME);
-        keys.add(TBN);
-        keys.add(NOTES);
+        keys.add(SOUNDS);
     }
 }
