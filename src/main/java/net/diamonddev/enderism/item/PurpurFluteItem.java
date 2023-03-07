@@ -18,7 +18,7 @@ public class PurpurFluteItem extends InstrumentItem {
 
     @Override
     public SoundEvent getDefaultSoundEvent() {
-        return SoundEvents.BLOCK_BELL_USE;
+        return SoundEvents.BLOCK_NOTE_BLOCK_FLUTE.value();
     }
 
     @Override

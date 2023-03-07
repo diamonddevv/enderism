@@ -1,9 +1,9 @@
 package net.diamonddev.enderism.nbt;
 
-import net.diamonddev.libgenetics.common.api.v1.nbt.NbtComponent;
+import net.diamonddev.libgenetics.common.api.v1.nbt.cerebellum.CerebellumNbtComponent;
 import net.minecraft.nbt.NbtCompound;
 
-public class NbtBooleanComponent extends NbtComponent<Boolean> {
+public class NbtBooleanComponent extends CerebellumNbtComponent<Boolean> {
     public NbtBooleanComponent(String key) {
         super(key);
     }

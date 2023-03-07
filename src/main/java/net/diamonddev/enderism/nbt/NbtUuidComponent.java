@@ -1,11 +1,11 @@
 package net.diamonddev.enderism.nbt;
 
-import net.diamonddev.libgenetics.common.api.v1.nbt.NbtComponent;
+import net.diamonddev.libgenetics.common.api.v1.nbt.cerebellum.CerebellumNbtComponent;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.UUID;
 
-public class NbtUuidComponent extends NbtComponent<UUID> {
+public class NbtUuidComponent extends CerebellumNbtComponent<UUID> {
     public NbtUuidComponent(String key) {
         super(key);
     }

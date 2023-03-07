@@ -30,16 +30,19 @@ public abstract class InstrumentItem extends Item {
             MusicSheetDataWrapper wrapper = MusicSheetItem.getWrapper(other);
             if (wrapper != null) {
                 sheet.play(wrapper, getInstrument(), world, user);
+                return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
             }
-        } else {
-            world.playSoundFromEntity(null, user, this.getDefaultSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
         }
+
+        world.playSoundFromEntity(null, user, this.getDefaultSoundEvent(), SoundCategory.NEUTRAL, 1.0f, 1.0f);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
     }
 
     public abstract int getCooldownTicks();
-    public abstract SoundEvent getDefaultSoundEvent();
+    public SoundEvent getDefaultSoundEvent() {
+        return this.getInstrument().sound();
+    }
 
     public abstract MusicSheetInstrument getInstrument();
 }

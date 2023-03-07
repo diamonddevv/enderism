@@ -44,5 +44,9 @@
   "effect.enderism.choruskirmish": "Choruskirmish",
 
   "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
-  "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces"
+  "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces",
+
+  "desc.song.enderism.megalovania": "Song of Willpower",
+
+  "context.enderism.music_sheet_missing": "Music Sheet was not found!"
 }

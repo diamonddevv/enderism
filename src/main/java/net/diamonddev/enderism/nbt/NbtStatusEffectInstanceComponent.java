@@ -1,13 +1,13 @@
 package net.diamonddev.enderism.nbt;
 
-import net.diamonddev.libgenetics.common.api.v1.nbt.NbtComponent;
+import net.diamonddev.libgenetics.common.api.v1.nbt.cerebellum.CerebellumNbtComponent;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
-public class NbtStatusEffectInstanceComponent extends NbtComponent<StatusEffectInstance> {
+public class NbtStatusEffectInstanceComponent extends CerebellumNbtComponent<StatusEffectInstance> {
     public NbtStatusEffectInstanceComponent(String key) {
         super(key);
     }

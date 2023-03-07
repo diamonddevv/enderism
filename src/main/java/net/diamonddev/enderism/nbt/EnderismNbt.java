@@ -1,7 +1,7 @@
 package net.diamonddev.enderism.nbt;
 
 import net.diamonddev.enderism.util.EnderismUtil;
-import net.diamonddev.libgenetics.common.api.v1.nbt.CompoundedNbtComponent;
+import net.diamonddev.libgenetics.common.api.v1.nbt.cerebellum.CerebellumCompoundedNbtComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,11 +16,22 @@ public class EnderismNbt {
     private static final NbtStatusEffectInstanceComponent CHARM_EFFECT = new NbtStatusEffectInstanceComponent("effect");
     private static final NbtBooleanComponent CHARM_HAS_EFFECT = new NbtBooleanComponent("hasEffect");
 
-    private static final CompoundedNbtComponent CURSED_CHORUS_BINDS = new CompoundedNbtComponent("bindData");
+    private static final CerebellumCompoundedNbtComponent CURSED_CHORUS_BINDS = new CerebellumCompoundedNbtComponent("bindData");
     private static final NbtStringComponent CURSED_CHORUS_BIND_STATE = new NbtStringComponent("bindState");
     private static final NbtUuidComponent CURSED_CHORUS_UUID = new NbtUuidComponent("uuid");
     private static final NbtVec3dComponent CURSED_CHORUS_VEC = new NbtVec3dComponent("pos");
 
+    private static final NbtStringComponent MUSIC_SHEET_ID = new NbtStringComponent("song_id");
+
+    public static class MusicSheetSongManager {
+        public static String getStringifiedId(ItemStack stack) {
+            return MUSIC_SHEET_ID.read(stack.getOrCreateNbt());
+        }
+
+        public static void setStringifiedId(ItemStack stack, String id) {
+            MUSIC_SHEET_ID.write(stack.getOrCreateNbt(), id);
+        }
+    }
     public static class CursedChorusBindManager {
         // Set Binding
         public static void setPlayerBind(PlayerEntity player, ItemStack stack) {
@@ -68,7 +79,6 @@ public class EnderismNbt {
             MAGNETITE
         }
     }
-
     public static class CharmEffectManager {
         public static void set(ItemStack stack, StatusEffectInstance effect) {
             CHARM_EFFECT.write(stack.getOrCreateNbt(), effect);

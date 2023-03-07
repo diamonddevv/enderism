@@ -21,5 +21,11 @@
       "enderism:block/fibrous_chorus_bounce0",
       "enderism:block/fibrous_chorus_bounce1"
     ]
+  },
+
+  "musicsheet.enderism.megalovania.flute": {
+    "sounds": [
+      "enderism:music/sheet/megalovania_flute"
+    ]
   }
 }

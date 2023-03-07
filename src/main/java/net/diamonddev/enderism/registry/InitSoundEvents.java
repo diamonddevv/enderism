@@ -1,6 +1,7 @@
 package net.diamonddev.enderism.registry;
 
 import net.diamonddev.enderism.EnderismMod;
+import net.diamonddev.enderism.item.music.MusicSheetDataWrapper;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -13,11 +14,15 @@ public class InitSoundEvents implements RegistryInitializer {
     public static SoundEvent CURSED_CHORUS_FRUIT_PLAYER_BIND;
     public static SoundEvent FIBROUS_CHORUS_BOUNCE;
 
+    public static SoundEvent SHEET_FLUTE_MEGALOVANIA;
+
     @Override
     public void register() {
         CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND = create("item.cursed_chorus.bind.chorus_magnetite");
         CURSED_CHORUS_FRUIT_PLAYER_BIND = create("item.cursed_chorus.bind.player");
         FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
+
+        SHEET_FLUTE_MEGALOVANIA = create(MusicSheetDataWrapper.getStringifiedSoundEventId(EnderismMod.id("megalovania"), "flute"));
     }
 
     private SoundEvent create(String name) {

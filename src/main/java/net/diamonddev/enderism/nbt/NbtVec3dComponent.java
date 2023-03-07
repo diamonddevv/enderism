@@ -1,10 +1,10 @@
 package net.diamonddev.enderism.nbt;
 
-import net.diamonddev.libgenetics.common.api.v1.nbt.NbtComponent;
+import net.diamonddev.libgenetics.common.api.v1.nbt.cerebellum.CerebellumNbtComponent;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 
-public class NbtVec3dComponent extends NbtComponent<Vec3d> {
+public class NbtVec3dComponent extends CerebellumNbtComponent<Vec3d> {
     public NbtVec3dComponent(String key) {
         super(key);
     }

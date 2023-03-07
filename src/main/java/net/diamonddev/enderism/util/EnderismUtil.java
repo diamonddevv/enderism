@@ -3,7 +3,7 @@ package net.diamonddev.enderism.util;
 import net.diamonddev.enderism.registry.InitConfig;
 import net.diamonddev.enderism.registry.InitResourceListener;
 import net.diamonddev.enderism.resource.type.CharmRecipeResourceType;
-import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResource;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataResource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -69,7 +69,7 @@ public class EnderismUtil {
         if (InitConfig.ENDERISM.charmConfig.charmCraftsUsePotions) {
             return false; // skip because it uses potions
         } else {
-            for (DataLoaderResource res : InitResourceListener.ENDERISM_CHARMS.getManager().CACHE.get(InitResourceListener.CHARM_TYPE)) {
+            for (CognitionDataResource res : InitResourceListener.ENDERISM_CHARMS.getManager().CACHE.get(InitResourceListener.CHARM_TYPE)) {
                 ItemConvertible item = registryGetOrElse(Registries.ITEM, res.getIdentifier(CharmRecipeResourceType.INGREDIENT), null);
                 if (item != null) {
                     if (ingredient.getItem() == item) return true;

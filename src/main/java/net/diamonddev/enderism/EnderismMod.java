@@ -2,6 +2,7 @@ package net.diamonddev.enderism;
 
 import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.item.CursedChorusItem;
+import net.diamonddev.enderism.network.InitPackets;
 import net.diamonddev.enderism.registry.*;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -28,6 +29,8 @@ public class EnderismMod implements ModInitializer {
 		//
 
 		new InitConfig().register();
+
+		new InitPackets().register();
 
 		new InitBlocks().register();
 		new InitItems().register();

@@ -33,7 +33,7 @@ public class BrewingRecipeRegistryMixin {
                     EnderismNbt.CharmEffectManager.set(input, sei);
                 }
             } else {
-                InitResourceListener.ENDERISM_CHARMS.getManager().forEachRecipe(InitResourceListener.CHARM_TYPE, res -> {
+                InitResourceListener.ENDERISM_CHARMS.getManager().forEachResource(InitResourceListener.CHARM_TYPE, res -> {
                     Item item = EnderismUtil.registryGetOrElse(Registries.ITEM, res.getIdentifier(CharmRecipeResourceType.INGREDIENT), null);
                     if (item != null) {
                         StatusEffectInstance sei = CharmRecipeResourceType.parseStatusEffectInstance(res.getObject(CharmRecipeResourceType.OUTEFFECT));

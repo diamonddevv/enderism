@@ -1,10 +1,10 @@
 package net.diamonddev.enderism.nbt;
 
-import net.diamonddev.libgenetics.common.api.v1.nbt.NbtComponent;
+import net.diamonddev.libgenetics.common.api.v1.nbt.cerebellum.CerebellumNbtComponent;
 import net.minecraft.nbt.NbtCompound;
 
 
-public class NbtStringComponent extends NbtComponent<String> {
+public class NbtStringComponent extends CerebellumNbtComponent<String> {
     public NbtStringComponent(String key) {
         super(key);
     }

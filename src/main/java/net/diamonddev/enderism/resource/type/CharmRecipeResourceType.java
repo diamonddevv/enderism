@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.item.music.SerializedMusicSheet;
 import net.diamonddev.enderism.util.EnderismUtil;
-import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResource;
-import net.diamonddev.libgenetics.common.api.v1.dataloader.DataLoaderResourceType;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataResource;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionResourceType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 
-public class CharmRecipeResourceType implements DataLoaderResourceType {
+public class CharmRecipeResourceType implements CognitionResourceType {
 
     public static StatusEffectInstance parseStatusEffectInstance(JsonElement element) {
         JsonObject json = element.getAsJsonObject();
@@ -28,10 +28,6 @@ public class CharmRecipeResourceType implements DataLoaderResourceType {
 
     public static final String INGREDIENT = "ingredient";
     public static final String OUTEFFECT = "out_effect";
-
-    public static SerializedMusicSheet getAsNotes(DataLoaderResource resource) {
-        return resource.getAsClass(SerializedMusicSheet.class);
-    }
     @Override
     public Identifier getId() {
         return EnderismMod.id("charm_recipe");

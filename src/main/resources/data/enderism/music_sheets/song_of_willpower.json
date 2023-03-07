@@ -1,0 +1,11 @@
+{
+  "resource_type": "enderism:music_sheet",
+
+  "id": "enderism:megalovania",
+
+  "key": "desc.song.enderism.megalovania",
+
+  "defined_instruments": [
+    "flute"
+  ]
+}
