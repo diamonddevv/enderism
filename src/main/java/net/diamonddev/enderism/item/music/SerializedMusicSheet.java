@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import static net.diamonddev.enderism.resource.type.MusicSheetResourceType.*;
 
 public class SerializedMusicSheet {
-    @SerializedName(NAME)
-    public String name;
+    @SerializedName(ID)
+    public String id;
 
     @SerializedName(KEY)
     public String descTranslationKey;

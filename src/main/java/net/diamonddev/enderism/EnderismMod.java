@@ -40,7 +40,7 @@ public class EnderismMod implements ModInitializer {
 		new InitPotions().register();
 		new InitSoundEvents().register();
 		new InitResourceListener().register();
-
+		new InitDataModifiers().register();
 
 		new ItemGroupEditor().register();
 

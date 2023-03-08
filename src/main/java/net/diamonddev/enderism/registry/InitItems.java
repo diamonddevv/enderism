@@ -18,7 +18,7 @@ public class InitItems implements RegistryInitializer {
     public static ShulkerShellmetItem SHULKER_SHELLMET = new ShulkerShellmetItem();
 
     public static PurpurFluteItem PURPUR_FLUTE = new PurpurFluteItem(new FabricItemSettings());
-    public static MusicSheetItem MUSIC_SHEET = new MusicSheetItem(new FabricItemSettings());
+    public static MusicSheetItem MUSIC_SHEET = new MusicSheetItem(new FabricItemSettings().maxCount(1));
 
     public static CharmItem ENDSTONE_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(25));
     public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(38));

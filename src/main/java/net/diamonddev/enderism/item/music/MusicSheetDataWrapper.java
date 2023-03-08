@@ -32,7 +32,7 @@ public class MusicSheetDataWrapper {
             if (defd.equals(instrumentId)) {
                 soundEvent = Registries.SOUND_EVENT.get(new Identifier(
                         modid,
-                        getStringifiedSoundEventId(new Identifier(sheet.name), defd)
+                        getStringifiedSoundEventId(new Identifier(sheet.id), defd)
                 ));
                 break;
             }

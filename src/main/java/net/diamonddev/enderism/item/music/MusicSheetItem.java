@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,10 +22,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class MusicSheetItem extends Item {
-
     public MusicSheetItem(Settings settings) {
         super(settings);
     }
+
 
     public static MusicSheetDataWrapper getWrapper(ItemStack stack) {
         if (stack.getItem() instanceof MusicSheetItem) {
@@ -35,7 +36,7 @@ public class MusicSheetItem extends Item {
 
             for (CognitionDataResource res : InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().CACHE.getOrCreateKey(InitResourceListener.MUSIC_TYPE)) {
                 SerializedMusicSheet musicSheet = MusicSheetResourceType.getAsSheet(res);
-                if (Objects.equals(id, musicSheet.name)) {
+                if (Objects.equals(id, musicSheet.id)) {
                     wrapper = new MusicSheetDataWrapper(musicSheet);
                     break;
                 }
@@ -65,6 +66,9 @@ public class MusicSheetItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        // get tooltip??
+        InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res-> {
+            String key = MusicSheetResourceType.getAsSheet(res).descTranslationKey;
+            tooltip.add(Text.translatable(key).formatted(Formatting.GRAY));
+        });
     }
 }

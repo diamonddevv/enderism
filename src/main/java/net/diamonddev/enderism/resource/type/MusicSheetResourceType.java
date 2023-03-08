@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MusicSheetResourceType implements CognitionResourceType {
 
 
-    public static final String NAME = "id";
+    public static final String ID = "id";
     public static final String KEY = "key";
     public static final String DEFINED_INSTRUMENTS = "defined_instruments";
     @Override
@@ -24,7 +24,7 @@ public class MusicSheetResourceType implements CognitionResourceType {
     }
     @Override
     public void addJsonKeys(ArrayList<String> keys) {
-        keys.add(NAME);
+        keys.add(ID);
         keys.add(KEY);
         keys.add(DEFINED_INSTRUMENTS);
     }

@@ -15,6 +15,7 @@ public class InitSoundEvents implements RegistryInitializer {
     public static SoundEvent FIBROUS_CHORUS_BOUNCE;
 
     public static SoundEvent SHEET_FLUTE_MEGALOVANIA;
+    public static SoundEvent SHEET_CELLO_MEGALOVANIA;
 
     @Override
     public void register() {
@@ -23,6 +24,7 @@ public class InitSoundEvents implements RegistryInitializer {
         FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
 
         SHEET_FLUTE_MEGALOVANIA = create(MusicSheetDataWrapper.getStringifiedSoundEventId(EnderismMod.id("megalovania"), "flute"));
+        SHEET_CELLO_MEGALOVANIA = create(MusicSheetDataWrapper.getStringifiedSoundEventId(EnderismMod.id("megalovania"), "cello"));
     }
 
     private SoundEvent create(String name) {
