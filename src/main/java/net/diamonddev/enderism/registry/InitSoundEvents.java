@@ -14,8 +14,7 @@ public class InitSoundEvents implements RegistryInitializer {
     public static SoundEvent CURSED_CHORUS_FRUIT_PLAYER_BIND;
     public static SoundEvent FIBROUS_CHORUS_BOUNCE;
 
-    public static SoundEvent SHEET_FLUTE_MEGALOVANIA;
-    public static SoundEvent SHEET_CELLO_MEGALOVANIA;
+
 
     @Override
     public void register() {
@@ -23,12 +22,23 @@ public class InitSoundEvents implements RegistryInitializer {
         CURSED_CHORUS_FRUIT_PLAYER_BIND = create("item.cursed_chorus.bind.player");
         FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
 
-        SHEET_FLUTE_MEGALOVANIA = create(MusicSheetDataWrapper.getStringifiedSoundEventId(EnderismMod.id("megalovania"), "flute"));
-        SHEET_CELLO_MEGALOVANIA = create(MusicSheetDataWrapper.getStringifiedSoundEventId(EnderismMod.id("megalovania"), "cello"));
+        createSheetMusic(EnderismMod.id("megalovania"),
+                "flute", "cello"
+        );
+
+        createSheetMusic(EnderismMod.id("rushe"),
+                "flute", "cello"
+        );
     }
 
-    private SoundEvent create(String name) {
+    private static SoundEvent create(String name) {
         Identifier id = EnderismMod.id(name);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+    }
+
+    private static void createSheetMusic(Identifier songId, String... instruments) {
+        for (String s : instruments) {
+            create(MusicSheetDataWrapper.getStringifiedSoundEventId(songId, s));
+        }
     }
 }

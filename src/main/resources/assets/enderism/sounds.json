@@ -25,7 +25,22 @@
 
   "musicsheet.enderism.megalovania.flute": {
     "sounds": [
-      "enderism:music/sheet/megalovania_flute"
+      "enderism:music/sheet/megalovania/flute"
+    ]
+  },
+  "musicsheet.enderism.megalovania.cello": {
+    "sounds": [
+      "enderism:music/sheet/megalovania/cello"
+    ]
+  },
+  "musicsheet.enderism.rushe.flute": {
+    "sounds": [
+      "enderism:music/sheet/rushe/flute"
+    ]
+  },
+  "musicsheet.enderism.rushe.cello": {
+    "sounds": [
+      "enderism:music/sheet/rushe/cello"
     ]
   }
 }
