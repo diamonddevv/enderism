@@ -8,6 +8,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
+import java.util.HashMap;
+
 public class InitSoundEvents implements RegistryInitializer {
 
     public static SoundEvent CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND;
@@ -36,9 +38,11 @@ public class InitSoundEvents implements RegistryInitializer {
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
-    private static void createSheetMusic(Identifier songId, String... instruments) {
+    public static HashMap<String, SoundEvent> createSheetMusic(Identifier songId, String... instruments) {
+        HashMap<String, SoundEvent> hash = new HashMap<>();
         for (String s : instruments) {
-            create(MusicSheetDataWrapper.getStringifiedSoundEventId(songId, s));
+            hash.put(s, create(MusicSheetDataWrapper.getStringifiedSoundEventId(songId, s)));
         }
+        return hash;
     }
 }

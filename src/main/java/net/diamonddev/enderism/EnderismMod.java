@@ -77,7 +77,8 @@ public class EnderismMod implements ModInitializer {
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(TOOLS).register(content -> {
-
+				content.addAfter(Items.GOAT_HORN, InitItems.PURPUR_FLUTE);
+				content.addAfter(InitItems.PURPUR_FLUTE, InitItems.CHORUS_CELLO);
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
