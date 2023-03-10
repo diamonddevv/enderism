@@ -16,7 +16,8 @@ public class InitSoundEvents implements RegistryInitializer {
     public static SoundEvent CURSED_CHORUS_FRUIT_PLAYER_BIND;
     public static SoundEvent FIBROUS_CHORUS_BOUNCE;
 
-
+    public static HashMap<String, SoundEvent> SHEET_MEGALOVANIA;
+    public static HashMap<String, SoundEvent> SHEET_RUSHE;
 
     @Override
     public void register() {
@@ -24,11 +25,11 @@ public class InitSoundEvents implements RegistryInitializer {
         CURSED_CHORUS_FRUIT_PLAYER_BIND = create("item.cursed_chorus.bind.player");
         FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
 
-        createSheetMusic(EnderismMod.id("megalovania"),
+        SHEET_MEGALOVANIA = createSheetMusic(EnderismMod.id("megalovania"),
                 "flute", "cello"
         );
 
-        createSheetMusic(EnderismMod.id("rushe"),
+        SHEET_RUSHE = createSheetMusic(EnderismMod.id("rushe"),
                 "flute", "cello"
         );
     }

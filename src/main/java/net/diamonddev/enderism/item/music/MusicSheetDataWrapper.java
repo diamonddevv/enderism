@@ -17,27 +17,18 @@ public class MusicSheetDataWrapper {
 
     public Optional<SoundEvent> getSoundFromHash(MusicSheetInstrument instrument) {
         String id = instrument.id().toLowerCase();
-        if (this.sheet.instruments.contains(id)) {
-            SoundEvent soundEvent = getSound(EnderismMod.modid, id);
-            if (soundEvent != null) {
-                return Optional.of(soundEvent);
-            }
+        SoundEvent soundEvent = getSound(EnderismMod.modid, id);
+        if (soundEvent != null) {
+            return Optional.of(soundEvent);
         } return Optional.empty();
     }
 
     @Nullable
     private SoundEvent getSound(String modid, String instrumentId) {
-        SoundEvent soundEvent = null;
-        for (String defd : sheet.instruments) {
-            if (defd.equals(instrumentId)) {
-                soundEvent = Registries.SOUND_EVENT.get(new Identifier(
-                        modid,
-                        getStringifiedSoundEventId(new Identifier(sheet.id), defd)
-                ));
-                break;
-            }
-        }
-        return soundEvent;
+        return Registries.SOUND_EVENT.get(new Identifier(
+                modid,
+                getStringifiedSoundEventId(new Identifier(sheet.id), instrumentId)
+        ));
     }
 
     private static String parseIdFormatToSoundKeyFormat(String idFormat) {

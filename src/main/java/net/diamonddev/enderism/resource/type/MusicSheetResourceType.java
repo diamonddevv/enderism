@@ -13,7 +13,6 @@ public class MusicSheetResourceType implements CognitionResourceType {
 
     public static final String ID = "id";
     public static final String KEY = "key";
-    public static final String DEFINED_INSTRUMENTS = "defined_instruments";
     @Override
     public Identifier getId() {
         return EnderismMod.id("music_sheet");
@@ -26,6 +25,5 @@ public class MusicSheetResourceType implements CognitionResourceType {
     public void addJsonKeys(ArrayList<String> keys) {
         keys.add(ID);
         keys.add(KEY);
-        keys.add(DEFINED_INSTRUMENTS);
     }
 }
