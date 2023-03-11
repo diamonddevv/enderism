@@ -35,6 +35,7 @@
 
   "item.enderism.music_sheet": "Music Sheet",
   "item.enderism.purpur_flute": "Purpur Flute",
+  "item.enderism.chorus_cello": "Chorus Cello",
 
   "enchantment.enderism.upthrust": "Upthrust",
   "enchantment.enderism.shackling_curse": "Curse of Shackling",
@@ -49,5 +50,5 @@
   "name.song.enderism.megalovania": "Song of Willpower",
   "name.song.enderism.rushe": "Song of Speed",
 
-  "context.enderism.music_sheet_missing": "Music Sheet was not found!"
+  "context.enderism.music_sheet_missing": "You couldn't possibly play this music sheet with this instrument.."
 }

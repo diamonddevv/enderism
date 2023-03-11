@@ -10,11 +10,6 @@ public class ChorusCelloItem extends InstrumentItem {
     }
 
     @Override
-    public int getCooldownTicks() {
-        return 20;
-    }
-
-    @Override
     public MusicSheetInstrument getInstrument() {
         return new MusicSheetInstrument("cello", SoundEvents.BLOCK_NOTE_BLOCK_BASS.value());
     }

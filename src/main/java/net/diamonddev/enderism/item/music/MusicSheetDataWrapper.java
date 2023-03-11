@@ -38,4 +38,8 @@ public class MusicSheetDataWrapper {
     public static String getStringifiedSoundEventId(Identifier sheetId, String instrumentId) {
         return "musicsheet." + parseIdFormatToSoundKeyFormat(sheetId.toString()) + "." + instrumentId;
     }
+
+    public int getCooldownTicks() {
+        return sheet.cooldown;
+    }
 }

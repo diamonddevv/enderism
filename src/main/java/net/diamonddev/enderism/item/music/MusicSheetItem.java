@@ -66,9 +66,12 @@ public class MusicSheetItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res-> {
-            String key = MusicSheetResourceType.getAsSheet(res).descTranslationKey;
-            tooltip.add(Text.translatable(key).formatted(Formatting.GRAY));
+        InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
+            SerializedMusicSheet sheet = MusicSheetResourceType.getAsSheet(res);
+            if (Objects.equals(EnderismNbt.MusicSheetSongManager.getStringifiedId(stack), sheet.id)) {
+                String key = sheet.descTranslationKey;
+                tooltip.add(Text.translatable(key).formatted(Formatting.GRAY));
+            }
         });
     }
 }

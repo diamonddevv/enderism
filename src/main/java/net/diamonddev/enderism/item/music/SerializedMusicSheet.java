@@ -10,4 +10,7 @@ public class SerializedMusicSheet {
 
     @SerializedName(KEY)
     public String descTranslationKey;
+
+    @SerializedName(COOLDOWN)
+    public int cooldown = 20;
 }

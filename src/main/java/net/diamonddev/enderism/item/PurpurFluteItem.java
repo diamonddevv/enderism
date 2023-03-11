@@ -12,11 +12,6 @@ public class PurpurFluteItem extends InstrumentItem {
     }
 
     @Override
-    public int getCooldownTicks() {
-        return 20;
-    }
-
-    @Override
     public SoundEvent getDefaultSoundEvent() {
         return SoundEvents.BLOCK_NOTE_BLOCK_FLUTE.value();
     }

@@ -2,5 +2,6 @@
   "resource_type": "enderism:music_sheet",
 
   "id": "enderism:megalovania",
-  "key": "name.song.enderism.megalovania"
+  "key": "name.song.enderism.megalovania",
+  "cooldown": 200
 }

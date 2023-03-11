@@ -4,6 +4,7 @@ import net.diamonddev.enderism.util.EnderismUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
@@ -19,9 +20,6 @@ public abstract class InstrumentItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (!user.isCreative()) {
-            user.getItemCooldownManager().set(user.getStackInHand(hand).getItem(), this.getCooldownTicks());
-        }
 
         ItemStack stackInHand = user.getStackInHand(hand);
         ItemStack other = user.getStackInHand(EnderismUtil.otherHand(hand));
@@ -30,6 +28,7 @@ public abstract class InstrumentItem extends Item {
             MusicSheetDataWrapper wrapper = MusicSheetItem.getWrapper(other);
             if (wrapper != null) {
                 sheet.play(wrapper, getInstrument(), world, user);
+                if (!user.isCreative()) setCooldownForAllInstruments(user, wrapper.getCooldownTicks());
                 return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
             }
         }
@@ -39,7 +38,13 @@ public abstract class InstrumentItem extends Item {
         return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
     }
 
-    public abstract int getCooldownTicks();
+    private static void setCooldownForAllInstruments(PlayerEntity player, int ticks) {
+        for (Item item : Registries.ITEM) {
+            if (item instanceof InstrumentItem instrument) {
+                player.getItemCooldownManager().set(instrument, ticks);
+            }
+        }
+    }
     public SoundEvent getDefaultSoundEvent() {
         return this.getInstrument().sound();
     }
