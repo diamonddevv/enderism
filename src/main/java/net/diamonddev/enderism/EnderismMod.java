@@ -73,7 +73,7 @@ public class EnderismMod implements ModInitializer {
 			ItemGroupEvents.modifyEntriesEvent(FOOD_AND_DRINK).register(content -> {
 				CursedChorusItem.addCursedChorus(content, InitItems.CURSED_CHORUS);
 
-				content.addAfter(InitItems.CURSED_CHORUS, getBlockItem(InitBlocks.CHORUS_FRUIT_PIE));
+//				content.addAfter(InitItems.CURSED_CHORUS, getBlockItem(InitBlocks.CHORUS_FRUIT_PIE));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(TOOLS).register(content -> {
@@ -84,6 +84,7 @@ public class EnderismMod implements ModInitializer {
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
 				content.addAfter(Items.TURTLE_HELMET, InitItems.SHULKER_SHELLMET);
 
+				CharmItem.addAllCharms(content, InitItems.WANDERERS_CHARM);
 				CharmItem.addAllCharms(content, InitItems.ENDSTONE_CHARM);
 				CharmItem.addAllCharms(content, InitItems.PURPUR_CHARM);
 				CharmItem.addAllCharms(content, InitItems.OBSIDIAN_CHARM);

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "enderism:item/charm_overlay",
+    "layer1": "enderism:item/wanderers_charm"
+  }
+}

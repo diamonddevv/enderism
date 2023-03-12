@@ -14,3 +14,12 @@
 **_Originally written and Performed by Sheet Music Boss_**
 - Flute: No Common Sense (https://www.youtube.com/watch?v=RWZtXQUYOXA)
 - Cello: Jeremy Tai (https://www.youtube.com/watch?v=hIAuU4wUmqY)
+
+
+All rights remained reserved to the respective performers and original writers of these songs.
+I use these tracks under the Creative Commons License. Again, I do NOT own these audios, and I would like
+to thank the creators of them. 
+
+If I have used your cover of a track, and would like me to remove it, please open a GitHub issue on this repository.
+
+Thank you!

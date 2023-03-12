@@ -21,6 +21,7 @@ public class ItemColorsMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private static void enderism$provideItemColors(BlockColors blockColors, CallbackInfoReturnable<ItemColors> cir, ItemColors itemColors) {
-        itemColors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : CharmItem.getColor(stack), InitItems.ENDSTONE_CHARM, InitItems.PURPUR_CHARM, InitItems.OBSIDIAN_CHARM);
+        itemColors.register((stack, tintIndex) -> tintIndex > 0 ? -1 : CharmItem.getColor(stack),
+                InitItems.ENDSTONE_CHARM, InitItems.PURPUR_CHARM, InitItems.OBSIDIAN_CHARM, InitItems.WANDERERS_CHARM);
     }
 }

@@ -5,6 +5,7 @@
   "item.enderism.cursed_chorus_fruit.bound": "§7Bound to: ",
   "item.enderism.cursed_chorus_fruit.unbound": "§7Unbound",
 
+  "item.enderism.wanderers_charm": "Wanderer's Charm",
   "item.enderism.end_stone_charm": "End Stone Charm",
   "item.enderism.purpur_charm": "Purpur Charm",
   "item.enderism.obsidian_charm": "Obsidian Charm",
@@ -29,9 +30,6 @@
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
   "block.enderism.chorus_fruit_pie": "Chorus Fruit Pie",
-
-  "block.enderism.chorus_jam": "Chorus Jam",
-  "item.enderism.chorus_jam_bread": "Chorus Jam on Bread",
 
   "item.enderism.music_sheet": "Music Sheet",
   "item.enderism.purpur_flute": "Purpur Flute",

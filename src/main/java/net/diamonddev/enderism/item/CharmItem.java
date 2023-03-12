@@ -1,20 +1,27 @@
 package net.diamonddev.enderism.item;
 
+import net.diamonddev.enderism.EnderismMod;
+import net.diamonddev.enderism.item.music.InstrumentItem;
 import net.diamonddev.enderism.mixin.StatusEffectAccessor;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.InitConfig;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +54,50 @@ public class CharmItem extends Item {
                 }
             }
         }
+    }
+
+    public static boolean canUseAnyCharm(PlayerEntity player) {
+        if (player.getAbilities().creativeMode) return true;
+
+        for (Item item : Registries.ITEM) {
+            if (item instanceof CharmItem charmItem) {
+                return !player.getItemCooldownManager().isCoolingDown(charmItem);
+            }
+        }
+        EnderismMod.logger.error("Tried to find first CharmItem in Item Registry to test for item cooldown, but none was found!");
+        return false;
+    }
+    public static void setCooldownForAllCharms(PlayerEntity player, int ticks) {
+        if (!player.getAbilities().creativeMode) {
+            for (Item item : Registries.ITEM) {
+                if (item instanceof CharmItem charmItem) {
+                    player.getItemCooldownManager().set(charmItem, ticks);
+                }
+            }
+        }
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+
+        if (canUseAnyCharm(user)) {
+            applyEffect(stack, user, user);
+            damageStack(stack, user);
+            setCooldownForAllCharms(user, 20 * 15);
+            return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+        }
+
+        return new TypedActionResult<>(ActionResult.PASS, stack);
+    }
+
+    public static void applyEffect(ItemStack stack, LivingEntity target, LivingEntity user) {
+        StatusEffectInstance instance = EnderismNbt.CharmEffectManager.get(stack);
+        target.addStatusEffect(instance, user);
+    }
+
+    public static void damageStack(ItemStack stack, LivingEntity user) {
+        stack.damage(1, user, living -> {});
     }
 
     public static ItemStack createCharm(StatusEffectInstance sei, CharmItem instance) {

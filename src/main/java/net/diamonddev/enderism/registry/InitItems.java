@@ -18,6 +18,7 @@ public class InitItems implements RegistryInitializer {
     public static ChorusCelloItem CHORUS_CELLO = new ChorusCelloItem(new FabricItemSettings());
     public static MusicSheetItem MUSIC_SHEET = new MusicSheetItem(new FabricItemSettings().maxCount(1));
 
+    public static CharmItem WANDERERS_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(75));
     public static CharmItem ENDSTONE_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(25));
     public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(38));
     public static CharmItem OBSIDIAN_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(50));
@@ -33,6 +34,7 @@ public class InitItems implements RegistryInitializer {
         Registry.register(Registries.ITEM, EnderismMod.id("chorus_cello"), CHORUS_CELLO);
         Registry.register(Registries.ITEM, EnderismMod.id("music_sheet"), MUSIC_SHEET);
 
+        Registry.register(Registries.ITEM, EnderismMod.id("wanderers_charm"), WANDERERS_CHARM);
         Registry.register(Registries.ITEM, EnderismMod.id("end_stone_charm"), ENDSTONE_CHARM);
         Registry.register(Registries.ITEM, EnderismMod.id("purpur_charm"), PURPUR_CHARM);
         Registry.register(Registries.ITEM, EnderismMod.id("obsidian_charm"), OBSIDIAN_CHARM);

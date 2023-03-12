@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.mixin;
 
+import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.item.ShulkerShellmetItem;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.InitEffects;
@@ -19,6 +20,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
@@ -154,18 +156,25 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
-    private void enderism$applyCharmEffect(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
-        LivingEntity user = source.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) source.getSource();
+    private void enderism$applyCharmEffect(DamageSource dmgsource, float amount, CallbackInfoReturnable<Float> cir) {
+        LivingEntity source = dmgsource.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) dmgsource.getSource();
 
-        if (user != null) {
-            ItemStack stack = user.getStackInHand(Hand.OFF_HAND);
+        if (source != null) {
+            boolean b = true;
+            if (source instanceof PlayerEntity player) b = CharmItem.canUseAnyCharm(player);
+            if (b) {
+                ItemStack stack = source.getStackInHand(Hand.OFF_HAND);
 
-            stack.damage(1, user, player -> {});
+                CharmItem.damageStack(stack, source);
 
-            if (EnderismNbt.CharmEffectManager.has(stack)) {
-                LivingEntity thisEntity = (LivingEntity) (Object) this;
-                StatusEffectInstance instance = EnderismNbt.CharmEffectManager.get(stack);
-                thisEntity.addStatusEffect(instance, user);
+                if (source instanceof PlayerEntity player) {
+                    CharmItem.setCooldownForAllCharms(player, 20 * 15);
+                }
+
+                if (EnderismNbt.CharmEffectManager.has(stack)) {
+                    LivingEntity thisEntity = (LivingEntity) (Object) this;
+                    CharmItem.applyEffect(stack, thisEntity, source);
+                }
             }
         }
     }
