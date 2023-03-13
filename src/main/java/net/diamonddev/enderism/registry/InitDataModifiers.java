@@ -1,17 +1,17 @@
 package net.diamonddev.enderism.registry;
 
+import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
-import net.diamonddev.enderism.util.EnderismUtil;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers;
@@ -19,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InitDataModifiers implements RegistryInitializer {
 
@@ -56,12 +57,27 @@ public class InitDataModifiers implements RegistryInitializer {
         @Override
         public TradeOffer create(Entity entity, Random random) {
 
-            ItemStack stack = new ItemStack(InitItems.WANDERERS_CHARM);
-            StatusEffect effect = Registries.STATUS_EFFECT.get(random.nextInt(Registries.STATUS_EFFECT.size()));
-            if (effect == null) effect = StatusEffects.POISON;
-            EnderismNbt.CharmEffectManager.set(stack, new StatusEffectInstance(effect, 60, 0));
+            ItemStack stack = createConfiguredRandomisedCharm(InitItems.WANDERERS_CHARM, random, InitConfig.ENDERISM);
 
             return new TradeOffer(new ItemStack(Items.EMERALD, 28), stack, 12, 8, 2);
+        }
+
+        public static ItemStack createConfiguredRandomisedCharm(CharmItem instance, Random random, InitConfig.EnderismConfig config) {
+
+            List<Identifier> mappedBlacklist = config.charmConfig.wanderersCharmTradeConfig.disallowedEffects.stream().map((Identifier::new)).toList();
+
+            StatusEffect effect = null;
+            while (effect == null || mappedBlacklist.contains(Registries.STATUS_EFFECT.getId(effect))) {
+                effect = Registries.STATUS_EFFECT.getOrThrow(random.nextInt(Registries.STATUS_EFFECT.size()));
+            }
+
+            int duration = 20 * random.nextInt(config.charmConfig.wanderersCharmTradeConfig.maxDurSecs);
+            int amplifier = random.nextBetween(0, config.charmConfig.wanderersCharmTradeConfig.maxPotency);
+
+            if (effect.isInstant()) duration = 0;
+
+            StatusEffectInstance sei = new StatusEffectInstance(effect, duration, amplifier);
+            return CharmItem.createCharm(sei, instance);
         }
     }
 }

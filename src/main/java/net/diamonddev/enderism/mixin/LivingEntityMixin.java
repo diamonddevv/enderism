@@ -163,22 +163,25 @@ public abstract class LivingEntityMixin extends Entity {
             boolean b = true;
             if (source instanceof PlayerEntity player) b = CharmItem.canUseAnyCharm(player);
             if (b) {
-                ItemStack stack = source.getStackInHand(Hand.OFF_HAND);
-
-                CharmItem.damageStack(stack, source);
-
-                if (source instanceof PlayerEntity player) {
-                    CharmItem.setCooldownForAllCharms(player, 20 * 15);
-                }
-
-                if (EnderismNbt.CharmEffectManager.has(stack)) {
-                    LivingEntity thisEntity = (LivingEntity) (Object) this;
-                    CharmItem.applyEffect(stack, thisEntity, source);
-                }
+                LivingEntity thisLivEn = (LivingEntity) (Object) this;
+                applyCharmEffectForStackIfCan(source.getStackInHand(Hand.MAIN_HAND), thisLivEn, source);
+                applyCharmEffectForStackIfCan(source.getStackInHand(Hand.OFF_HAND), thisLivEn, source);
             }
         }
     }
+    private static void applyCharmEffectForStackIfCan(ItemStack stack, LivingEntity target, LivingEntity user) {
+        if (stack.getItem() instanceof CharmItem) {
+            CharmItem.damageStack(stack, user);
 
+            if (user instanceof PlayerEntity player) {
+                CharmItem.setCooldownForAllCharms(player, 20 * 15);
+            }
+
+            if (EnderismNbt.CharmEffectManager.has(stack)) {
+                CharmItem.applyEffect(stack, target, user);
+            }
+        }
+    }
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
     private boolean enderism$redirectLevitationCheckWithShellmet(LivingEntity instance, StatusEffect effect) {
         if (instance.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ShulkerShellmetItem) {

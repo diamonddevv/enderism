@@ -14,16 +14,22 @@ public class InitSoundEvents implements RegistryInitializer {
 
     public static SoundEvent CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND;
     public static SoundEvent CURSED_CHORUS_FRUIT_PLAYER_BIND;
+
     public static SoundEvent FIBROUS_CHORUS_BOUNCE;
+
+    public static SoundEvent CHARM_USE;
 
     public static HashMap<String, SoundEvent> SHEET_MEGALOVANIA;
     public static HashMap<String, SoundEvent> SHEET_RUSHE;
 
     @Override
     public void register() {
-        CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND = create("item.cursed_chorus.bind.chorus_magnetite");
-        CURSED_CHORUS_FRUIT_PLAYER_BIND = create("item.cursed_chorus.bind.player");
-        FIBROUS_CHORUS_BOUNCE = create("block.fibrous_chorus.bounce");
+        CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND = create("item.enderism.cursed_chorus.bind.chorus_magnetite");
+        CURSED_CHORUS_FRUIT_PLAYER_BIND = create("item.enderism.cursed_chorus.bind.player");
+
+        FIBROUS_CHORUS_BOUNCE = create("block.enderism.fibrous_chorus.bounce");
+
+        CHARM_USE = create("item.enderism.charm.use");
 
         SHEET_MEGALOVANIA = createSheetMusic(EnderismMod.id("megalovania"),
                 "flute", "cello"

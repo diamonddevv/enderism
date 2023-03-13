@@ -6,6 +6,8 @@ import net.diamonddev.libgenetics.common.api.v1.config.chromosome.ChromosomeConf
 import net.diamonddev.libgenetics.common.api.v1.config.chromosome.ChromosomeConfigFileRegistry;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 
+import java.util.ArrayList;
+
 public class InitConfig implements RegistryInitializer {
 
     public static EnderismConfig ENDERISM = new EnderismConfig();
@@ -33,6 +35,15 @@ public class InitConfig implements RegistryInitializer {
 
             @SerializedName("creativeHasAllRegisteredEffectCharms")
             public boolean creativeHasAllCharms = false;
+
+            @SerializedName("wanderersCharmTrades")
+            public WanderersCharmTradeConfig wanderersCharmTradeConfig = new WanderersCharmTradeConfig();
+
+            public static class WanderersCharmTradeConfig {
+                @SerializedName("maxPotency") public int maxPotency = 4;
+                @SerializedName("maxDurationSeconds") public int maxDurSecs = 90;
+                @SerializedName("disallowedEffectIds") public ArrayList<String> disallowedEffects = new ArrayList<>();
+            }
         }
     }
 }

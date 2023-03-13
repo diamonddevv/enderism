@@ -1,16 +1,17 @@
 package net.diamonddev.enderism.item;
 
 import net.diamonddev.enderism.EnderismMod;
-import net.diamonddev.enderism.item.music.InstrumentItem;
 import net.diamonddev.enderism.mixin.StatusEffectAccessor;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.InitConfig;
+import net.diamonddev.enderism.registry.InitSoundEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -92,6 +93,7 @@ public class CharmItem extends Item {
     }
 
     public static void applyEffect(ItemStack stack, LivingEntity target, LivingEntity user) {
+        user.playSound(InitSoundEvents.CHARM_USE, 0.5f, user.getRandom().nextFloat());
         StatusEffectInstance instance = EnderismNbt.CharmEffectManager.get(stack);
         target.addStatusEffect(instance, user);
     }
@@ -140,7 +142,7 @@ public class CharmItem extends Item {
 
         MutableText text = fx.append(" ");
         if (sei.getAmplifier() > 0)  text.append(level).append(" ");
-        text.append(time);
+        if (!sei.getEffectType().isInstant()) text.append(time);
 
         tooltip.add(text.formatted(beneficial ? Formatting.BLUE : Formatting.RED));
     }

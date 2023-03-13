@@ -1,5 +1,5 @@
 {
-  "item.cursed_chorus.bind.chorus_magnetite": {
+  "item.enderism.cursed_chorus.bind.chorus_magnetite": {
     "subtitle": "subtitle.enderism.cursed_chorus_bind",
     "sounds": [
       "minecraft:block/sculk_catalyst/break1",
@@ -7,7 +7,7 @@
       "minecraft:block/sculk_catalyst/break3"
     ]
   },
-  "item.cursed_chorus.bind.player": {
+  "item.enderism.cursed_chorus.bind.player": {
     "subtitle": "subtitle.enderism.cursed_chorus_bind",
     "sounds": [
       "minecraft:block/sculk_catalyst/place1",
@@ -15,11 +15,18 @@
       "minecraft:block/sculk_catalyst/place3"
     ]
   },
-  "block.fibrous_chorus.bounce": {
+
+  "block.enderism.fibrous_chorus.bounce": {
     "subtitle": "subtitle.enderism.fibrous_chorus_bounce",
     "sounds": [
       "enderism:block/fibrous_chorus_bounce0",
       "enderism:block/fibrous_chorus_bounce1"
+    ]
+  },
+
+  "item.enderism.charm.use": {
+    "sounds": [
+      "enderism:item/charm_use"
     ]
   },
 
