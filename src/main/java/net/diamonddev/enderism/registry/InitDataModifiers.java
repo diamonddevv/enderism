@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -19,7 +20,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InitDataModifiers implements RegistryInitializer {
 
@@ -28,6 +28,9 @@ public class InitDataModifiers implements RegistryInitializer {
         TradeOfferHelper.registerWanderingTraderOffers(1, factories -> {
             factories.add(new SellMusicSheetFactory());
             factories.add(new SellWanderersCharmFactory());
+
+            factories.add(new EnderismSellItemFactory(10, 20, InitItems.PURPUR_FLUTE, 1));
+            factories.add(new EnderismSellItemFactory(15, 30, InitItems.CHORUS_CELLO, 1));
         });
 
 
@@ -51,6 +54,26 @@ public class InitDataModifiers implements RegistryInitializer {
         }
     }
 
+    private static class EnderismSellItemFactory implements TradeOffers.Factory {
+
+        private final int emMn;
+        private final int emMx;
+        private final ItemConvertible item;
+        private final int uses;
+
+        public EnderismSellItemFactory(int emeraldsMin, int emeraldsMax, ItemConvertible sells, int uses) {
+            this.emMn = emeraldsMin;
+            this.emMx = emeraldsMax;
+            this.item = sells;
+            this.uses = uses;
+        }
+
+        @Nullable
+        @Override
+        public TradeOffer create(Entity entity, Random random) {
+            return new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(emMn, emMx)), new ItemStack(item, 1), uses, 8, 2);
+        }
+    }
     private static class SellWanderersCharmFactory implements TradeOffers.Factory {
 
         @Nullable
@@ -59,7 +82,7 @@ public class InitDataModifiers implements RegistryInitializer {
 
             ItemStack stack = createConfiguredRandomisedCharm(InitItems.WANDERERS_CHARM, random, InitConfig.ENDERISM);
 
-            return new TradeOffer(new ItemStack(Items.EMERALD, 28), stack, 12, 8, 2);
+            return new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(30, 60)), stack, 3, 8, 2);
         }
 
         public static ItemStack createConfiguredRandomisedCharm(CharmItem instance, Random random, InitConfig.EnderismConfig config) {
