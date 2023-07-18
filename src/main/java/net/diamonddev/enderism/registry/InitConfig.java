@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.libgenetics.common.api.v1.config.chromosome.ChromosomeConfigFile;
 import net.diamonddev.libgenetics.common.api.v1.config.chromosome.ChromosomeConfigFileRegistry;
+import net.diamonddev.libgenetics.common.api.v1.config.chromosome.serializer.ConfigSerializer;
+import net.diamonddev.libgenetics.common.api.v1.config.chromosome.serializer.JsonConfigSerializer;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 
 import java.util.ArrayList;
@@ -22,6 +24,11 @@ public class InitConfig implements RegistryInitializer {
         @Override
         public String getFilePathFromConfigDirectory() {
             return ".diamonddev/enderism.json";
+        }
+
+        @Override
+        public ConfigSerializer getSerializer() {
+            return new JsonConfigSerializer();
         }
 
         //

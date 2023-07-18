@@ -9,9 +9,8 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,13 +36,13 @@ public class CharmItem extends Item {
     public static void addAllCharms(FabricItemGroupEntries content, CharmItem itemInstance) {
         ItemStack emptyStack = new ItemStack(itemInstance);
         EnderismNbt.CharmEffectManager.setHas(emptyStack, false);
-        content.add(emptyStack);
+        content.addStack(emptyStack);
 
         if (InitConfig.ENDERISM.charmConfig.creativeHasAllCharms) {
             for (StatusEffect effect : Registries.STATUS_EFFECT) {
                 ItemStack stack = new ItemStack(itemInstance);
                 EnderismNbt.CharmEffectManager.set(stack, new StatusEffectInstance(effect, 200, 0));
-                content.add(stack);
+                content.addStack(stack);
             }
         } else {
             for (Potion potion : Registries.POTION) {
@@ -51,7 +50,7 @@ public class CharmItem extends Item {
                 if (!potion.getEffects().isEmpty()) {
                     StatusEffectInstance sei = potion.getEffects().get(0);
                     EnderismNbt.CharmEffectManager.set(stack, sei);
-                    content.add(stack);
+                    content.addStack(stack);
                 }
             }
         }
@@ -114,6 +113,10 @@ public class CharmItem extends Item {
         return stack;
     }
 
+    public static boolean hasEffect(ItemStack stack) {
+        return EnderismNbt.CharmEffectManager.has(stack);
+    }
+
     @Override
     public ItemStack getDefaultStack() {
         return createEmptyCharm(this);
@@ -134,7 +137,7 @@ public class CharmItem extends Item {
         StatusEffectInstance sei = EnderismNbt.CharmEffectManager.get(stack);
 
         StatusEffect effect = sei.getEffectType();
-        boolean beneficial = ((StatusEffectAccessor)effect).accessCategory() != StatusEffectCategory.HARMFUL;
+        boolean beneficial = ((StatusEffectAccessor)effect).accessType() != StatusEffectType.HARMFUL;
 
         MutableText fx = Text.translatable(effect.getTranslationKey());
         MutableText level = Text.translatable("potion.potency." + sei.getAmplifier());

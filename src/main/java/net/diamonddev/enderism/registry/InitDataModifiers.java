@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,7 @@ public class InitDataModifiers implements RegistryInitializer {
     private static class SellMusicSheetFactory implements TradeOffers.Factory {
         @Nullable
         @Override
-        public TradeOffer create(Entity entity, Random random) {
+        public TradeOffer create(Entity entity, RandomGenerator random) {
             List<String> ids = new ArrayList<>();
 
             InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
@@ -70,22 +70,22 @@ public class InitDataModifiers implements RegistryInitializer {
 
         @Nullable
         @Override
-        public TradeOffer create(Entity entity, Random random) {
-            return new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(emMn, emMx)), new ItemStack(item, 1), uses, 8, 2);
+        public TradeOffer create(Entity entity, RandomGenerator random) {
+            return new TradeOffer(new ItemStack(Items.EMERALD, random.range(emMn, emMx)), new ItemStack(item, 1), uses, 8, 2);
         }
     }
     private static class SellWanderersCharmFactory implements TradeOffers.Factory {
 
         @Nullable
         @Override
-        public TradeOffer create(Entity entity, Random random) {
+        public TradeOffer create(Entity entity, RandomGenerator random) {
 
             ItemStack stack = createConfiguredRandomisedCharm(InitItems.WANDERERS_CHARM, random, InitConfig.ENDERISM);
 
-            return new TradeOffer(new ItemStack(Items.EMERALD, random.nextBetween(30, 60)), stack, 3, 8, 2);
+            return new TradeOffer(new ItemStack(Items.EMERALD, random.range(30, 60)), stack, 3, 8, 2);
         }
 
-        public static ItemStack createConfiguredRandomisedCharm(CharmItem instance, Random random, InitConfig.EnderismConfig config) {
+        public static ItemStack createConfiguredRandomisedCharm(CharmItem instance, RandomGenerator random, InitConfig.EnderismConfig config) {
 
             List<Identifier> mappedBlacklist = config.charmConfig.wanderersCharmTradeConfig.disallowedEffects.stream().map((Identifier::new)).toList();
 
@@ -95,7 +95,7 @@ public class InitDataModifiers implements RegistryInitializer {
             }
 
             int duration = 20 * random.nextInt(config.charmConfig.wanderersCharmTradeConfig.maxDurSecs);
-            int amplifier = random.nextBetween(0, config.charmConfig.wanderersCharmTradeConfig.maxPotency);
+            int amplifier = random.range(0, config.charmConfig.wanderersCharmTradeConfig.maxPotency);
 
             if (effect.isInstant()) duration = 0;
 

@@ -130,10 +130,10 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "tickInVoid", at = @At("HEAD"))
     private void enderism$tickVoidRecall(CallbackInfo ci) {
         if (this.hasStatusEffect(InitEffects.VOID_RECALL)) {
-            if (this.getEntityWorld().getDimensionKey() == DimensionTypes.THE_END) {
+            if (this.getWorld().getDimensionKey() == DimensionTypes.THE_END) {
                 try {
-                    if (Objects.requireNonNull(world.getServer()).getWorld(World.END) != null) {
-                        ServerWorld.createEndSpawnPlatform(Objects.requireNonNull(world.getServer().getWorld(World.END)));
+                    if (Objects.requireNonNull(getWorld().getServer()).getWorld(World.END) != null) {
+                        ServerWorld.createEndSpawnPlatform(Objects.requireNonNull(getWorld().getServer().getWorld(World.END)));
                         BlockPos b = ServerWorld.END_SPAWN_POS;
                         this.fallDistance = 0;
                         this.teleport(b.getX(), b.getY(), b.getZ());
@@ -145,17 +145,17 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
+    @Inject(method = "damage", at = @At("HEAD"))
     private void enderism$callChoruskirmish(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         LivingEntity user = (LivingEntity) (Object) this;
-        int chance = this.world.getGameRules().getInt(InitGamerules.CHORUSKIRMISH_CHANCE);
+        int chance = this.getWorld().getGameRules().getInt(InitGamerules.CHORUSKIRMISH_CHANCE);
         if (user.hasStatusEffect(InitEffects.CHORUSKIRMISH) && random.nextFloat() <= chance / 100.0f) {
             int i = user.getStatusEffect(InitEffects.CHORUSKIRMISH).getAmplifier();
             EnderismUtil.chorusTeleport(user, 16, 16 * i);
         }
     }
 
-    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
+    @Inject(method = "damage", at = @At("HEAD"))
     private void enderism$applyCharmEffect(DamageSource dmgsource, float amount, CallbackInfoReturnable<Float> cir) {
         LivingEntity source = dmgsource.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) dmgsource.getSource();
 
@@ -185,7 +185,9 @@ public abstract class LivingEntityMixin extends Entity {
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
     private boolean enderism$redirectLevitationCheckWithShellmet(LivingEntity instance, StatusEffect effect) {
         if (instance.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ShulkerShellmetItem) {
-            return false;
+            if (!instance.isSneaking()) {
+                return false;
+            }
         }
         return instance.hasStatusEffect(effect);
     }

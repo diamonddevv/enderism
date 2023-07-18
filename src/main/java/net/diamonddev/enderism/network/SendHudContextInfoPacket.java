@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.network;
 
+import net.diamonddev.libgenetics.common.api.v1.network.nerve.NerveNetworker;
 import net.diamonddev.libgenetics.common.api.v1.network.nerve.NerveS2CPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
@@ -19,7 +20,7 @@ public class SendHudContextInfoPacket implements NerveS2CPacket<SendHudContextIn
 
     @Override
     public PacketByteBuf write(SHCIPacketData data) {
-        PacketByteBuf buf = getNewBuf();
+        PacketByteBuf buf = NerveNetworker.getNewBuf();
 
         buf.writeString(data.contextData);
         buf.writeBoolean(data.isTranslated);
@@ -35,7 +36,7 @@ public class SendHudContextInfoPacket implements NerveS2CPacket<SendHudContextIn
         return data;
     }
 
-    public static class SHCIPacketData extends NervePacketData {
+    public static class SHCIPacketData implements NervePacketData {
         public String contextData;
         public boolean isTranslated;
     }

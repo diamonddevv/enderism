@@ -25,6 +25,7 @@
   },
 
   "item.enderism.charm.use": {
+    "subtitle": "subtitle.enderism.charm_use",
     "sounds": [
       "enderism:item/charm_use"
     ]

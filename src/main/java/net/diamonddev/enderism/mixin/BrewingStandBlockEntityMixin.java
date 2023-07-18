@@ -1,6 +1,7 @@
 package net.diamonddev.enderism.mixin;
 
 
+import net.diamonddev.enderism.item.CharmItem;
 import net.minecraft.block.entity.BrewingStandBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
@@ -18,7 +19,7 @@ public class BrewingStandBlockEntityMixin {
 
         for(int i = 0; i < 3; ++i) {
             ItemStack charm = slots.get(i);
-            if (!charm.isEmpty()) {
+            if (charm.getItem() instanceof CharmItem && !charm.isEmpty() && CharmItem.hasEffect(charm)) {
                 hasACharm = true;
                 break;
             }

@@ -5,6 +5,7 @@ import net.diamonddev.enderism.resource.EnderismMusicSheetListener;
 import net.diamonddev.enderism.resource.type.CharmRecipeResourceType;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataListener;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionRegistry;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionResourceType;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 
@@ -22,11 +23,11 @@ public class InitResourceListener implements RegistryInitializer {
     @Override
     public void register() {
         // Listeners
-        CognitionDataListener.registerListener(ENDERISM_CHARMS);
-        CognitionDataListener.registerListener(ENDERISM_MUSIC_SHEETS);
+        CognitionRegistry.registerListener(ENDERISM_CHARMS);
+        CognitionRegistry.registerListener(ENDERISM_MUSIC_SHEETS);
 
         // Types
-        ENDERISM_CHARMS.getManager().registerType(CHARM_TYPE);
-        ENDERISM_MUSIC_SHEETS.getManager().registerType(MUSIC_TYPE);
+        CognitionRegistry.registerType(ENDERISM_CHARMS, CHARM_TYPE);
+        CognitionRegistry.registerType(ENDERISM_MUSIC_SHEETS, MUSIC_TYPE);
     }
 }

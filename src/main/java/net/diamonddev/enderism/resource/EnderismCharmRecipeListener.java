@@ -13,4 +13,14 @@ public class EnderismCharmRecipeListener extends CognitionDataListener {
     @Override
     public void onReloadForEachResource(CognitionDataResource resource, Identifier path) {
     }
+
+    @Override
+    public void onFinishReload() {
+
+    }
+
+    @Override
+    public void onClearCachePhase() {
+
+    }
 }

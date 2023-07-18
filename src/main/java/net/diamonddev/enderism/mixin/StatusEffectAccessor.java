@@ -1,12 +1,12 @@
 package net.diamonddev.enderism.mixin;
 
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.effect.StatusEffectType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(StatusEffect.class)
 public interface StatusEffectAccessor {
-    @Accessor("category")
-    StatusEffectCategory accessCategory();
+    @Accessor("type")
+    StatusEffectType accessType();
 }

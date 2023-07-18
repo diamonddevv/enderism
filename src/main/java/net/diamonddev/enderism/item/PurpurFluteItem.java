@@ -2,7 +2,7 @@ package net.diamonddev.enderism.item;
 
 import net.diamonddev.enderism.item.music.InstrumentItem;
 import net.diamonddev.enderism.item.music.MusicSheetInstrument;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
@@ -18,6 +18,6 @@ public class PurpurFluteItem extends InstrumentItem {
 
     @Override
     public MusicSheetInstrument getInstrument() {
-        return MusicSheetInstrument.fromInstrument(Instrument.FLUTE);
+        return MusicSheetInstrument.fromNoteBlockInstrument(NoteBlockInstrument.FLUTE);
     }
 }

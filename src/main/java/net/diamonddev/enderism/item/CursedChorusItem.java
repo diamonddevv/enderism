@@ -22,9 +22,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Position;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +35,7 @@ import java.util.function.Predicate;
 
 public class CursedChorusItem extends Item {
     public CursedChorusItem() {
-        super(new FabricItemSettings().maxCount(1).food(
+        super(new QuiltItemSettings().maxCount(1).food(
                 new FoodComponent.Builder()
                         .saturationModifier(0.1f).hunger(10)
                         .alwaysEdible()
@@ -76,7 +78,7 @@ public class CursedChorusItem extends Item {
         } else if (EnderismNbt.CursedChorusBindManager.isMagnetiteBound(stack)) { // Chorus Magnetite Bind
             if (!world.isClient()) {
                 Vec3d coords = EnderismNbt.CursedChorusBindManager.getBoundVector(stack);
-                BlockPos pos = new BlockPos(coords);
+                BlockPos pos = BlockPos.fromPosition(coords);
 
                 // Check Magnetite Still Exists and is in this dimension
                 if (world.getBlockState(pos).getBlock() == InitBlocks.CHORUS_MAGNETITE) {
@@ -172,7 +174,7 @@ public class CursedChorusItem extends Item {
     }
 
     private void failTeleport(LivingEntity user, World world, ItemStack stack) {
-        user.damage(DamageSource.MAGIC, 6f);
+        user.damage(user.getDamageSources().magic(), 6f);
         world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, SoundCategory.PLAYERS, 1f, 0.1f);
         EnderismNbt.CursedChorusBindManager.clearBinds(stack);
     }

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "io.github.diamonddevv",
+    "id": "enderism",
+    "version": "${version}",
+    "entrypoints": {
+      "init": "net.diamonddev.enderism.EnderismMod"
+    },
+
+    "metadata": {
+      "name": "Enderism",
+      "description": "Mid to Endgame Expansion Mod",
+      "contributors": {
+        "DiamondDev": "Owner"
+      },
+      "contact": {
+        "homepage": "https://diamonddevv.github.io/",
+        "issues": "https://github.com/diamonddevv/enderism/issues",
+        "sources": "https://github.com/diamonddevv/enderism"
+      },
+      "license": "CC-BY-NC-4.0",
+      "icon": "assets/enderism/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=0.19.1"
+      },
+      {
+        "id": "quilted_fabric_api",
+        "versions": ">=7.0.3"
+      },
+      {
+        "id": "minecraft",
+        "versions": ">=1.20.1"
+      }
+    ]
+  },
+  "mixin": "enderism.mixins.json",
+  "access_widener": "enderism.accesswidener",
+  "minecraft": {
+    "environment": "*"
+  }
+}

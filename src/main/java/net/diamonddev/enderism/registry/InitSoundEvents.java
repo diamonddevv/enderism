@@ -42,7 +42,7 @@ public class InitSoundEvents implements RegistryInitializer {
 
     private static SoundEvent create(String name) {
         Identifier id = EnderismMod.id(name);
-        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
     public static HashMap<String, SoundEvent> createSheetMusic(Identifier songId, String... instruments) {

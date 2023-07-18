@@ -24,7 +24,7 @@ public class BrewingRecipeRegistryMixin {
 
     @Inject(method = "craft", at = @At("HEAD"))
     private static void enderism$infuseCharm(ItemStack ingredient, ItemStack input, CallbackInfoReturnable<ItemStack> cir) {
-        if (input.getItem() instanceof CharmItem) {
+        if (input.getItem() instanceof CharmItem && !CharmItem.hasEffect(input)) {
             if (InitConfig.ENDERISM.charmConfig.charmCraftsUsePotions) {
                 if (ingredient.getItem() instanceof PotionItem) {
                     Potion potion = PotionUtil.getPotion(ingredient);
