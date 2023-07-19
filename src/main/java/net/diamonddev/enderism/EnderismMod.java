@@ -81,6 +81,7 @@ public class EnderismMod implements ModInitializer {
 			ItemGroupEvents.modifyEntriesEvent(TOOLS_AND_UTILITIES).register(content -> {
 				content.addAfter(Items.GOAT_HORN, InitItems.PURPUR_FLUTE);
 				content.addAfter(InitItems.PURPUR_FLUTE, InitItems.CHORUS_CELLO);
+				content.addAfter(InitItems.CHORUS_CELLO, InitItems.VIBRATOTAMATONE);
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {

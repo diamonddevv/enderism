@@ -1,7 +1,7 @@
 package net.diamonddev.enderism.registry;
 
 import net.diamonddev.enderism.EnderismMod;
-import net.diamonddev.enderism.item.music.MusicSheetDataWrapper;
+import net.diamonddev.enderism.item.music.MusicSheetWrapper;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -19,8 +19,11 @@ public class InitSoundEvents implements RegistryInitializer {
 
     public static SoundEvent CHARM_USE;
 
+    public static SoundEvent NOTE_OTAMATONE;
+
     public static HashMap<String, SoundEvent> SHEET_MEGALOVANIA;
     public static HashMap<String, SoundEvent> SHEET_RUSHE;
+    public static HashMap<String, SoundEvent> SHEET_POLCOW;
 
     @Override
     public void register() {
@@ -31,12 +34,18 @@ public class InitSoundEvents implements RegistryInitializer {
 
         CHARM_USE = create("item.enderism.charm.use");
 
+        NOTE_OTAMATONE = create("note.enderism.otamatone");
+
         SHEET_MEGALOVANIA = createSheetMusic(EnderismMod.id("megalovania"),
-                "flute", "cello"
+                "flute", "cello", "otamatone"
         );
 
         SHEET_RUSHE = createSheetMusic(EnderismMod.id("rushe"),
                 "flute", "cello"
+        );
+
+        SHEET_POLCOW = createSheetMusic(EnderismMod.id("polcow"),
+                "otamatone"
         );
     }
 
@@ -48,7 +57,7 @@ public class InitSoundEvents implements RegistryInitializer {
     public static HashMap<String, SoundEvent> createSheetMusic(Identifier songId, String... instruments) {
         HashMap<String, SoundEvent> hash = new HashMap<>();
         for (String s : instruments) {
-            hash.put(s, create(MusicSheetDataWrapper.getStringifiedSoundEventId(songId, s)));
+            hash.put(s, create(MusicSheetWrapper.getStringifiedSoundEventId(songId, s)));
         }
         return hash;
     }

@@ -1,0 +1,8 @@
+{
+  "resource_type": "enderism:instrument",
+
+  "default_sound": "minecraft:block.note_block.bass",
+  "instrument_items": [
+    "enderism:chorus_cello"
+  ]
+}

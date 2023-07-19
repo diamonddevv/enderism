@@ -1,0 +1,8 @@
+{
+  "resource_type": "enderism:instrument",
+
+  "default_sound": "enderism:note.enderism.otamatone",
+  "instrument_items": [
+    "enderism:vibratotamatone"
+  ]
+}

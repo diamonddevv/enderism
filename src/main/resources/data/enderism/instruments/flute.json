@@ -1,0 +1,8 @@
+{
+  "resource_type": "enderism:instrument",
+
+  "default_sound": "minecraft:block.note_block.flute",
+  "instrument_items": [
+    "enderism:purpur_flute"
+  ]
+}

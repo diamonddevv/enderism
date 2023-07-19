@@ -31,6 +31,7 @@ public class InitDataModifiers implements RegistryInitializer {
 
             factories.add(new EnderismSellItemFactory(10, 20, InitItems.PURPUR_FLUTE, 1));
             factories.add(new EnderismSellItemFactory(15, 30, InitItems.CHORUS_CELLO, 1));
+            factories.add(new EnderismSellItemFactory(15, 30, InitItems.VIBRATOTAMATONE, 1));
         });
 
 
@@ -91,7 +92,7 @@ public class InitDataModifiers implements RegistryInitializer {
 
             StatusEffect effect = null;
             while (effect == null || mappedBlacklist.contains(Registries.STATUS_EFFECT.getId(effect))) {
-                effect = Registries.STATUS_EFFECT.getOrThrow(random.nextInt(Registries.STATUS_EFFECT.size()));
+                effect = Registries.STATUS_EFFECT.getOrThrow(random.nextInt(Registries.STATUS_EFFECT.size()-1) + 1);
             }
 
             int duration = 20 * random.nextInt(config.charmConfig.wanderersCharmTradeConfig.maxDurSecs);

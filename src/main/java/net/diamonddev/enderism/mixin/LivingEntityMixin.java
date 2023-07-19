@@ -2,6 +2,7 @@ package net.diamonddev.enderism.mixin;
 
 import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.item.ShulkerShellmetItem;
+import net.diamonddev.enderism.item.music.InstrumentItem;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.InitEffects;
 import net.diamonddev.enderism.registry.InitEnchants;
@@ -19,11 +20,11 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -63,6 +64,11 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
 
+    @Shadow public abstract ItemStack getStackInHand(Hand hand);
+
+    @Shadow public abstract ItemStack getMainHandStack();
+
+    @Shadow public abstract ItemStack getOffHandStack();
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -70,18 +76,16 @@ public abstract class LivingEntityMixin extends Entity {
 
 
 
-    @Unique private static TrackedData<Integer> boostCount = DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
+    private static TrackedData<Integer> boostCount = DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.INTEGER);
     @Unique private DirtyObject<Integer> maxBoostCount = new DirtyObject<>(0);
-
     @Unique private int ticksOnGround = 0;
-
 
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))
     private void enderism$initializeDataTrackers(CallbackInfo ci) {
         dataTracker.startTracking(boostCount, 0);
     }
+
     @Inject(method = "jump", at = @At("HEAD"))
     private void enderism$increaseUpthrustBoostCount(CallbackInfo ci) {
         dataTracker.set(boostCount, dataTracker.get(boostCount) + 1);
@@ -182,6 +186,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
     }
+
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
     private boolean enderism$redirectLevitationCheckWithShellmet(LivingEntity instance, StatusEffect effect) {
         if (instance.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ShulkerShellmetItem) {
@@ -192,4 +197,26 @@ public abstract class LivingEntityMixin extends Entity {
         return instance.hasStatusEffect(effect);
     }
 
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void enderism$addNoteParticlesWhenInstrumenting(CallbackInfo ci) {
+        ItemStack stack = null;
+        if (getMainHandStack().getItem() instanceof InstrumentItem) {
+            stack = getMainHandStack();
+        } else if (getOffHandStack().getItem() instanceof InstrumentItem) {
+            stack = getOffHandStack();
+        }
+
+        if (stack != null) {
+            if (EnderismNbt.InstrumentFinishTimeManager.get(stack) > 0 && EnderismNbt.InstrumentFinishTimeManager.get(stack) > getWorld().getTime()) {
+                if (EnderismNbt.InstrumentFinishTimeManager.get(stack) < getWorld().getTime()) {
+                    EnderismNbt.InstrumentFinishTimeManager.set(stack, -1);
+                }
+
+                if (this.age % 20 == 0) {
+                    double i = Math.sin(this.age) * 24;
+                    getWorld().addParticle(ParticleTypes.NOTE, this.getX(), this.getY() + 2.2, this.getZ(), i / 24.0, 0.0, 0.0);
+                }
+            }
+        }
+    }
 }

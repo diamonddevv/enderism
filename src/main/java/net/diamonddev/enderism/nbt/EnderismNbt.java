@@ -23,6 +23,20 @@ public class EnderismNbt {
 
     private static final NbtStringComponent MUSIC_SHEET_ID = new NbtStringComponent("song_id");
 
+    private static final NbtLongComponent FINISH_TIME = new NbtLongComponent("sheet_end_time");
+
+    public static class InstrumentFinishTimeManager {
+        public static long get(ItemStack stack) {
+            return FINISH_TIME.read(stack.getOrCreateNbt());
+        }
+        public static void set(ItemStack stack, long i) {
+            FINISH_TIME.write(stack.getOrCreateNbt(), i);
+        }
+
+        public static void setFromLength(ItemStack stack, long i, World world) {
+            set(stack, world.getTime() + i);
+        }
+    }
     public static class MusicSheetSongManager {
         public static String getStringifiedId(ItemStack stack) {
             return MUSIC_SHEET_ID.read(stack.getOrCreateNbt());

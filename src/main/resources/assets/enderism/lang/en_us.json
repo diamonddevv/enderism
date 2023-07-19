@@ -34,6 +34,7 @@
   "item.enderism.music_sheet": "Music Sheet",
   "item.enderism.purpur_flute": "Purpur Flute",
   "item.enderism.chorus_cello": "Chorus Cello",
+  "item.enderism.vibratotamatone": "Vibratotamatone",
 
   "enchantment.enderism.upthrust": "Upthrust",
   "enchantment.enderism.shackling_curse": "Curse of Shackling",
@@ -48,6 +49,9 @@
 
   "name.song.enderism.megalovania": "Song of Willpower",
   "name.song.enderism.rushe": "Song of Speed",
+  "name.song.enderism.polcow": "Piosenka Krowy",
+
+  "tooltip.enderism.instrument.canplay": "Can Play:",
 
   "context.enderism.music_sheet_missing": "You couldn't possibly play this music sheet with this instrument.."
 }

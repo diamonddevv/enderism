@@ -5,7 +5,8 @@
     "id": "enderism",
     "version": "${version}",
     "entrypoints": {
-      "init": "net.diamonddev.enderism.EnderismMod"
+      "init": "net.diamonddev.enderism.EnderismMod",
+      "client_init": "net.diamonddev.enderism.client.EnderismClient"
     },
 
     "metadata": {

@@ -31,6 +31,13 @@
     ]
   },
 
+  "note.enderism.otamatone": {
+    "sounds": [
+      "enderism:music/note/otamatone"
+    ]
+  },
+
+
   "musicsheet.enderism.megalovania.flute": {
     "sounds": [
       "enderism:music/sheet/megalovania/flute"
@@ -41,6 +48,12 @@
       "enderism:music/sheet/megalovania/cello"
     ]
   },
+  "musicsheet.enderism.megalovania.otamatone": {
+    "sounds": [
+      "enderism:music/sheet/megalovania/otamatone"
+    ]
+  },
+
   "musicsheet.enderism.rushe.flute": {
     "sounds": [
       "enderism:music/sheet/rushe/flute"
@@ -49,6 +62,12 @@
   "musicsheet.enderism.rushe.cello": {
     "sounds": [
       "enderism:music/sheet/rushe/cello"
+    ]
+  },
+
+  "musicsheet.enderism.polcow.otamatone": {
+    "sounds": [
+      "enderism:music/sheet/polcow/otamatone"
     ]
   }
 }

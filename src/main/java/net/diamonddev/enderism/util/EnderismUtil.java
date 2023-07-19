@@ -59,6 +59,11 @@ public class EnderismUtil {
         }
     }
 
+    public static <T> T test(T t) {
+        System.out.println(t);
+        return t;
+    }
+
     public static Hand otherHand(Hand hand) {
         return hand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND;
     }

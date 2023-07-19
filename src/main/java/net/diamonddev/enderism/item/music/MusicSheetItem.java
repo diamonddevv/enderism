@@ -27,17 +27,17 @@ public class MusicSheetItem extends Item {
     }
 
 
-    public static MusicSheetDataWrapper getWrapper(ItemStack stack) {
+    public static MusicSheetWrapper getWrapper(ItemStack stack) {
         if (stack.getItem() instanceof MusicSheetItem) {
 
             String id = EnderismNbt.MusicSheetSongManager.getStringifiedId(stack);
 
-            MusicSheetDataWrapper wrapper = null;
+            MusicSheetWrapper wrapper = null;
 
             for (CognitionDataResource res : InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().CACHE.getOrCreateKey(InitResourceListener.MUSIC_TYPE)) {
-                SerializedMusicSheet musicSheet = MusicSheetResourceType.getAsSheet(res);
+                MusicSheetBean musicSheet = MusicSheetResourceType.getAsSheet(res);
                 if (Objects.equals(id, musicSheet.id)) {
-                    wrapper = new MusicSheetDataWrapper(musicSheet);
+                    wrapper = new MusicSheetWrapper(musicSheet);
                     break;
                 }
             }
@@ -46,11 +46,18 @@ public class MusicSheetItem extends Item {
         } return null;
     }
 
-    public void play(MusicSheetDataWrapper wrapper, MusicSheetInstrument instrument, World world, PlayerEntity user) {
+    public boolean play(ItemStack instrumentStack, MusicSheetWrapper wrapper, InstrumentWrapper instrument, World world, PlayerEntity user) {
+        boolean produceError = true;
 
         if (wrapper.getSoundFromHash(instrument).isPresent()) {
-            world.playSound(null, user.getBlockPos(), wrapper.getSoundFromHash(instrument).get(), SoundCategory.RECORDS);
-        } else {
+            if (wrapper.canBePlayedWithInstrument(instrument)) {
+                EnderismNbt.InstrumentFinishTimeManager.setFromLength(instrumentStack, wrapper.getCooldownTicks(), world);
+                world.playSound(null, user.getBlockPos(), wrapper.getSoundFromHash(instrument).get(), SoundCategory.RECORDS);
+                produceError = false;
+            }
+        }
+
+        if (produceError) {
             if (user.getServer() != null) {
                 ServerPlayerEntity spe = user.getServer().getPlayerManager().getPlayer(user.getUuid());
 
@@ -61,13 +68,15 @@ public class MusicSheetItem extends Item {
                 NerveNetworker.send(spe, InitPackets.SHCI, data);
             }
         }
+
+        return !produceError;
     }
 
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
-            SerializedMusicSheet sheet = MusicSheetResourceType.getAsSheet(res);
+            MusicSheetBean sheet = MusicSheetResourceType.getAsSheet(res);
             if (Objects.equals(EnderismNbt.MusicSheetSongManager.getStringifiedId(stack), sheet.id)) {
                 String key = sheet.descTranslationKey;
                 tooltip.add(Text.translatable(key).formatted(Formatting.GRAY));
