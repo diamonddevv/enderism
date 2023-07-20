@@ -19,6 +19,9 @@ public class MusicInstrumentResourceType implements CognitionResourceType {
             DEFAULT_SOUND = "default_sound",
             ITEMS = "instrument_items";
 
+    public static final String // instrument id bean
+            MODIFIER_ID = "item", MODIFIER_PITCH = "pitch";
+
     public static InstrumentWrapper wrap(CognitionDataResource resource) {
         var serialized = resource.getAsClass(InstrumentBean.class);
         String[] split = resource.getId().getPath().split("/");

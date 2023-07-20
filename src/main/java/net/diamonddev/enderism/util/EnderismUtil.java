@@ -17,6 +17,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +30,12 @@ import net.minecraft.world.event.GameEvent;
 import java.util.UUID;
 
 public class EnderismUtil {
+
+    public static class Math {
+        public static float decimalToPercentageChange(float decimal) {
+            return (100f * decimal) - 100f;
+        }
+    }
 
     public static final UUID UUID_ZERO = new UUID(0, 0);
 
@@ -88,5 +96,13 @@ public class EnderismUtil {
             }
         }
         return false;
+    }
+
+    public static Text compoundText(Text... texts) {
+        MutableText t = Text.empty();
+        for (Text text : texts) {
+            t.append(text);
+        }
+        return t;
     }
 }

@@ -3,6 +3,8 @@
 
   "default_sound": "minecraft:block.note_block.bass",
   "instrument_items": [
-    "enderism:chorus_cello"
+    {
+      "item": "enderism:chorus_cello"
+    }
   ]
 }

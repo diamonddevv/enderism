@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -27,6 +28,8 @@ public class InstrumentItem extends Item {
 
 
     private static final String CAN_PLAY_KEY = "tooltip.enderism.instrument.canplay";
+    private static final String INSTRUMENT_KEY = "tooltip.enderism.instrument.instrument";
+    private static final String PITCHSHIFT_KEY = "tooltip.enderism.instrument.pitchshift";
 
     @Nullable
     private InstrumentWrapper instrumentWrapper = null;
@@ -41,13 +44,16 @@ public class InstrumentItem extends Item {
         if (stackInHand.getItem() instanceof InstrumentItem ii) {
             if (ii.getInstrument() != null) {
 
+                float pitch = ii.getInstrument().getPitchByItemId(Registries.ITEM.getId(stackInHand.getItem()));
+
                 if (other.getItem() instanceof MusicSheetItem sheet) {
                     MusicSheetWrapper wrapper = MusicSheetItem.getWrapper(other);
                     if (wrapper != null) {
-                        boolean played = sheet.play(stackInHand, wrapper, getInstrument(), world, user);
+                        int coolTicks = EnderismUtil.test(Math.round(calculateNewLengthFromOldLengthAndPitch(wrapper.getCooldownTicks(), pitch)));
+
+                        boolean played = sheet.play(stackInHand, wrapper, getInstrument(), world, user, pitch, coolTicks);
                         if (played) {
-                            world.emitGameEvent(user, GameEvent.INSTRUMENT_PLAY, user.getPos()); // this will ensure we get some nice vibrations
-                            if (!user.isCreative()) setCooldownForAllInstruments(user, wrapper.getCooldownTicks());
+                            if (!user.isCreative()) setCooldownForAllInstruments(user, coolTicks);
                             return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
                         } else {
                             return new TypedActionResult<>(ActionResult.PASS, stackInHand);
@@ -55,6 +61,8 @@ public class InstrumentItem extends Item {
                     }
 
                     return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
+                } else {
+                    user.playSound(getDefaultSoundEvent(), SoundCategory.RECORDS, 10f, pitch);
                 }
             }
         }
@@ -98,6 +106,13 @@ public class InstrumentItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (this.getInstrument() != null) {
+            float pitch = this.getInstrument().getPitchByItemId(Registries.ITEM.getId(stack.getItem()));
+
+            tooltip.add(EnderismUtil.compoundText(Text.translatable(INSTRUMENT_KEY).formatted(Formatting.WHITE), generateInstrumentText(getInstrument()).formatted(Formatting.GRAY)));
+            tooltip.add(EnderismUtil.compoundText(Text.translatable(PITCHSHIFT_KEY).formatted(Formatting.WHITE), getPercentageChangeText(pitch)));
+
+            tooltip.add(Text.empty()); // blank line
+
             tooltip.add(Text.translatable(CAN_PLAY_KEY).formatted(Formatting.WHITE));
             InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
                 MusicSheetWrapper sheet = new MusicSheetWrapper(MusicSheetResourceType.getAsSheet(res));
@@ -107,5 +122,28 @@ public class InstrumentItem extends Item {
                 }
             });
         }
+    }
+
+    private static float calculateNewLengthFromOldLengthAndPitch(float oldLength, float pitch) {
+        // this function is from https://github.com/audacity/audacity/blob/aa59545651dd7b88c87b6bb87a38ad1332c1361a/src/effects/ChangeTempo.cpp#L140
+        // i took it from audacity
+        // i couldnt figure out how it was calculated lol so i looked at the source
+        // thank god audacity is open source
+
+        float percentageChange = EnderismUtil.Math.decimalToPercentageChange(pitch);
+
+        return (oldLength * 100.0f) / (100.0f + percentageChange);
+    }
+
+    private static MutableText getPercentageChangeText(float pitch) {
+        float percent = EnderismUtil.Math.decimalToPercentageChange(pitch);
+
+        String stringifiedPercent = percent-Math.floor(percent) == 0 ? "" + (int)percent : "" + percent;
+
+        return Text.literal(stringifiedPercent + "%").formatted(Formatting.GRAY);
+    }
+
+    private MutableText generateInstrumentText(InstrumentWrapper instrumentWrapper) {
+        return Text.translatable("name.instrument.enderism." + instrumentWrapper.getIdentifier());
     }
 }

@@ -5,6 +5,7 @@ import net.diamonddev.enderism.item.*;
 import net.diamonddev.enderism.item.music.InstrumentItem;
 import net.diamonddev.enderism.item.music.MusicSheetItem;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
@@ -26,6 +27,8 @@ public class InitItems implements RegistryInitializer {
     public static CharmItem PURPUR_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(38));
     public static CharmItem OBSIDIAN_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(50));
 
+    public static Item PIRPELL_INGOT = new Item(new QuiltItemSettings());
+
 
     @Override
     public void register() {
@@ -43,5 +46,7 @@ public class InitItems implements RegistryInitializer {
         Registry.register(Registries.ITEM, EnderismMod.id("end_stone_charm"), ENDSTONE_CHARM);
         Registry.register(Registries.ITEM, EnderismMod.id("purpur_charm"), PURPUR_CHARM);
         Registry.register(Registries.ITEM, EnderismMod.id("obsidian_charm"), OBSIDIAN_CHARM);
+
+        Registry.register(Registries.ITEM, EnderismMod.id("pirpell_ingot"), PIRPELL_INGOT);
     }
 }

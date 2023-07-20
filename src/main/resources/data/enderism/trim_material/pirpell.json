@@ -1,0 +1,9 @@
+{
+  "asset_name": "pirpell",
+  "description": {
+    "color": "#C987FF",
+    "translate": "trim_material.enderism.pirpell"
+  },
+  "ingredient": "enderism:pirpell_ingot",
+  "item_model_index": 0.22625
+}

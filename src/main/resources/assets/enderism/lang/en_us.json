@@ -26,6 +26,10 @@
   "item.minecraft.lingering_potion.effect.choruskirmish": "Lingering Potion of Choruskirmishing",
   "item.minecraft.tipped_arrow.effect.choruskirmish": "Tipped Arrow of Choruskirmishing",
 
+  "item.enderism.pirpell_ingot": "Pirpell Ingot",
+  "block.enderism.pirpell_block": "Block of Pirpell",
+
+  "trim_material.enderism.pirpell": "Pirpell",
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
@@ -51,7 +55,13 @@
   "name.song.enderism.rushe": "Song of Speed",
   "name.song.enderism.polcow": "Piosenka Krowy",
 
-  "tooltip.enderism.instrument.canplay": "Can Play:",
+  "name.instrument.enderism.cello": "Cello",
+  "name.instrument.enderism.flute": "Flute",
+  "name.instrument.enderism.otamatone": "Otamatone",
+
+  "tooltip.enderism.instrument.canplay": "Can Play: ",
+  "tooltip.enderism.instrument.instrument": "Instrument: ",
+  "tooltip.enderism.instrument.pitchshift": "Pitch-Shift: ",
 
   "context.enderism.music_sheet_missing": "You couldn't possibly play this music sheet with this instrument.."
 }

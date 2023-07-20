@@ -6,6 +6,8 @@ import net.diamonddev.enderism.network.InitPackets;
 import net.diamonddev.enderism.registry.*;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.ModContainer;
@@ -67,6 +69,14 @@ public class EnderismMod implements ModInitializer {
 
 
 		private static void place() {
+			ItemGroupEvents.modifyEntriesEvent(INGREDIENTS).register(content -> {
+				content.addAfter(Items.NETHERITE_INGOT, InitItems.PIRPELL_INGOT);
+			});
+
+			ItemGroupEvents.modifyEntriesEvent(BUILDING_BLOCKS).register(content -> {
+				content.addAfter(Items.NETHERITE_BLOCK, getBlockItem(InitBlocks.PIRPELL_BLOCK));
+			});
+
 			ItemGroupEvents.modifyEntriesEvent(FUNCTIONAL_BLOCKS).register(content -> {
 				content.addAfter(Items.LODESTONE, getBlockItem(InitBlocks.CHORUS_MAGNETITE));
 				content.addAfter(getBlockItem(InitBlocks.CHORUS_MAGNETITE), getBlockItem(InitBlocks.FIBROUS_CHORUS));

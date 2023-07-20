@@ -11,11 +11,13 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -46,13 +48,14 @@ public class MusicSheetItem extends Item {
         } return null;
     }
 
-    public boolean play(ItemStack instrumentStack, MusicSheetWrapper wrapper, InstrumentWrapper instrument, World world, PlayerEntity user) {
+    public boolean play(ItemStack instrumentStack, MusicSheetWrapper wrapper, InstrumentWrapper instrument, World world, PlayerEntity user, float pitch, int coolTicks) {
         boolean produceError = true;
 
         if (wrapper.getSoundFromHash(instrument).isPresent()) {
             if (wrapper.canBePlayedWithInstrument(instrument)) {
-                EnderismNbt.InstrumentFinishTimeManager.setFromLength(instrumentStack, wrapper.getCooldownTicks(), world);
-                world.playSound(null, user.getBlockPos(), wrapper.getSoundFromHash(instrument).get(), SoundCategory.RECORDS);
+                EnderismNbt.InstrumentFinishTimeManager.setFromLength(instrumentStack, coolTicks, world);
+                world.playSound(null, user.getBlockPos(), wrapper.getSoundFromHash(instrument).get(), SoundCategory.RECORDS, 10f, pitch);
+                world.emitGameEvent(user, GameEvent.INSTRUMENT_PLAY, user.getPos()); // this will ensure we get some nice vibrations for the warden and stuff yk
                 produceError = false;
             }
         }
