@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "enderism:pirpell_fragment"
+    },
+    {
+      "item": "enderism:pirpell_fragment"
+    },
+    {
+      "item": "enderism:pirpell_fragment"
+    },
+    {
+      "item": "enderism:pirpell_fragment"
+    },
+    {
+      "item": "enderism:pirpell_fragment"
+    },
+    {
+      "item": "enderism:pirpell_fragment"
+    },
+    {
+      "item": "enderism:ancient_scrap"
+    },
+    {
+      "item": "enderism:ancient_scrap"
+    }
+  ],
+  "result": {
+    "item": "enderism:pirpell_ingot"
+  }
+}

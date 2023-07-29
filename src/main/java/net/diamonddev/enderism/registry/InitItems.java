@@ -27,7 +27,11 @@ public class InitItems implements RegistryInitializer {
     public static CharmItem PURPUR_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(38));
     public static CharmItem OBSIDIAN_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(50));
 
+    public static Item PIRPELL_FRAGMENT = new Item(new QuiltItemSettings());
     public static Item PIRPELL_INGOT = new Item(new QuiltItemSettings());
+
+    public static Item ANCIENT_SCRAP = new Item(new QuiltItemSettings());
+    public static Item SCULK_SPINE = new Item(new QuiltItemSettings());
 
 
     @Override
@@ -47,6 +51,10 @@ public class InitItems implements RegistryInitializer {
         Registry.register(Registries.ITEM, EnderismMod.id("purpur_charm"), PURPUR_CHARM);
         Registry.register(Registries.ITEM, EnderismMod.id("obsidian_charm"), OBSIDIAN_CHARM);
 
+        Registry.register(Registries.ITEM, EnderismMod.id("pirpell_fragment"), PIRPELL_FRAGMENT);
         Registry.register(Registries.ITEM, EnderismMod.id("pirpell_ingot"), PIRPELL_INGOT);
+
+        Registry.register(Registries.ITEM, EnderismMod.id("ancient_scrap"), ANCIENT_SCRAP);
+        Registry.register(Registries.ITEM, EnderismMod.id("sculk_spine"), SCULK_SPINE);
     }
 }

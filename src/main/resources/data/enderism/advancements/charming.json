@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:end/find_end_city",
+  "requirements": [
+    [
+      "use_charm"
+    ]
+  ],
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.enderism.charming.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "enderism:end_stone_charm"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.enderism.charming.title"
+    }
+  },
+
+
+  "criteria": {
+    "use_charm": {
+      "conditions": {
+        "condition": "enderism:use_charm"
+      }
+    }
+  }
+}

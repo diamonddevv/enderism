@@ -6,7 +6,8 @@
     "version": "${version}",
     "entrypoints": {
       "init": "net.diamonddev.enderism.EnderismMod",
-      "client_init": "net.diamonddev.enderism.client.EnderismClient"
+      "client_init": "net.diamonddev.enderism.client.EnderismClient",
+      "mm:early_risers": "net.diamonddev.enderism.impl.AsmEarlyRiser"
     },
 
     "metadata": {

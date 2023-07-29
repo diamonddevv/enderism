@@ -55,7 +55,6 @@ public class MusicSheetItem extends Item {
             if (wrapper.canBePlayedWithInstrument(instrument)) {
                 EnderismNbt.InstrumentFinishTimeManager.setFromLength(instrumentStack, coolTicks, world);
                 world.playSound(null, user.getBlockPos(), wrapper.getSoundFromHash(instrument).get(), SoundCategory.RECORDS, 10f, pitch);
-                world.emitGameEvent(user, GameEvent.INSTRUMENT_PLAY, user.getPos()); // this will ensure we get some nice vibrations for the warden and stuff yk
                 produceError = false;
             }
         }

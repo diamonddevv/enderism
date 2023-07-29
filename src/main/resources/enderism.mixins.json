@@ -11,7 +11,8 @@
     "ElytraItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
-    "StatusEffectAccessor"
+    "StatusEffectAccessor",
+    "extension.ExtendableEnchantmentTarget"
   ],
   "client": [
     "ItemColorsMixin"

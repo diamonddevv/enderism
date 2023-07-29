@@ -1,0 +1,22 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "enderism:sculk_spine"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:sculk_shrieker",
+          "properties": {
+            "can_summon": "true"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -7,8 +7,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 
-public class ShacklingCurseEnchantment extends Enchantment {
-    public ShacklingCurseEnchantment(EnchantmentTarget target) {
+public class AerodynamicEnchantment extends Enchantment {
+    public AerodynamicEnchantment(EnchantmentTarget target) {
         super(Rarity.VERY_RARE, target, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
@@ -24,11 +24,6 @@ public class ShacklingCurseEnchantment extends Enchantment {
 
     @Override
     public boolean isAvailableForRandomSelection() {
-        return true;
-    }
-
-    @Override
-    public boolean isCursed() {
         return true;
     }
 }

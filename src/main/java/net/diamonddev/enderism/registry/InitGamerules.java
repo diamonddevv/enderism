@@ -7,15 +7,12 @@ import net.minecraft.world.GameRules;
 
 public class InitGamerules implements RegistryInitializer {
 
-    public static GameRules.Key<GameRules.BooleanRule> UPTHRUST_NO_DRAG;
     public static GameRules.Key<GameRules.BooleanRule> ELYTRA_FIREWORKS;
     public static GameRules.Key<GameRules.IntRule> CHORUSKIRMISH_CHANCE;
 
-
     @Override
     public void register() {
-        UPTHRUST_NO_DRAG = GameRuleRegistry.register("upthrustNoDrag", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
-        ELYTRA_FIREWORKS = GameRuleRegistry.register("shouldFireworksBoostElytra", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+        ELYTRA_FIREWORKS = GameRuleRegistry.register("fireworksBoostElytra", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
         CHORUSKIRMISH_CHANCE = GameRuleRegistry.register("choruskirmishChance", GameRules.Category.MISC, GameRuleFactory.createIntRule(25));
     }
 }

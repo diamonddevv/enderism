@@ -35,6 +35,11 @@ public class VelocityProtectionEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean isAvailableForRandomSelection() {
+        return true;
+    }
+
+    @Override
     public boolean isTreasure() {
         return true;
     }

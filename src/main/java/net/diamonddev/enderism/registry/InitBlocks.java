@@ -14,6 +14,7 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
 
     // Decorative
     public static Block PIRPELL_BLOCK = new Block(blankSettings().sounds(BlockSoundGroup.METAL).strength(5f, 6f));
+    public static Block PATTERNED_PIRPELL = new Block(blankSettings().sounds(BlockSoundGroup.METAL).strength(2.5f, 3f));
 
     // Purposeful Blocks
     public static Block CHORUS_MAGNETITE = new Block(blankSettings().sounds(BlockSoundGroup.LODESTONE).luminance(8).strength(1.5f, 1.2f));
@@ -26,6 +27,7 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
         registerBlockAndItem(CHORUS_MAGNETITE, EnderismMod.id("chorus_magnetite"), new QuiltItemSettings());
         registerBlockAndItem(FIBROUS_CHORUS, EnderismMod.id("fibrous_chorus"), new QuiltItemSettings());
         registerBlockAndItem(PIRPELL_BLOCK, EnderismMod.id("pirpell_block"), new QuiltItemSettings());
+        registerBlockAndItem(PATTERNED_PIRPELL, EnderismMod.id("patterned_pirpell"), new QuiltItemSettings());
 
 
 //        registerBlockAndItem(CHORUS_FRUIT_PIE, EnderismMod.id("chorus_fruit_pie"), new FabricItemSettings());

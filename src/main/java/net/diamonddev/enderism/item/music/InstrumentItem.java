@@ -5,6 +5,7 @@ import net.diamonddev.enderism.resource.type.MusicInstrumentResourceType;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
 import net.diamonddev.enderism.util.EnderismUtil;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -52,6 +53,7 @@ public class InstrumentItem extends Item {
                         int coolTicks = EnderismUtil.test(Math.round(calculateNewLengthFromOldLengthAndPitch(wrapper.getCooldownTicks(), pitch)));
 
                         boolean played = sheet.play(stackInHand, wrapper, getInstrument(), world, user, pitch, coolTicks);
+                        createVibration(user);
                         if (played) {
                             if (!user.isCreative()) setCooldownForAllInstruments(user, coolTicks);
                             return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
@@ -63,6 +65,7 @@ public class InstrumentItem extends Item {
                     return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
                 } else {
                     user.playSound(getDefaultSoundEvent(), SoundCategory.RECORDS, 10f, pitch);
+                    createVibration(user);
                 }
             }
         }
@@ -108,17 +111,17 @@ public class InstrumentItem extends Item {
         if (this.getInstrument() != null) {
             float pitch = this.getInstrument().getPitchByItemId(Registries.ITEM.getId(stack.getItem()));
 
-            tooltip.add(EnderismUtil.compoundText(Text.translatable(INSTRUMENT_KEY).formatted(Formatting.WHITE), generateInstrumentText(getInstrument()).formatted(Formatting.GRAY)));
-            tooltip.add(EnderismUtil.compoundText(Text.translatable(PITCHSHIFT_KEY).formatted(Formatting.WHITE), getPercentageChangeText(pitch)));
+            tooltip.add(EnderismUtil.compoundText(Text.translatable(INSTRUMENT_KEY).formatted(Formatting.AQUA), generateInstrumentText(getInstrument()).formatted(Formatting.GRAY)));
+            tooltip.add(EnderismUtil.compoundText(Text.translatable(PITCHSHIFT_KEY).formatted(Formatting.AQUA), getPercentageChangeText(pitch)));
 
             tooltip.add(Text.empty()); // blank line
 
-            tooltip.add(Text.translatable(CAN_PLAY_KEY).formatted(Formatting.WHITE));
+            tooltip.add(Text.translatable(CAN_PLAY_KEY).formatted(Formatting.AQUA));
             InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
                 MusicSheetWrapper sheet = new MusicSheetWrapper(MusicSheetResourceType.getAsSheet(res));
                 if (sheet.canBePlayedWithInstrument(getInstrument())) {
                     String key = sheet.bean.descTranslationKey;
-                    tooltip.add(Text.translatable(key).formatted(Formatting.GRAY));
+                    tooltip.add(EnderismUtil.compoundText(Text.literal(" "), Text.translatable(key).formatted(Formatting.GRAY)));
                 }
             });
         }
@@ -137,13 +140,19 @@ public class InstrumentItem extends Item {
 
     private static MutableText getPercentageChangeText(float pitch) {
         float percent = EnderismUtil.Math.decimalToPercentageChange(pitch);
+        boolean over0 = percent > 0;
+
 
         String stringifiedPercent = percent-Math.floor(percent) == 0 ? "" + (int)percent : "" + percent;
 
-        return Text.literal(stringifiedPercent + "%").formatted(Formatting.GRAY);
+        return Text.literal((over0 ? "+" : "") + stringifiedPercent + "%").formatted(Formatting.GRAY);
     }
 
     private MutableText generateInstrumentText(InstrumentWrapper instrumentWrapper) {
         return Text.translatable("name.instrument.enderism." + instrumentWrapper.getIdentifier());
+    }
+
+    private static void createVibration(LivingEntity user) {
+        user.getWorld().emitGameEvent(user, GameEvent.INSTRUMENT_PLAY, user.getPos()); // this will ensure we get some nice vibrations for the warden and stuff yk
     }
 }

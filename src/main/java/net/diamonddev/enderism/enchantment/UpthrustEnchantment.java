@@ -24,6 +24,11 @@ public class UpthrustEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean isAvailableForRandomSelection() {
+        return true;
+    }
+
+    @Override
     public boolean isTreasure() {
         return true;
     }

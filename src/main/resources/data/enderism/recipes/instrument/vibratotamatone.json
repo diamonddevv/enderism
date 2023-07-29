@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #=",
+    " # ",
+    " ~ "
+  ],
+  "key": {
+    "#": {
+      "item": "enderism:sculk_spine"
+    },
+    "=": {
+      "item": "minecraft:sculk"
+    },
+    "~": {
+      "item": "minecraft:sculk_shrieker"
+    }
+  },
+  "result": {
+    "item": "enderism:vibratotamatone"
+  }
+}

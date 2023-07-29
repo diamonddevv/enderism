@@ -26,10 +26,16 @@
   "item.minecraft.lingering_potion.effect.choruskirmish": "Lingering Potion of Choruskirmishing",
   "item.minecraft.tipped_arrow.effect.choruskirmish": "Tipped Arrow of Choruskirmishing",
 
+  "item.enderism.pirpell_fragment": "Pirpell Fragment",
   "item.enderism.pirpell_ingot": "Pirpell Ingot",
   "block.enderism.pirpell_block": "Block of Pirpell",
+  "block.enderism.patterned_pirpell": "Patterned Pirpell",
 
-  "trim_material.enderism.pirpell": "Pirpell",
+  "item.enderism.ancient_scrap": "Ancient Scrap",
+
+  "item.enderism.sculk_spine": "Sculk Spine",
+
+  "trim_material.enderism.pirpell": "Pirpell Material",
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
@@ -40,6 +46,7 @@
   "item.enderism.chorus_cello": "Chorus Cello",
   "item.enderism.vibratotamatone": "Vibratotamatone",
 
+  "enchantment.enderism.aerodynamic": "Aerodynamic",
   "enchantment.enderism.upthrust": "Upthrust",
   "enchantment.enderism.shackling_curse": "Curse of Shackling",
   "enchantment.enderism.velocity_protection": "Velocity Protection",
@@ -63,5 +70,8 @@
   "tooltip.enderism.instrument.instrument": "Instrument: ",
   "tooltip.enderism.instrument.pitchshift": "Pitch-Shift: ",
 
-  "context.enderism.music_sheet_missing": "You couldn't possibly play this music sheet with this instrument.."
+  "context.enderism.music_sheet_missing": "You couldn't possibly play this music sheet with this instrument..",
+
+  "advancement.enderism.charming.title": "Charming",
+  "advancement.enderism.charming.desc": "Use any Charm"
 }

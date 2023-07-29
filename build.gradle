@@ -47,6 +47,9 @@ dependencies {
 	// libGenetics
 	include modImplementation ("com.github.diamonddevv:libgenetics:${project.libgenetics}");
 
+	// Simple Trims
+	include modImplementation("com.github.diamonddevv:simple-trims:${project.simple_trims_version}");
+
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 

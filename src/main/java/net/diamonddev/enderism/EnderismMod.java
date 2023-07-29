@@ -6,8 +6,7 @@ import net.diamonddev.enderism.network.InitPackets;
 import net.diamonddev.enderism.registry.*;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.ModContainer;
@@ -45,6 +44,7 @@ public class EnderismMod implements ModInitializer {
 		new InitSoundEvents().register();
 		new InitResourceListener().register();
 		new InitDataModifiers().register();
+		new	InitAdvancementCriterions().register();
 
 		new ItemGroupEditor().register();
 
@@ -70,11 +70,17 @@ public class EnderismMod implements ModInitializer {
 
 		private static void place() {
 			ItemGroupEvents.modifyEntriesEvent(INGREDIENTS).register(content -> {
-				content.addAfter(Items.NETHERITE_INGOT, InitItems.PIRPELL_INGOT);
+				content.addAfter(Items.NETHERITE_INGOT, InitItems.ANCIENT_SCRAP);
+				content.addAfter(InitItems.ANCIENT_SCRAP, InitItems.PIRPELL_FRAGMENT);
+				content.addAfter(InitItems.PIRPELL_FRAGMENT, InitItems.PIRPELL_INGOT);
+
+				content.addAfter(InitItems.PIRPELL_INGOT, InitItems.SCULK_SPINE);
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(BUILDING_BLOCKS).register(content -> {
 				content.addAfter(Items.NETHERITE_BLOCK, getBlockItem(InitBlocks.PIRPELL_BLOCK));
+
+				content.addStack(new ItemStack(getBlockItem(InitBlocks.PATTERNED_PIRPELL)));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(FUNCTIONAL_BLOCKS).register(content -> {

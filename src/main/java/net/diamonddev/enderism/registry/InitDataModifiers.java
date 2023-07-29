@@ -1,6 +1,7 @@
 package net.diamonddev.enderism.registry;
 
 import net.diamonddev.enderism.item.CharmItem;
+import net.diamonddev.enderism.modifier.LootTableModifier;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
@@ -34,7 +35,7 @@ public class InitDataModifiers implements RegistryInitializer {
             factories.add(new EnderismSellItemFactory(15, 30, InitItems.VIBRATOTAMATONE, 1));
         });
 
-
+        new LootTableModifier().register(); // Loot Tables
     }
 
     private static class SellMusicSheetFactory implements TradeOffers.Factory {
