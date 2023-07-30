@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "enderism:item/tool/pirpell_plated_netherite_axe"
+  }
+}

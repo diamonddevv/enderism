@@ -12,7 +12,7 @@ public class InitGamerules implements RegistryInitializer {
 
     @Override
     public void register() {
-        ELYTRA_FIREWORKS = GameRuleRegistry.register("fireworksBoostElytra", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+        ELYTRA_FIREWORKS = GameRuleRegistry.register("fireworksBoostElytra", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
         CHORUSKIRMISH_CHANCE = GameRuleRegistry.register("choruskirmishChance", GameRules.Category.MISC, GameRuleFactory.createIntRule(25));
     }
 }

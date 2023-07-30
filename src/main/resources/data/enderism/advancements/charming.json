@@ -2,13 +2,13 @@
   "parent": "minecraft:end/find_end_city",
   "requirements": [
     [
-      "use_charm"
+      "charm"
     ]
   ],
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.enderism.charming.desc"
+      "translate": "advancement.enderism.charming.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -17,16 +17,13 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.enderism.charming.title"
+      "translate": "advancement.enderism.charming.title"
     }
   },
 
-
   "criteria": {
-    "use_charm": {
-      "conditions": {
-        "condition": "enderism:use_charm"
-      }
+    "charm": {
+      "trigger": "enderism:use_charm"
     }
   }
 }

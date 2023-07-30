@@ -44,7 +44,7 @@ public class EnderismMod implements ModInitializer {
 		new InitSoundEvents().register();
 		new InitResourceListener().register();
 		new InitDataModifiers().register();
-		new	InitAdvancementCriterions().register();
+		new InitAdvancementCriteria().register();
 
 		new ItemGroupEditor().register();
 
@@ -73,8 +73,10 @@ public class EnderismMod implements ModInitializer {
 				content.addAfter(Items.NETHERITE_INGOT, InitItems.ANCIENT_SCRAP);
 				content.addAfter(InitItems.ANCIENT_SCRAP, InitItems.PIRPELL_FRAGMENT);
 				content.addAfter(InitItems.PIRPELL_FRAGMENT, InitItems.PIRPELL_INGOT);
-
 				content.addAfter(InitItems.PIRPELL_INGOT, InitItems.SCULK_SPINE);
+
+				content.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, InitItems.PIRPELL_PLATED_TOOL_UPGRADE);
+				content.addAfter(InitItems.PIRPELL_PLATED_TOOL_UPGRADE, InitItems.ANCIENT_PLATED_ARMOR_UPGRADE);
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(BUILDING_BLOCKS).register(content -> {
@@ -90,17 +92,23 @@ public class EnderismMod implements ModInitializer {
 
 			ItemGroupEvents.modifyEntriesEvent(FOOD_AND_DRINKS).register(content -> {
 				CursedChorusItem.addCursedChorus(content, InitItems.CURSED_CHORUS);
-
-//				content.addAfter(InitItems.CURSED_CHORUS, getBlockItem(InitBlocks.CHORUS_FRUIT_PIE));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(TOOLS_AND_UTILITIES).register(content -> {
 				content.addAfter(Items.GOAT_HORN, InitItems.PURPUR_FLUTE);
 				content.addAfter(InitItems.PURPUR_FLUTE, InitItems.CHORUS_CELLO);
 				content.addAfter(InitItems.CHORUS_CELLO, InitItems.VIBRATOTAMATONE);
+
+				content.addAfter(Items.NETHERITE_HOE, InitItems.PIRPELL_NETHERITE_SHOVEL);
+				content.addAfter(InitItems.PIRPELL_NETHERITE_SHOVEL, InitItems.PIRPELL_NETHERITE_PICK);
+				content.addAfter(InitItems.PIRPELL_NETHERITE_PICK, InitItems.PIRPELL_NETHERITE_AXE);
+				content.addAfter(InitItems.PIRPELL_NETHERITE_AXE, InitItems.PIRPELL_NETHERITE_HOE);
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
+				content.addAfter(Items.NETHERITE_SWORD, InitItems.PIRPELL_NETHERITE_SWORD);
+				content.addAfter(Items.NETHERITE_AXE, InitItems.PIRPELL_NETHERITE_AXE);
+
 				content.addAfter(Items.TURTLE_HELMET, InitItems.SHULKER_SHELLMET);
 
 				CharmItem.addAllCharms(content, InitItems.WANDERERS_CHARM);

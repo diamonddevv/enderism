@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.item.music;
 
+import net.diamonddev.enderism.registry.InitAdvancementCriteria;
 import net.diamonddev.enderism.registry.InitResourceListener;
 import net.diamonddev.enderism.resource.type.MusicInstrumentResourceType;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
@@ -10,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.MutableText;
@@ -53,8 +55,14 @@ public class InstrumentItem extends Item {
                         int coolTicks = EnderismUtil.test(Math.round(calculateNewLengthFromOldLengthAndPitch(wrapper.getCooldownTicks(), pitch)));
 
                         boolean played = sheet.play(stackInHand, wrapper, getInstrument(), world, user, pitch, coolTicks);
-                        createVibration(user);
                         if (played) {
+                            createVibration(user);
+
+                            if (user instanceof ServerPlayerEntity spe) {
+                                InitAdvancementCriteria.USE_INSTRUMENT.trigger(spe);
+                                InitAdvancementCriteria.USE_ALL_INSTRUMENTS.trigger(spe, ii);
+                            }
+
                             if (!user.isCreative()) setCooldownForAllInstruments(user, coolTicks);
                             return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
                         } else {

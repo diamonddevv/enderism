@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "enderism:item/pirpell_plated_tool_upgrade_smithing_template"
+  }
+}

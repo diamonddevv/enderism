@@ -1,0 +1,10 @@
+{
+  "encoded_palette": false,
+
+  "asset_name": "sculk_spine",
+  "description": {
+    "color": "#BBC39B",
+    "translate": "trim_material.enderism.sculk_spine"
+  },
+  "ingredient": "enderism:sculk_spine"
+}

@@ -26,6 +26,11 @@
   "item.minecraft.lingering_potion.effect.choruskirmish": "Lingering Potion of Choruskirmishing",
   "item.minecraft.tipped_arrow.effect.choruskirmish": "Tipped Arrow of Choruskirmishing",
 
+  "item.minecraft.potion.effect.silencing": "Potion of Silencing",
+  "item.minecraft.splash_potion.effect.silencing": "Splash Potion of Silencing",
+  "item.minecraft.lingering_potion.effect.silencing": "Lingering Potion of Silencing",
+  "item.minecraft.tipped_arrow.effect.silencing": "Tipped Arrow of Silencing",
+
   "item.enderism.pirpell_fragment": "Pirpell Fragment",
   "item.enderism.pirpell_ingot": "Pirpell Ingot",
   "block.enderism.pirpell_block": "Block of Pirpell",
@@ -33,9 +38,19 @@
 
   "item.enderism.ancient_scrap": "Ancient Scrap",
 
+  "item.enderism.pirpell_plated_tool_upgrade_smithing_template": "Pirpell-Plated Tool Upgrade Smithing Template",
+  "item.enderism.ancient_plated_armor_upgrade_smithing_template": "Ancient-Plated Armor Upgrade Smithing Template",
+
   "item.enderism.sculk_spine": "Sculk Spine",
 
+  "item.enderism.pirpell_plated_netherite_sword": "Pirpell-Plated Netherite Sword",
+  "item.enderism.pirpell_plated_netherite_shovel": "Pirpell-Plated Netherite Shovel",
+  "item.enderism.pirpell_plated_netherite_pickaxe": "Pirpell-Plated Netherite Pickaxe",
+  "item.enderism.pirpell_plated_netherite_axe": "Pirpell-Plated Netherite Axe",
+  "item.enderism.pirpell_plated_netherite_hoe": "Pirpell-Plated Netherite Hoe",
+
   "trim_material.enderism.pirpell": "Pirpell Material",
+  "trim_material.enderism.sculk_spine": "Sculk Spine Material",
 
   "block.enderism.chorus_magnetite": "Chorus Magnetite",
   "block.enderism.fibrous_chorus": "Fibrous Chorus",
@@ -53,6 +68,7 @@
 
   "effect.enderism.void_recall": "Void Recall",
   "effect.enderism.choruskirmish": "Choruskirmish",
+  "effect.enderism.silencing": "Silencing",
 
   "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
   "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces",
@@ -72,6 +88,22 @@
 
   "context.enderism.music_sheet_missing": "You couldn't possibly play this music sheet with this instrument..",
 
+  "tooltip.pirpell_upgrade.applies": "Netherite Weapons & Tools",
+  "tooltip.pirpell_upgrade.ingredients": "Pirpell Ingot",
+  "tooltip.pirpell_upgrade.upgrade": "Pirpell-Plating Upgrade",
+  "tooltip.pirpell_upgrade.base": "Add Netherite Weapon or Tool",
+  "tooltip.pirpell_upgrade.additions": "Add Pirpell Ingot",
+
+  "tooltip.ancient_upgrade.applies": "Netherite Armor",
+  "tooltip.ancient_upgrade.ingredients": "Ancient Scrap",
+  "tooltip.ancient_upgrade.upgrade": "Ancient-Plating Upgrade",
+  "tooltip.ancient_upgrade.base": "Add Netherite Armor Piece",
+  "tooltip.ancient_upgrade.additions": "Add Ancient Scrap",
+
   "advancement.enderism.charming.title": "Charming",
-  "advancement.enderism.charming.desc": "Use any Charm"
+  "advancement.enderism.charming.desc": "Use any Charm",
+  "advancement.enderism.unfinished_symphony.title": "Unfinished Symphony",
+  "advancement.enderism.unfinished_symphony.desc": "Play a music sheet on any instrument",
+  "advancement.enderism.maestro.title": "Maestro",
+  "advancement.enderism.maestro.desc": "Play a music sheet on every Instrument"
 }

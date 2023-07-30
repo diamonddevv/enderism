@@ -19,7 +19,7 @@ public class BrewingStandBlockEntityMixin {
 
         for(int i = 0; i < 3; ++i) {
             ItemStack charm = slots.get(i);
-            if (charm.getItem() instanceof CharmItem && !charm.isEmpty() && CharmItem.hasEffect(charm)) {
+            if (charm.getItem() instanceof CharmItem && !charm.isEmpty() && !CharmItem.hasEffect(charm)) {
                 hasACharm = true;
                 break;
             }

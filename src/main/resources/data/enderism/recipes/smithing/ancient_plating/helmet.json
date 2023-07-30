@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "enderism:ancient_plated_tool_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "minecraft:netherite_helmet"
+  },
+  "addition": {
+    "item": "enderism:ancient_scrap"
+  },
+  "result": {
+    "item": "enderism:ancient_plated_netherite_helmet"
+  }
+}

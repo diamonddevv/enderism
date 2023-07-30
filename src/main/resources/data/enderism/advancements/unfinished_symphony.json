@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:adventure/root",
+  "requirements": [
+    [
+      "use_instrument"
+    ]
+  ],
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.enderism.unfinished_symphony.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "enderism:chorus_cello"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.enderism.unfinished_symphony.title"
+    }
+  },
+
+  "criteria": {
+    "use_instrument": {
+      "trigger": "enderism:use_instrument"
+    }
+  }
+}

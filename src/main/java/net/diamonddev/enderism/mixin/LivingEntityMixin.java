@@ -189,7 +189,7 @@ public abstract class LivingEntityMixin extends Entity {
                 }
 
                 if (this.age % 20 == 0) {
-                    double i = Math.sin(this.age) * 24; // screw psuedorandomness via new Random(),  all my homies prefer psuedorandomness via Math.sin() with an ever-changing number
+                    double i = Math.sin(this.age) * 24; // screw psuedorandomness via new Random(), all my homies prefer psuedorandomness via Math.sin() with an ever-changing number
                     getWorld().addParticle(ParticleTypes.NOTE, this.getX(), this.getY() + 2.2, this.getZ(), i / 24.0, 0.0, 0.0);
                 }
             }

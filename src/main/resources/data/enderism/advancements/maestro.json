@@ -1,0 +1,29 @@
+{
+  "parent": "enderism:unfinished_symphony",
+  "requirements": [
+    [
+      "use_all_instruments"
+    ]
+  ],
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.enderism.maestro.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "enderism:vibratotamatone"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.enderism.maestro.title"
+    }
+  },
+
+  "criteria": {
+    "use_all_instruments": {
+      "trigger": "enderism:use_all_instruments"
+    }
+  }
+}

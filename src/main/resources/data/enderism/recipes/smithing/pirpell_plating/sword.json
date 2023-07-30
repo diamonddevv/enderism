@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "enderism:pirpell_plated_tool_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "minecraft:netherite_sword"
+  },
+  "addition": {
+    "item": "enderism:pirpell_ingot"
+  },
+  "result": {
+    "item": "enderism:pirpell_plated_netherite_sword"
+  }
+}

@@ -3,6 +3,7 @@ package net.diamonddev.enderism.item;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.mixin.StatusEffectAccessor;
 import net.diamonddev.enderism.nbt.EnderismNbt;
+import net.diamonddev.enderism.registry.InitAdvancementCriteria;
 import net.diamonddev.enderism.registry.InitConfig;
 import net.diamonddev.enderism.registry.InitSoundEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
@@ -16,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -67,6 +69,7 @@ public class CharmItem extends Item {
         EnderismMod.logger.error("Tried to find first CharmItem in Item Registry to test for item cooldown, but none was found!");
         return false;
     }
+
     public static void setCooldownForAllCharms(PlayerEntity player, int ticks) {
         if (!player.getAbilities().creativeMode) {
             for (Item item : Registries.ITEM) {
@@ -82,10 +85,15 @@ public class CharmItem extends Item {
         ItemStack stack = user.getStackInHand(hand);
 
         if (canUseAnyCharm(user)) {
-            applyEffect(stack, user, user);
-            damageStack(stack, user);
-            setCooldownForAllCharms(user, 20 * 15);
-            return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+            if (hasEffect(stack)) {
+                applyEffect(stack, user, user);
+                damageStack(stack, user);
+                setCooldownForAllCharms(user, 20 * 15);
+
+                if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.USE_CHARM.trigger(spe);
+
+                return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+            }
         }
 
         return new TypedActionResult<>(ActionResult.PASS, stack);
@@ -123,7 +131,7 @@ public class CharmItem extends Item {
     }
 
     public static int getColor(ItemStack stack) {
-        if (EnderismNbt.CharmEffectManager.has(stack)) {
+        if (hasEffect(stack)) {
             return EnderismNbt.CharmEffectManager.get(stack).getEffectType().getColor();
         } return 0xfff;
     }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "enderism:item/ancient_plated_armor_upgrade_smithing_template"
+  }
+}
