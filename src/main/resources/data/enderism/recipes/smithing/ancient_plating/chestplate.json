@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
   "template": {
-    "item": "enderism:ancient_plated_tool_upgrade_smithing_template"
+    "item": "enderism:ancient_plated_armor_upgrade_smithing_template"
   },
   "base": {
     "item": "minecraft:netherite_chestplate"

@@ -6,6 +6,9 @@ import net.diamonddev.libgenetics.common.api.v1.network.nerve.NervePacketRegistr
 
 public class InitPackets implements RegistryInitializer {
 
+    // todo: network instruments, music sheets, and charm recipes
+
+
     public static NervePacketRegistry.NervePacketRegistryEntry<SendHudContextInfoPacket, SendHudContextInfoPacket.SHCIPacketData> SHCI;
 
     @Override

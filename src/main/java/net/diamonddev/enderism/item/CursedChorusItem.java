@@ -39,8 +39,6 @@ public class CursedChorusItem extends Item {
                 new FoodComponent.Builder()
                         .saturationModifier(0.1f).hunger(10)
                         .alwaysEdible()
-                        .statusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1), 1.0f)
-                        .statusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100, 1), 1.0f)
                         .build()));
     }
 
@@ -94,6 +92,7 @@ public class CursedChorusItem extends Item {
             }
         }
 
+        applyEatEffects(user);
         EnderismNbt.CursedChorusBindManager.clearBinds(stack);
 
         return super.finishUsing(stack, world, user);
@@ -184,6 +183,13 @@ public class CursedChorusItem extends Item {
         user.teleport(coords.x, coords.y, coords.z, true);
         world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
         EnderismNbt.CursedChorusBindManager.clearBinds(stack);
+    }
+
+    public void applyEatEffects(LivingEntity user) {
+        if (user instanceof PlayerEntity pe && pe.getAbilities().creativeMode) return;
+
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 100, 1), user);
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 100, 1), user);
     }
 
     private static Vec3d alterVectorForMagnetite(Vec3d vec) {

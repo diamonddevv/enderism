@@ -14,7 +14,7 @@ public class AerodynamicEnchantment extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 5;
     }
 
     @Override
@@ -25,5 +25,15 @@ public class AerodynamicEnchantment extends Enchantment {
     @Override
     public boolean isAvailableForRandomSelection() {
         return true;
+    }
+
+    @Override
+    public boolean isTreasure() {
+        return true;
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return false;
     }
 }

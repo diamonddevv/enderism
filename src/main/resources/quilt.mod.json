@@ -24,6 +24,7 @@
       "license": "CC-BY-NC-4.0",
       "icon": "assets/enderism/icon.png"
     },
+
     "intermediate_mappings": "net.fabricmc:intermediary",
 
     "depends": [

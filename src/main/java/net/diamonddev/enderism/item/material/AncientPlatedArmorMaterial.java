@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvent;
 public class AncientPlatedArmorMaterial implements ArmorMaterial {
     public static final AncientPlatedArmorMaterial INSTANCE = new AncientPlatedArmorMaterial();
 
-    private static final float FACTOR = 1.35f;
+    private static final float FACTOR = 1.3f;
 
     @Override
     public int getDurability(ArmorItem.ArmorSlot slot) {

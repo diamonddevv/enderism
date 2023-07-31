@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 public class UpthrustEnchantment extends Enchantment {
     public UpthrustEnchantment(EnchantmentTarget target) {
-        super(Rarity.RARE, target, new EquipmentSlot[]{EquipmentSlot.CHEST});
+        super(Rarity.VERY_RARE, target, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override

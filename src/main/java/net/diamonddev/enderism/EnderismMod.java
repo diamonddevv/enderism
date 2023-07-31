@@ -32,9 +32,8 @@ public class EnderismMod implements ModInitializer {
 		//
 
 		new InitConfig().register();
-
+		new InitEvents().register();
 		new InitPackets().register();
-
 		new InitBlocks().register();
 		new InitItems().register();
 		new InitEffects().register();
@@ -45,7 +44,6 @@ public class EnderismMod implements ModInitializer {
 		new InitResourceListener().register();
 		new InitDataModifiers().register();
 		new InitAdvancementCriteria().register();
-
 		new ItemGroupEditor().register();
 
 		//
@@ -108,6 +106,11 @@ public class EnderismMod implements ModInitializer {
 			ItemGroupEvents.modifyEntriesEvent(COMBAT).register(content -> {
 				content.addAfter(Items.NETHERITE_SWORD, InitItems.PIRPELL_NETHERITE_SWORD);
 				content.addAfter(Items.NETHERITE_AXE, InitItems.PIRPELL_NETHERITE_AXE);
+
+				content.addAfter(Items.NETHERITE_BOOTS, InitItems.ANCIENT_NETHERITE_HELMET);
+				content.addAfter(InitItems.ANCIENT_NETHERITE_HELMET, InitItems.ANCIENT_NETHERITE_CHESTPLATE);
+				content.addAfter(InitItems.ANCIENT_NETHERITE_CHESTPLATE, InitItems.ANCIENT_NETHERITE_LEGGINGS);
+				content.addAfter(InitItems.ANCIENT_NETHERITE_LEGGINGS, InitItems.ANCIENT_NETHERITE_BOOTS);
 
 				content.addAfter(Items.TURTLE_HELMET, InitItems.SHULKER_SHELLMET);
 

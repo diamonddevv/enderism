@@ -37,6 +37,16 @@ public class SendHudContextInfoPacket implements NerveS2CPacket<SendHudContextIn
     }
 
     public static class SHCIPacketData implements NervePacketData {
+
+        public SHCIPacketData() {
+            contextData = "";
+            this.isTranslated = false;
+        }
+        public SHCIPacketData(String data, boolean isTranslated) {
+            contextData = data;
+            this.isTranslated = isTranslated;
+        }
+
         public String contextData;
         public boolean isTranslated;
     }

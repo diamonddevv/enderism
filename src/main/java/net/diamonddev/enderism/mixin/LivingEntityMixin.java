@@ -1,5 +1,7 @@
 package net.diamonddev.enderism.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.item.ShulkerShellmetItem;
 import net.diamonddev.enderism.item.music.InstrumentItem;
@@ -122,15 +124,17 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("HEAD"))
     private void enderism$applyCharmEffect(DamageSource dmgsource, float amount, CallbackInfoReturnable<Float> cir) {
-        LivingEntity source = dmgsource.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) dmgsource.getSource();
+        if (dmgsource.getSource() instanceof LivingEntity || dmgsource.getSource() instanceof ProjectileEntity) {
+            LivingEntity source = dmgsource.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) dmgsource.getSource();
 
-        if (source != null) {
-            boolean b = true;
-            if (source instanceof PlayerEntity player) b = CharmItem.canUseAnyCharm(player);
-            if (b) {
-                LivingEntity thisLivEn = (LivingEntity) (Object) this;
-                applyCharmEffectForStackIfCan(source.getStackInHand(Hand.MAIN_HAND), thisLivEn, source);
-                applyCharmEffectForStackIfCan(source.getStackInHand(Hand.OFF_HAND), thisLivEn, source);
+            if (source != null) {
+                boolean b = true;
+                if (source instanceof PlayerEntity player) b = CharmItem.canUseAnyCharm(player);
+                if (b) {
+                    LivingEntity thisLivEn = (LivingEntity) (Object) this;
+                    applyCharmEffectForStackIfCan(source.getStackInHand(Hand.MAIN_HAND), thisLivEn, source);
+                    applyCharmEffectForStackIfCan(source.getStackInHand(Hand.OFF_HAND), thisLivEn, source);
+                }
             }
         }
     }
@@ -158,19 +162,28 @@ public abstract class LivingEntityMixin extends Entity {
         return instance.hasStatusEffect(effect);
     }
 
-    @Inject(method = "travel", at = @At("HEAD"))
-    private void enderism$aerodynamicNoDrag(Vec3d movementInput, CallbackInfo ci) {
+    @WrapOperation(
+            method = "travel",
+            at = @At(
+                    value = "INVOKE",
+                    target ="Lnet/minecraft/util/math/Vec3d;multiply(DDD)Lnet/minecraft/util/math/Vec3d;",
+                    ordinal = 2
+            )
+    )
+    private Vec3d enderism$aerodynamicSpeed(Vec3d instance, double x, double y, double z, Operation<Vec3d> original) {
         if (this.hasStackEquipped(EquipmentSlot.CHEST)) {
             if (InitEnchants.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
                 ItemStack stack = this.getEquippedStack(EquipmentSlot.CHEST);
                 if (ElytraItem.isUsable(stack)) {
                     if (this.isFallFlying()) {
-                        this.setNoDrag(EnchantHelper.hasEnchantment(InitEnchants.AERODYNAMIC, stack));
+                        int level = EnchantHelper.getEnchantmentLevel(stack, InitEnchants.AERODYNAMIC);
+                        double calc = (level * 0.00085) + 1;
+                        return original.call(instance, x, y, z).multiply(calc, 1, calc);
                     }
                 }
             }
         }
-        this.setNoDrag(false);
+        return original.call(instance, x, y, z);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

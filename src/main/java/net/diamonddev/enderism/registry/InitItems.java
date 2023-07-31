@@ -13,6 +13,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 import java.util.List;
@@ -54,7 +55,6 @@ public class InitItems implements RegistryInitializer {
     public static ArmorItem ANCIENT_NETHERITE_LEGGINGS = new ArmorItem(AncientPlatedArmorMaterial.INSTANCE, ArmorItem.ArmorSlot.LEGGINGS, new QuiltItemSettings().fireproof());
     public static ArmorItem ANCIENT_NETHERITE_BOOTS = new ArmorItem(AncientPlatedArmorMaterial.INSTANCE, ArmorItem.ArmorSlot.BOOTS, new QuiltItemSettings().fireproof());
 
-
     @Override
     public void register() {
         Registry.register(Registries.ITEM, EnderismMod.id("cursed_chorus_fruit"), CURSED_CHORUS);
@@ -91,7 +91,6 @@ public class InitItems implements RegistryInitializer {
         Registry.register(Registries.ITEM, EnderismMod.id("ancient_plated_netherite_chestplate"), ANCIENT_NETHERITE_CHESTPLATE);
         Registry.register(Registries.ITEM, EnderismMod.id("ancient_plated_netherite_leggings"), ANCIENT_NETHERITE_LEGGINGS);
         Registry.register(Registries.ITEM, EnderismMod.id("ancient_plated_netherite_boots"), ANCIENT_NETHERITE_BOOTS);
-
     }
 
     private static final class SmithingTemplateHelper {
