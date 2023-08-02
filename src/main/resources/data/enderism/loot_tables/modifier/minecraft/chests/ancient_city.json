@@ -18,6 +18,11 @@
               }
             }
           ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "enderism:ancient_plated_armor_upgrade_smithing_template",
+          "weight": 50
         }
       ]
     }

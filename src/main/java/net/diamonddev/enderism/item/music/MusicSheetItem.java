@@ -1,5 +1,6 @@
 package net.diamonddev.enderism.item.music;
 
+import net.diamonddev.enderism.client.EnderismClient;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.network.InitPackets;
 import net.diamonddev.enderism.network.SendHudContextInfoPacket;
@@ -36,8 +37,8 @@ public class MusicSheetItem extends Item {
 
             MusicSheetWrapper wrapper = null;
 
-            for (CognitionDataResource res : InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().CACHE.getOrCreateKey(InitResourceListener.MUSIC_TYPE)) {
-                MusicSheetBean musicSheet = MusicSheetResourceType.getAsSheet(res);
+            for (CognitionDataResource cdr : InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().getAllResources(InitResourceListener.MUSIC_TYPE)) {
+                MusicSheetBean musicSheet = MusicSheetResourceType.getAsSheet(cdr);
                 if (Objects.equals(id, musicSheet.id)) {
                     wrapper = new MusicSheetWrapper(musicSheet);
                     break;
@@ -77,8 +78,7 @@ public class MusicSheetItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
-            MusicSheetBean sheet = MusicSheetResourceType.getAsSheet(res);
+        EnderismClient.getAllAsT(InitResourceListener.MUSIC_TYPE, MusicSheetResourceType.REMAPPER).forEach(sheet -> {
             if (Objects.equals(EnderismNbt.MusicSheetSongManager.getStringifiedId(stack), sheet.id)) {
                 String key = sheet.descTranslationKey;
                 tooltip.add(Text.translatable(key).formatted(Formatting.GRAY));

@@ -1,13 +1,16 @@
 package net.diamonddev.enderism.item.music;
 
+import net.diamonddev.enderism.client.EnderismClient;
 import net.diamonddev.enderism.registry.InitAdvancementCriteria;
 import net.diamonddev.enderism.registry.InitResourceListener;
+import net.diamonddev.enderism.resource.EnderismMusicalInstrumentListener;
 import net.diamonddev.enderism.resource.type.MusicInstrumentResourceType;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
 import net.diamonddev.enderism.util.EnderismUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Instrument;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -34,50 +37,52 @@ public class InstrumentItem extends Item {
     private static final String INSTRUMENT_KEY = "tooltip.enderism.instrument.instrument";
     private static final String PITCHSHIFT_KEY = "tooltip.enderism.instrument.pitchshift";
 
-    @Nullable
-    private InstrumentWrapper instrumentWrapper = null;
-
+    @Nullable private InstrumentWrapper instrumentWrapper = null;
+    @Nullable private InstrumentWrapper instrumentWrapperClient = null;
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-
         ItemStack stackInHand = user.getStackInHand(hand);
         ItemStack other = user.getStackInHand(EnderismUtil.otherHand(hand));
 
-        if (stackInHand.getItem() instanceof InstrumentItem ii) {
-            if (ii.getInstrument() != null) {
+        if (!world.isClient) {
 
-                float pitch = ii.getInstrument().getPitchByItemId(Registries.ITEM.getId(stackInHand.getItem()));
+            if (stackInHand.getItem() instanceof InstrumentItem ii) {
+                if (ii.getInstrument() != null) {
 
-                if (other.getItem() instanceof MusicSheetItem sheet) {
-                    MusicSheetWrapper wrapper = MusicSheetItem.getWrapper(other);
-                    if (wrapper != null) {
-                        int coolTicks = EnderismUtil.test(Math.round(calculateNewLengthFromOldLengthAndPitch(wrapper.getCooldownTicks(), pitch)));
+                    float pitch = ii.getInstrument().getPitchByItemId(Registries.ITEM.getId(stackInHand.getItem()));
 
-                        boolean played = sheet.play(stackInHand, wrapper, getInstrument(), world, user, pitch, coolTicks);
-                        if (played) {
-                            createVibration(user);
+                    if (other.getItem() instanceof MusicSheetItem sheet) {
+                        MusicSheetWrapper wrapper = MusicSheetItem.getWrapper(other);
+                        if (wrapper != null) {
+                            int coolTicks = Math.round(calculateNewLengthFromOldLengthAndPitch(wrapper.getCooldownTicks(), pitch));
 
-                            if (user instanceof ServerPlayerEntity spe) {
-                                InitAdvancementCriteria.USE_INSTRUMENT.trigger(spe);
-                                InitAdvancementCriteria.USE_ALL_INSTRUMENTS.trigger(spe, ii);
+                            boolean played = sheet.play(stackInHand, wrapper, getInstrument(), world, user, pitch, coolTicks);
+                            if (played) {
+                                createVibration(user);
+
+                                if (user instanceof ServerPlayerEntity spe) {
+                                    InitAdvancementCriteria.USE_INSTRUMENT.trigger(spe);
+                                    InitAdvancementCriteria.USE_ALL_INSTRUMENTS.trigger(spe, ii);
+                                }
+
+                                if (!user.isCreative()) setCooldownForAllInstruments(user, coolTicks);
+                                return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
+                            } else {
+                                return new TypedActionResult<>(ActionResult.PASS, stackInHand);
                             }
-
-                            if (!user.isCreative()) setCooldownForAllInstruments(user, coolTicks);
-                            return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
-                        } else {
-                            return new TypedActionResult<>(ActionResult.PASS, stackInHand);
                         }
-                    }
 
-                    return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
-                } else {
-                    user.playSound(getDefaultSoundEvent(), SoundCategory.RECORDS, 10f, pitch);
-                    createVibration(user);
+                        return new TypedActionResult<>(ActionResult.SUCCESS, stackInHand);
+                    } else {
+                        user.playSound(getDefaultSoundEvent(), SoundCategory.RECORDS, 10f, pitch);
+                        createVibration(user);
+                    }
                 }
             }
-        }
 
+
+        }
         return new TypedActionResult<>(ActionResult.PASS, stackInHand);
     }
 
@@ -99,12 +104,11 @@ public class InstrumentItem extends Item {
     @Nullable
     public InstrumentWrapper getInstrument() {
         if (instrumentWrapper == null) {
-            ArrayList<InstrumentWrapper> wrappers = new ArrayList<>();
             Identifier thisId = Registries.ITEM.getId(this);
 
-            InitResourceListener.ENDERISM_INSTRUMENTS.getManager().forEachResource(InitResourceListener.INSTRUMENT_TYPE, (resource) -> {
-                wrappers.add(MusicInstrumentResourceType.wrap(resource));
-            });
+            List<InstrumentWrapper> wrappers =
+                    new ArrayList<>(InitResourceListener.ENDERISM_INSTRUMENTS.getManager().getAllResources(InitResourceListener.INSTRUMENT_TYPE).stream().map(MusicInstrumentResourceType::wrap).toList());
+
             wrappers.removeIf((wrapper) -> !wrapper.containsInstrumentItem(thisId));
 
             try {
@@ -114,20 +118,39 @@ public class InstrumentItem extends Item {
         return instrumentWrapper;
     }
 
+
+    @Nullable
+    public InstrumentWrapper getInstrumentClient() {
+        if (instrumentWrapperClient == null) {
+            Identifier thisId = Registries.ITEM.getId(this);
+
+            List<InstrumentWrapper> wrappers = EnderismClient.getAllAsT(InitResourceListener.INSTRUMENT_TYPE, EnderismMusicalInstrumentListener.REMAPPER);
+
+            wrappers.removeIf((wrapper) -> !wrapper.containsInstrumentItem(thisId));
+
+            try {
+                return wrappers.get(0); // just get the first
+            } catch (IndexOutOfBoundsException ignored) {} // if this is caught, then there isnt an instrument so we do nothing
+        }
+        return instrumentWrapperClient;
+    }
+
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (this.getInstrument() != null) {
-            float pitch = this.getInstrument().getPitchByItemId(Registries.ITEM.getId(stack.getItem()));
+        if (this.getInstrumentClient() != null) {
+            float pitch = this.getInstrumentClient().getPitchByItemId(Registries.ITEM.getId(stack.getItem()));
 
-            tooltip.add(EnderismUtil.compoundText(Text.translatable(INSTRUMENT_KEY).formatted(Formatting.AQUA), generateInstrumentText(getInstrument()).formatted(Formatting.GRAY)));
+            tooltip.add(EnderismUtil.compoundText(Text.translatable(INSTRUMENT_KEY).formatted(Formatting.AQUA), generateInstrumentText(getInstrumentClient()).formatted(Formatting.GRAY)));
             tooltip.add(EnderismUtil.compoundText(Text.translatable(PITCHSHIFT_KEY).formatted(Formatting.AQUA), getPercentageChangeText(pitch)));
 
             tooltip.add(Text.empty()); // blank line
 
             tooltip.add(Text.translatable(CAN_PLAY_KEY).formatted(Formatting.AQUA));
-            InitResourceListener.ENDERISM_MUSIC_SHEETS.getManager().forEachResource(InitResourceListener.MUSIC_TYPE, res -> {
-                MusicSheetWrapper sheet = new MusicSheetWrapper(MusicSheetResourceType.getAsSheet(res));
-                if (sheet.canBePlayedWithInstrument(getInstrument())) {
+
+            EnderismClient.getAllAsT(InitResourceListener.MUSIC_TYPE, MusicSheetResourceType.REMAPPER).forEach(bean -> {
+                MusicSheetWrapper sheet = new MusicSheetWrapper(bean);
+
+                if (sheet.canBePlayedWithInstrument(getInstrumentClient())) {
                     String key = sheet.bean.descTranslationKey;
                     tooltip.add(EnderismUtil.compoundText(Text.literal(" "), Text.translatable(key).formatted(Formatting.GRAY)));
                 }

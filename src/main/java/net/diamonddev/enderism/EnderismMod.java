@@ -44,6 +44,7 @@ public class EnderismMod implements ModInitializer {
 		new InitResourceListener().register();
 		new InitDataModifiers().register();
 		new InitAdvancementCriteria().register();
+		new InitCommands().register();
 		new ItemGroupEditor().register();
 
 		//

@@ -30,10 +30,10 @@ public class InitItems implements RegistryInitializer {
 
     public static MusicSheetItem MUSIC_SHEET = new MusicSheetItem(new QuiltItemSettings().maxCount(1));
 
-    public static CharmItem WANDERERS_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(75));
-    public static CharmItem ENDSTONE_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(25));
-    public static CharmItem PURPUR_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(38));
-    public static CharmItem OBSIDIAN_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(50));
+    public static CharmItem WANDERERS_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(75), 20 * 45);
+    public static CharmItem ENDSTONE_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(25), 20 * 15);
+    public static CharmItem PURPUR_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(38), 20 * 10);
+    public static CharmItem OBSIDIAN_CHARM = new CharmItem(new QuiltItemSettings().maxCount(1).maxDamage(50), 20 * 8);
 
     public static Item PIRPELL_FRAGMENT = new Item(new QuiltItemSettings());
     public static Item PIRPELL_INGOT = new Item(new QuiltItemSettings());

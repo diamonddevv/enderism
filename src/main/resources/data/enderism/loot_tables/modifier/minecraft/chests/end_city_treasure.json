@@ -18,6 +18,11 @@
           ],
           "name": "enderism:pirpell_fragment",
           "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "enderism:pirpell_plated_tool_upgrade_smithing_template",
+          "weight": 50
         }
       ]
     }

@@ -1,10 +1,12 @@
 package net.diamonddev.enderism.mixin;
 
+import net.diamonddev.enderism.client.EnderismClient;
 import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.registry.InitConfig;
 import net.diamonddev.enderism.registry.InitResourceListener;
 import net.diamonddev.enderism.resource.type.CharmRecipeResourceType;
+import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
 import net.diamonddev.enderism.util.EnderismUtil;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
@@ -14,6 +16,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,9 +37,15 @@ public class BrewingRecipeRegistryMixin {
                 }
             } else {
                 InitResourceListener.ENDERISM_CHARMS.getManager().forEachResource(InitResourceListener.CHARM_TYPE, res -> {
-                    Item item = EnderismUtil.registryGetOrElse(Registries.ITEM, res.getIdentifier(CharmRecipeResourceType.INGREDIENT), null);
+
+                });
+
+                EnderismClient.getAllAsT(InitResourceListener.CHARM_TYPE, (obj, gson) ->
+                        gson.fromJson(obj, CharmRecipeResourceType.CharmRecipeResourceBean.class)
+                ).forEach(bean -> {
+                    Item item = EnderismUtil.registryGetOrElse(Registries.ITEM, new Identifier(bean.ingredient), null);
                     if (item != null) {
-                        StatusEffectInstance sei = CharmRecipeResourceType.parseStatusEffectInstance(res.getObject(CharmRecipeResourceType.OUTEFFECT));
+                        StatusEffectInstance sei = CharmRecipeResourceType.parseStatusEffectInstance(bean.effect);
                         EnderismNbt.CharmEffectManager.set(input, sei);
                     }
                 });

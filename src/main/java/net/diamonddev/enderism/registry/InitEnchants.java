@@ -1,10 +1,7 @@
 package net.diamonddev.enderism.registry;
 
 import net.diamonddev.enderism.EnderismMod;
-import net.diamonddev.enderism.enchantment.AerodynamicEnchantment;
-import net.diamonddev.enderism.enchantment.ShacklingCurseEnchantment;
-import net.diamonddev.enderism.enchantment.UpthrustEnchantment;
-import net.diamonddev.enderism.enchantment.VelocityProtectionEnchantment;
+import net.diamonddev.enderism.enchantment.*;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.enchantment.Enchantment;
@@ -22,12 +19,18 @@ public class InitEnchants implements RegistryInitializer {
     public static Enchantment SHACKLING_CURSE = new ShacklingCurseEnchantment(ELYTRA);
     public static Enchantment VELOCITY_PROT = new VelocityProtectionEnchantment(ELYTRA);
 
+    public static Enchantment PEARLING = new PearlingEnchantment();
+    public static Enchantment CANNONING = new CannoningEnchantment();
+
     @Override
     public void register() {
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("aerodynamic"), AERODYNAMIC);
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("upthrust"), UPTHRUST);
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("shackling_curse"), SHACKLING_CURSE);
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("velocity_protection"), VELOCITY_PROT);
+
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("pearling"), PEARLING);
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("cannoning"), CANNONING);
     }
 
 

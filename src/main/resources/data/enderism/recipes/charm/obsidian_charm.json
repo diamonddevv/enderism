@@ -13,7 +13,7 @@
       "item": "minecraft:obsidian"
     },
     "*": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:diamond"
     }
   },
   "result": {

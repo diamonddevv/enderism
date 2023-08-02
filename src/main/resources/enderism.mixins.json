@@ -8,9 +8,12 @@
     "BrewingRecipeRegistryMixin",
     "BrewingStandBlockEntityMixin",
     "BrewingStandScreenHandlerPotionSlotMixin",
+    "CrossbowItemMixin",
     "ElytraItemMixin",
+    "EnderPearlItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
+    "PlayerManagerMixin",
     "ServerWorldMixin",
     "StatusEffectAccessor",
     "extension.ExtendableEnchantmentTarget"

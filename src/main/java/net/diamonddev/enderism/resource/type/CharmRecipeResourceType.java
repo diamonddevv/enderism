@@ -2,6 +2,7 @@ package net.diamonddev.enderism.resource.type;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.util.EnderismUtil;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionResourceType;
@@ -23,6 +24,13 @@ public class CharmRecipeResourceType implements CognitionResourceType {
         return new StatusEffectInstance(effect, duration, amplifier);
     }
 
+    public static class CharmRecipeResourceBean {
+        @SerializedName(INGREDIENT)
+        public String ingredient;
+
+        @SerializedName(OUTEFFECT)
+        public JsonElement effect;
+    }
 
     public static final String INGREDIENT = "ingredient";
     public static final String OUTEFFECT = "out_effect";

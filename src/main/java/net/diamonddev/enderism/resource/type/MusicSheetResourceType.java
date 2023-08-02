@@ -1,5 +1,7 @@
 package net.diamonddev.enderism.resource.type;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.item.music.MusicSheetBean;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataResource;
@@ -7,6 +9,7 @@ import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionRe
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
+import java.util.function.BiFunction;
 
 public class MusicSheetResourceType implements CognitionResourceType {
 
@@ -21,9 +24,12 @@ public class MusicSheetResourceType implements CognitionResourceType {
         return EnderismMod.id("music_sheet");
     }
 
+
     public static MusicSheetBean getAsSheet(CognitionDataResource resource) {
         return resource.getAsClass(MusicSheetBean.class);
     }
+
+    public static BiFunction<JsonObject, Gson, MusicSheetBean> REMAPPER = (obj, gson) -> gson.fromJson(obj, MusicSheetBean.class);
 
     @Override
     public void addJsonKeys(ArrayList<String> keys) {

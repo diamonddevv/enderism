@@ -31,8 +31,11 @@ import java.util.List;
 
 public class CharmItem extends Item {
 
-    public CharmItem(Settings settings) {
+    private final int cooldown;
+
+    public CharmItem(Settings settings, int cooldown) {
         super(settings);
+        this.cooldown = cooldown;
     }
 
     public static void addAllCharms(FabricItemGroupEntries content, CharmItem itemInstance) {
@@ -88,7 +91,7 @@ public class CharmItem extends Item {
             if (hasEffect(stack)) {
                 applyEffect(stack, user, user);
                 damageStack(stack, user);
-                setCooldownForAllCharms(user, 20 * 15);
+                setCooldownForAllCharms(user, this.cooldown);
 
                 if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.USE_CHARM.trigger(spe);
 

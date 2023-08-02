@@ -22,11 +22,16 @@ public class MusicInstrumentResourceType implements CognitionResourceType {
     public static final String // instrument id bean
             MODIFIER_ID = "item", MODIFIER_PITCH = "pitch";
 
+
     public static InstrumentWrapper wrap(CognitionDataResource resource) {
         var serialized = resource.getAsClass(InstrumentBean.class);
-        String[] split = resource.getId().getPath().split("/");
-        serialized.nonSerializedIdentifier = split[split.length-1].split("\\.")[0]; // this will isolate the filename without the extension
+        serialized.nonSerializedIdentifier = getNSI(resource.getId());
         return new InstrumentWrapper(serialized);
+    }
+
+    public static String getNSI(Identifier id) {
+        String[] split = id.getPath().split("/");
+        return split[split.length-1].split("\\.")[0]; // this will isolate the filename without the extension
     }
 
     @Override

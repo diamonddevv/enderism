@@ -1,9 +1,21 @@
 package net.diamonddev.enderism.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import net.diamonddev.enderism.EnderismMod;
+import net.diamonddev.enderism.item.music.InstrumentBean;
+import net.diamonddev.enderism.item.music.InstrumentWrapper;
+import net.diamonddev.enderism.network.SendJsonObject;
+import net.diamonddev.enderism.registry.InitEvents;
+import net.diamonddev.enderism.registry.InitResourceListener;
+import net.diamonddev.enderism.resource.type.MusicInstrumentResourceType;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataListener;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataResource;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionResourceManager;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class EnderismMusicalInstrumentListener extends CognitionDataListener {
     public EnderismMusicalInstrumentListener() {
@@ -16,9 +28,22 @@ public class EnderismMusicalInstrumentListener extends CognitionDataListener {
 
     }
 
+    private static final String TRANSIENT_ID_FIELD = "transientId";
+    public static final BiFunction<JsonObject, Gson, InstrumentWrapper> REMAPPER = (obj, gson) -> {
+        InstrumentBean bean = gson.fromJson(obj, InstrumentBean.class); // new epic client based remapping
+        bean.nonSerializedIdentifier = obj.get("transientId").getAsString(); // we need to re-add the transient field because it's transient
+        return new InstrumentWrapper(bean);
+    };
+
     @Override
     public void onFinishReload() {
-
+        List<JsonObject> arr = this.getManager().CACHE.getOrCreateKey(InitResourceListener.INSTRUMENT_TYPE).stream().map(cdr -> {
+            JsonObject json = cdr.getAsClass(JsonObject.class);
+            json.addProperty("transientId", MusicInstrumentResourceType.getNSI(cdr.getId())); // we need to add the transient id because it is transient
+            return json;
+        }).toList();
+        arr.forEach(json -> json.addProperty(CognitionResourceManager.IDPARAM, InitResourceListener.INSTRUMENT_TYPE.getId().toString()));
+        InitEvents.dataSetBeans.add(new SendJsonObject.DataSetBean(arr));
     }
 
     @Override
