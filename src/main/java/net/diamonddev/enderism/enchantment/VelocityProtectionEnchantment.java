@@ -6,8 +6,10 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 
 public class VelocityProtectionEnchantment extends Enchantment {
     public VelocityProtectionEnchantment(EnchantmentTarget type) {
@@ -26,7 +28,7 @@ public class VelocityProtectionEnchantment extends Enchantment {
 
     @Override
     public int getProtectionAmount(int level, DamageSource source) {
-        return source == source.getSource().getDamageSources().flyIntoWall() ? level * 35 : 0;
+        return source.isType(DamageTypes.FLY_INTO_WALL) ? level * 35 : 0;
     }
 
     @Override

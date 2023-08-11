@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class InitDataModifiers implements RegistryInitializer {
 
@@ -93,10 +94,15 @@ public class InitDataModifiers implements RegistryInitializer {
 
         public static ItemStack createConfiguredRandomisedCharm(CharmItem instance, RandomGenerator random, InitConfig.EnderismConfig config) {
 
-            List<Identifier> mappedBlacklist = config.charmConfig.wanderersCharmTradeConfig.disallowedEffects.stream().map((Identifier::new)).toList();
+            List<Identifier> mappedList = config.charmConfig.wanderersCharmTradeConfig.disallowedEffects.stream().map((Identifier::new)).toList();
+            Predicate<StatusEffect> predicate = effect -> {
+              if (config.charmConfig.wanderersCharmTradeConfig.whitelist) {
+                  return !mappedList.contains(Registries.STATUS_EFFECT.getId(effect));
+              } else return mappedList.contains(Registries.STATUS_EFFECT.getId(effect));
+            };
 
             StatusEffect effect = null;
-            while (effect == null || mappedBlacklist.contains(Registries.STATUS_EFFECT.getId(effect))) {
+            while (effect == null || predicate.test(effect)) {
                 effect = Registries.STATUS_EFFECT.getOrThrow(random.nextInt(Registries.STATUS_EFFECT.size()-1) + 1);
             }
 

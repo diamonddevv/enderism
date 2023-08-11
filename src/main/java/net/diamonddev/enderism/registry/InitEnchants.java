@@ -22,6 +22,8 @@ public class InitEnchants implements RegistryInitializer {
     public static Enchantment PEARLING = new PearlingEnchantment();
     public static Enchantment CANNONING = new CannoningEnchantment();
 
+    public static Enchantment QUICK_STRIKE = new QuickStrikeEnchantment();
+
     @Override
     public void register() {
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("aerodynamic"), AERODYNAMIC);
@@ -31,6 +33,8 @@ public class InitEnchants implements RegistryInitializer {
 
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("pearling"), PEARLING);
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("cannoning"), CANNONING);
+
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("quick_strike"), QUICK_STRIKE);
     }
 
 

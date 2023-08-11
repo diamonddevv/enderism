@@ -87,10 +87,10 @@ public abstract class CrossbowItemMixin {
 
                 if (EnchantHelper.hasEnchantment(InitEnchants.PEARLING, crossbow)) {
                     newEntity = new EnderPearlEntity(world, shooter);
-                    velocityModifier = new Vec3d(1.15, 1.15, 1.15);
+                    velocityModifier = new Vec3d(1.1, 1.1, 1.1);
                 } else {
                     newEntity = new TntEntity(world, entity.getX(), entity.getY(), entity.getZ(), shooter);
-                    velocityModifier = new Vec3d(.25, .25, .25);
+                    velocityModifier = new Vec3d(.3, .3, .3);
                 }
 
                 newEntity.setVelocity(entity.getVelocity().multiply(velocityModifier));

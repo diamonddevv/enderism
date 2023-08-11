@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.loader.api.QuiltLoader;
 import org.quiltmc.loader.api.Version;
 import org.quiltmc.loader.impl.QuiltLoaderImpl;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
@@ -124,7 +125,7 @@ public class EnderismMod implements ModInitializer {
 	}
 
 	public static String buildVersionString(String modid) {
-		Version.Semantic semantic = QuiltLoaderImpl.INSTANCE.getModContainer(modid).orElseThrow().metadata().version().semantic();
+		Version.Semantic semantic = QuiltLoader.getModContainer(modid).orElseThrow().metadata().version().semantic();
 		return String.format("%s.%s.%s", semantic.major(), semantic.minor(), semantic.patch());
 	}
 }

@@ -21,7 +21,6 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
     public static FibrousChorusBlock FIBROUS_CHORUS = new FibrousChorusBlock(1.5f, 5f, blankSettings().strength(2.0f, 2.0f));
 
 
-//    public static ChorusFruitPieBlock CHORUS_FRUIT_PIE = new ChorusFruitPieBlock(new FoodComponent.Builder().hunger(2).saturationModifier(0.3f).build(), 6, FabricBlockSettings.of(Material.CAKE));
     @Override
     public void register() {
         registerBlockAndItem(CHORUS_MAGNETITE, EnderismMod.id("chorus_magnetite"), new QuiltItemSettings());
@@ -29,8 +28,6 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
         registerBlockAndItem(PIRPELL_BLOCK, EnderismMod.id("pirpell_block"), new QuiltItemSettings());
         registerBlockAndItem(PATTERNED_PIRPELL, EnderismMod.id("patterned_pirpell"), new QuiltItemSettings());
 
-
-//        registerBlockAndItem(CHORUS_FRUIT_PIE, EnderismMod.id("chorus_fruit_pie"), new FabricItemSettings());
     }
 
 

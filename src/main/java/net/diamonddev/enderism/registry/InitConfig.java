@@ -41,7 +41,7 @@ public class InitConfig implements RegistryInitializer {
             public boolean charmCraftsUsePotions = true;
 
             @SerializedName("creativeHasAllRegisteredEffectCharms")
-            public boolean creativeHasAllCharms = false;
+            public boolean creativeHasAllCharms = true;
 
             @SerializedName("wanderersCharmTrades")
             public WanderersCharmTradeConfig wanderersCharmTradeConfig = new WanderersCharmTradeConfig();
@@ -49,7 +49,8 @@ public class InitConfig implements RegistryInitializer {
             public static class WanderersCharmTradeConfig {
                 @SerializedName("maxPotency") public int maxPotency = 4;
                 @SerializedName("maxDurationSeconds") public int maxDurSecs = 90;
-                @SerializedName("disallowedEffectIds") public ArrayList<String> disallowedEffects = new ArrayList<>();
+                @SerializedName("effectIds") public ArrayList<String> disallowedEffects = new ArrayList<>();
+                @SerializedName("effectIdsIsWhitelist") public boolean whitelist = false;
             }
         }
     }
