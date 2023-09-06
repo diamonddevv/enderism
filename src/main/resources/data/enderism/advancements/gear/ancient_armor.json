@@ -1,0 +1,57 @@
+{
+    "display": {
+        "icon": {
+            "item": "enderism:ancient_plated_netherite_chestplate",
+            "nbt": "{Damage:0}"
+        },
+        "title": {
+            "translate": "advancement.enderism.ancient_armor.title"
+        },
+        "description": {
+            "translate": "advancement.enderism.ancient_armor.desc"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:nether/netherite_armor",
+    "criteria": {
+        "armor": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderism:ancient_plated_netherite_helmet"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "enderism:ancient_plated_netherite_chestplate"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "enderism:ancient_plated_netherite_leggings"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "enderism:ancient_plated_netherite_boots"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "armor"
+        ]
+    ],
+    "rewards": {
+        "experience": 100
+    },
+    "sends_telemetry_event": true
+}

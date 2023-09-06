@@ -1,0 +1,33 @@
+{
+    "display": {
+        "icon": {
+            "item": "enderism:pirpell_ingot"
+        },
+        "title": {
+            "translate": "advancement.enderism.pirpell.title"
+        },
+        "description": {
+            "translate": "advancement.enderism.pirpell.desc"
+        }
+    },
+    "parent": "minecraft:end/find_end_city",
+    "criteria": {
+        "pirpell": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderism:pirpell_ingot"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "pirpell"
+        ]
+    ]
+}

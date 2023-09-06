@@ -1,6 +1,7 @@
 package net.diamonddev.enderism.item;
 
 import net.diamonddev.enderism.nbt.EnderismNbt;
+import net.diamonddev.enderism.registry.InitAdvancementCriteria;
 import net.diamonddev.enderism.registry.InitBlocks;
 import net.diamonddev.enderism.registry.InitSoundEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -15,6 +16,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
@@ -162,10 +164,9 @@ public class CursedChorusItem extends Item {
 
             return text;
 
-        } else if (!EnderismNbt.CursedChorusBindManager.isBound(stack)) {
+        } else {
             return Text.translatable("item.enderism.cursed_chorus_fruit.unbound");
         }
-        return getFailedTooltip();
     }
 
     private static MutableText getFailedTooltip() {
@@ -183,6 +184,7 @@ public class CursedChorusItem extends Item {
         user.teleport(coords.x, coords.y, coords.z, true);
         world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
         EnderismNbt.CursedChorusBindManager.clearBinds(stack);
+        if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.EAT_BOUND_CURSED_CHORUS.trigger(spe);
     }
 
     public void applyEatEffects(LivingEntity user) {

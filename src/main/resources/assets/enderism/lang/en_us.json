@@ -112,6 +112,16 @@
   "advancement.enderism.charming.desc": "Use any Charm",
   "advancement.enderism.unfinished_symphony.title": "Unfinished Symphony",
   "advancement.enderism.unfinished_symphony.desc": "Play a music sheet on any instrument",
-  "advancement.enderism.maestro.title": "Maestro",
-  "advancement.enderism.maestro.desc": "Play a music sheet on every Instrument"
+          "advancement.enderism.maestro.title": "Maestro",
+          "advancement.enderism.maestro.desc": "Play a music sheet on every Instrument",
+  "advancement.enderism.pirpell.title": "Pirpell Hearts",
+  "advancement.enderism.pirpell.desc": "Craft a Pirpell Ingot from Pirpell Fragments and Ancient Scraps",
+  "advancement.enderism.ancient_scrap.title": "Outdated Material",
+  "advancement.enderism.ancient_scrap.desc": "Find Ancient Scraps in an Ancient City",
+  "advancement.enderism.ancient_armor.title": "Wearing History",
+  "advancement.enderism.ancient_armor.desc": "Plate Netherite armor with Ancient Scraps",
+  "advancement.enderism.pirpell_hoe.title": "Why would you even do that?!",
+  "advancement.enderism.pirpell_hoe.desc": "Prove your agricultural commitment and upgrade your hoe, again",
+  "advancement.enderism.cursed_chorus.title": "Bounce-back",
+  "advancement.enderism.cursed_chorus.desc": "Eat a Cursed Chorus Fruit and teleport back somewhere"
 }

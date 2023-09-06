@@ -1,0 +1,33 @@
+{
+    "display": {
+        "icon": {
+            "item": "enderism:ancient_scrap"
+        },
+        "title": {
+            "translate": "advancement.enderism.ancient_scrap.title"
+        },
+        "description": {
+            "translate": "advancement.enderism.ancient_scrap.desc"
+        }
+    },
+    "parent": "minecraft:adventure/avoid_vibration",
+    "criteria": {
+        "scrap": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderism:ancient_scrap"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "scrap"
+        ]
+    ]
+}

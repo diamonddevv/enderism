@@ -1,0 +1,21 @@
+{
+    "display": {
+        "icon": {
+            "item": "enderism:cursed_chorus_fruit"
+        },
+        "title": {
+            "translate": "advancement.enderism.cursed_chorus.title"
+        },
+        "description": {
+            "translate": "advancement.enderism.cursed_chorus.desc"
+        }
+    },
+
+    "parent": "minecraft:end/enter_end_gateway",
+
+    "criteria": {
+        "requirement": {
+            "trigger": "enderism:eat_bound_cursed_chorus"
+        }
+    }
+}
