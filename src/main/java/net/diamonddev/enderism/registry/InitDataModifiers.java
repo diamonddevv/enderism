@@ -1,14 +1,9 @@
 package net.diamonddev.enderism.registry;
 
-import net.diamonddev.enderism.client.EnderismClient;
 import net.diamonddev.enderism.item.CharmItem;
-import net.diamonddev.enderism.item.music.MusicSheetBean;
-import net.diamonddev.enderism.item.music.MusicSheetWrapper;
 import net.diamonddev.enderism.modifier.LootTableModifier;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
-import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionRegistry;
-import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionResourceManager;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.entity.Entity;

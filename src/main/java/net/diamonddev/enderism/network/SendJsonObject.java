@@ -48,7 +48,6 @@ public class SendJsonObject implements NerveS2CPacket<SendJsonObject, SendJsonOb
 
                 count.addAndGet(1);
             });
-
             EnderismMod.logger.info("Received {} JsonObjects in a packet of size {} kb.", count.get(), ((float)size.get())/1000f);
         });
     }

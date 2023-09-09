@@ -4,29 +4,41 @@ import net.diamonddev.enderism.client.EnderismClient;
 import net.diamonddev.enderism.nbt.EnderismNbt;
 import net.diamonddev.enderism.network.InitPackets;
 import net.diamonddev.enderism.network.SendHudContextInfoPacket;
+import net.diamonddev.enderism.registry.InitItems;
 import net.diamonddev.enderism.registry.InitResourceListener;
 import net.diamonddev.enderism.resource.type.MusicSheetResourceType;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionDataResource;
+import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.CognitionRegistry;
 import net.diamonddev.libgenetics.common.api.v1.network.nerve.NerveNetworker;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class MusicSheetItem extends Item {
     public MusicSheetItem(Settings settings) {
         super(settings);
+    }
+
+    public static ArrayList<ItemStack> getAllMusicSheets(List<MusicSheetBean> sheets, MusicSheetItem item) {
+        ArrayList<ItemStack> list = new ArrayList<>();
+        for (var sheet : sheets) {
+            ItemStack stack = new ItemStack(item);
+            EnderismNbt.MusicSheetSongManager.setStringifiedId(stack, sheet.id);
+            list.add(stack);
+        }
+
+        return list;
     }
 
 

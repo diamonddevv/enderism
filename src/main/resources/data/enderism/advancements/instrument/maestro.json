@@ -1,8 +1,14 @@
 {
-  "parent": "enderism:unfinished_symphony",
+  "parent": "enderism:instrument/unfinished_symphony",
   "requirements": [
     [
-      "use_all_instruments"
+      "purpur_flute"
+    ],
+    [
+      "chorus_cello"
+    ],
+    [
+      "vibratotamatone"
     ]
   ],
   "display": {
@@ -22,8 +28,23 @@
   },
 
   "criteria": {
-    "use_all_instruments": {
-      "trigger": "enderism:use_all_instruments"
+    "purpur_flute": {
+      "trigger": "enderism:use_instrument",
+      "conditions": {
+        "item_id": "enderism:purpur_flute"
+      }
+    },
+    "chorus_cello": {
+      "trigger": "enderism:use_instrument",
+      "conditions": {
+        "item_id": "enderism:chorus_cello"
+      }
+    },
+    "vibratotamatone": {
+      "trigger": "enderism:use_instrument",
+      "conditions": {
+        "item_id": "enderism:vibratotamatone"
+      }
     }
   }
 }

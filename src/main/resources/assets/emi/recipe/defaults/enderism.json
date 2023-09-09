@@ -1,0 +1,24 @@
+{
+    "added": [
+        "enderism:charm/purpur_charm",
+        "enderism:smithing/ancient_plating/leggings",
+        "enderism:smithing/pirpell_plating/shovel",
+        "enderism:smithing/ancient_plating/boots",
+        "enderism:instrument/vibratotamatone",
+        "enderism:smithing/pirpell_plating/sword",
+        "enderism:utility/cursed_chorus",
+        "enderism:utility/fibrous_chorus",
+        "enderism:gear/shulker_shellmet",
+        "enderism:utility/chorus_magnetite",
+        "enderism:smithing/ancient_plating/helmet",
+        "enderism:material/pirpell_ingot_alloy",
+        "enderism:decoration/patterned_pirpell",
+        "enderism:smithing/pirpell_plating/axe",
+        "enderism:smithing/ancient_plating/chestplate",
+        "enderism:charm/end_stone_charm",
+        "enderism:smithing/pirpell_plating/pickaxe",
+        "enderism:smithing/pirpell_plating/hoe",
+        "enderism:charm/obsidian_charm",
+        "enderism:conversions/pirpell_to_block"
+    ]
+}

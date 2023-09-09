@@ -62,8 +62,7 @@ public class InstrumentItem extends Item {
                                 createVibration(user);
 
                                 if (user instanceof ServerPlayerEntity spe) {
-                                    InitAdvancementCriteria.USE_INSTRUMENT.trigger(spe);
-                                    InitAdvancementCriteria.USE_ALL_INSTRUMENTS.trigger(spe, ii);
+                                    InitAdvancementCriteria.USE_INSTRUMENT.trigger(spe, stackInHand);
                                 }
 
                                 if (!user.isCreative()) setCooldownForAllInstruments(user, coolTicks);
