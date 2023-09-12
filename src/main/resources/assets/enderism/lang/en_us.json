@@ -62,7 +62,7 @@
   "block.enderism.chorus_fruit_pie": "Chorus Fruit Pie",
 
   "item.enderism.music_sheet": "Music Sheet",
-  "item.enderism.instrument": "Instrument (use this as a holder for a custom instrument!)",
+  "item.enderism.instrument": "Instrument",
   "item.enderism.purpur_flute": "Purpur Flute",
   "item.enderism.chorus_cello": "Chorus Cello",
   "item.enderism.vibratotamatone": "Vibratotamatone",
@@ -86,6 +86,9 @@
   "name.song.enderism.megalovania": "Song of Willpower",
   "name.song.enderism.rushe": "Song of Speed",
   "name.song.enderism.polcow": "Piosenka Krowy",
+  "name.song.enderism.rick": "Melody of Eternal Bond",
+  "name.song.enderism.xfiles": "Conspiracy Theorist's Theme",
+  "name.song.enderism.shark": "Shark Pup",
 
   "name.instrument.enderism.cello": "Cello",
   "name.instrument.enderism.flute": "Flute",

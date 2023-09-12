@@ -16,6 +16,7 @@ public class MusicInstrumentResourceType implements CognitionResourceType {
     }
 
     public static final String
+            ADDITIVE = "add_to",
             DEFAULT_SOUND = "default_sound",
             ITEMS = "instrument_items";
 

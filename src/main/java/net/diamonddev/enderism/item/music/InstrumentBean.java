@@ -11,6 +11,9 @@ public class InstrumentBean {
 
    public transient String nonSerializedIdentifier; // transient fields get ignored by gson, so we need to manually fill that
 
+    @SerializedName(ADDITIVE)
+    public String addTo = null;
+
     @SerializedName(DEFAULT_SOUND)
     public String defaultSoundId;
 
