@@ -62,6 +62,7 @@
   "block.enderism.chorus_fruit_pie": "Chorus Fruit Pie",
 
   "item.enderism.music_sheet": "Music Sheet",
+  "item.enderism.instrument": "Instrument (use this as a holder for a custom instrument!)",
   "item.enderism.purpur_flute": "Purpur Flute",
   "item.enderism.chorus_cello": "Chorus Cello",
   "item.enderism.vibratotamatone": "Vibratotamatone",
@@ -112,8 +113,8 @@
   "advancement.enderism.charming.desc": "Use any Charm",
   "advancement.enderism.unfinished_symphony.title": "Unfinished Symphony",
   "advancement.enderism.unfinished_symphony.desc": "Play a music sheet on any instrument",
-          "advancement.enderism.maestro.title": "Maestro",
-          "advancement.enderism.maestro.desc": "Play a music sheet on every Instrument",
+  "advancement.enderism.maestro.title": "Maestro",
+  "advancement.enderism.maestro.desc": "Play a music sheet on every Instrument",
   "advancement.enderism.pirpell.title": "Pirpell Hearts",
   "advancement.enderism.pirpell.desc": "Craft a Pirpell Ingot from Pirpell Fragments and Ancient Scraps",
   "advancement.enderism.ancient_scrap.title": "Outdated Material",
@@ -123,5 +124,7 @@
   "advancement.enderism.pirpell_hoe.title": "Why would you even do that?!",
   "advancement.enderism.pirpell_hoe.desc": "Prove your agricultural commitment and upgrade your hoe, again",
   "advancement.enderism.cursed_chorus.title": "Bounce-back",
-  "advancement.enderism.cursed_chorus.desc": "Eat a Cursed Chorus Fruit and teleport back somewhere"
+  "advancement.enderism.cursed_chorus.desc": "Eat a Cursed Chorus Fruit and teleport back somewhere",
+  "advancement.enderism.sculk_spine.title": "Thanks, I'll be having that now",
+  "advancement.enderism.sculk_spine.desc": "Obtain a Sculk Spine"
 }

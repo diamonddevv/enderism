@@ -1,5 +1,6 @@
 package net.diamonddev.enderism;
 
+import net.diamonddev.enderism.impl.GeneralModCompat;
 import net.diamonddev.enderism.item.CharmItem;
 import net.diamonddev.enderism.item.CursedChorusItem;
 import net.diamonddev.enderism.network.InitPackets;
@@ -48,6 +49,7 @@ public class EnderismMod implements ModInitializer {
 		new InitCommands().register();
 		new ItemGroupEditor().register();
 
+		GeneralModCompat.checkInstalls();
 		//
 		double time = System.currentTimeMillis() - startTime;
 		// Finish Registration

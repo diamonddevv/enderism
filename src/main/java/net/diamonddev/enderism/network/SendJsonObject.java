@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.diamonddev.enderism.EnderismMod;
 import net.diamonddev.enderism.client.EnderismClient;
+import net.diamonddev.enderism.impl.GeneralModCompat;
 import net.diamonddev.libgenetics.common.api.v1.dataloader.cognition.*;
 import net.diamonddev.libgenetics.common.api.v1.network.nerve.NerveNetworker;
 import net.diamonddev.libgenetics.common.api.v1.network.nerve.NerveS2CPacket;
@@ -67,7 +68,7 @@ public class SendJsonObject implements NerveS2CPacket<SendJsonObject, SendJsonOb
 
     // Delegates
 
-    private static final long MAX_SIZE = (long) 2e+6; // 2mb
+    private static final long MAX_SIZE = GeneralModCompat.hasXXLPackets ? (long)2e+9 : (long) 2e+6; // 2mb, or 2gb with XXL Packets
     private static final int INT_BYTES = 4;
 
     public static void delegatedSend(ServerPlayerEntity spe, DataSetBean... dataSetBeans) {

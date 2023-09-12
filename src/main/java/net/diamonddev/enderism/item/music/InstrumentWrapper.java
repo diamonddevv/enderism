@@ -27,14 +27,14 @@ public class InstrumentWrapper {
 
     public float getPitchByItemId(Identifier itemId) {
         for (var bean : bean.instrumentItemIds) {
-            if (bean.stringifiedId.equals(itemId.toString())) return bean.pitch;
+            if (bean.item.stringifiedId.equals(itemId.toString())) return bean.pitch;
         }
         return 1f;
     }
 
     private static ArrayList<Identifier> instrumentIdModifierBeansToIdsAdapter(ArrayList<InstrumentBean.InstrumentItemModifierBean> beans) {
         ArrayList<Identifier> identifiers = new ArrayList<>();
-        for (var bean : beans) identifiers.add(new Identifier(bean.stringifiedId));
+        for (var bean : beans) identifiers.add(new Identifier(bean.item.stringifiedId));
         return identifiers;
     }
 }

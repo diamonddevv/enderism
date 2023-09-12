@@ -58,6 +58,8 @@ public class CursedChorusItem extends Item {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) { // todo: interdimensional travel
 
+        if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.EAT_BOUND_CURSED_CHORUS.trigger(spe);
+
         if (EnderismNbt.CursedChorusBindManager.isPlayerbound(stack)) { // Player Bind
             if (!world.isClient()) {
                 if (EnderismNbt.CursedChorusBindManager.getBoundPlayer(stack, world) != null) {
@@ -95,7 +97,7 @@ public class CursedChorusItem extends Item {
         }
 
         applyEatEffects(user);
-        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
+        if (!(user instanceof PlayerEntity p && p.getAbilities().creativeMode)) EnderismNbt.CursedChorusBindManager.clearBinds(stack);
 
         return super.finishUsing(stack, world, user);
     }
@@ -176,15 +178,12 @@ public class CursedChorusItem extends Item {
     private void failTeleport(LivingEntity user, World world, ItemStack stack) {
         user.damage(user.getDamageSources().magic(), 6f);
         world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH, SoundCategory.PLAYERS, 1f, 0.1f);
-        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
     }
 
     private void teleport(LivingEntity user, World world, ItemStack stack, Vec3d coords) {
         world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 2f);
         user.teleport(coords.x, coords.y, coords.z, true);
         world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1f, 0.1f);
-        EnderismNbt.CursedChorusBindManager.clearBinds(stack);
-        if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.EAT_BOUND_CURSED_CHORUS.trigger(spe);
     }
 
     public void applyEatEffects(LivingEntity user) {

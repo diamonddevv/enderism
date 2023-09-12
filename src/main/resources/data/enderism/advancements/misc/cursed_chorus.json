@@ -15,7 +15,12 @@
 
     "criteria": {
         "requirement": {
-            "trigger": "enderism:eat_bound_cursed_chorus"
+            "trigger": "enderism:eat_cursed_chorus",
+            "conditions": {
+                "bind": {
+                    "is_bound": true
+                }
+            }
         }
     }
 }

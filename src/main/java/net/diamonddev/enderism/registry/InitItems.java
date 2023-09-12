@@ -24,6 +24,7 @@ public class InitItems implements RegistryInitializer {
 
     public static ShulkerShellmetItem SHULKER_SHELLMET = new ShulkerShellmetItem();
 
+    public static InstrumentItem INSTRUMENT = new InstrumentItem(new QuiltItemSettings());
     public static InstrumentItem PURPUR_FLUTE = new InstrumentItem(new QuiltItemSettings());
     public static InstrumentItem CHORUS_CELLO = new InstrumentItem(new QuiltItemSettings());
     public static InstrumentItem VIBRATOTAMATONE = new InstrumentItem(new QuiltItemSettings());
@@ -61,6 +62,7 @@ public class InitItems implements RegistryInitializer {
 
         Registry.register(Registries.ITEM, EnderismMod.id("shulker_shellmet"), SHULKER_SHELLMET);
 
+        Registry.register(Registries.ITEM, EnderismMod.id("instrument"), INSTRUMENT);
         Registry.register(Registries.ITEM, EnderismMod.id("purpur_flute"), PURPUR_FLUTE);
         Registry.register(Registries.ITEM, EnderismMod.id("chorus_cello"), CHORUS_CELLO);
         Registry.register(Registries.ITEM, EnderismMod.id("vibratotamatone"), VIBRATOTAMATONE);
@@ -110,11 +112,11 @@ public class InitItems implements RegistryInitializer {
         );
 
         private static final List<Identifier> PIRPELL_ADDITION_ICONS = List.of(
-                EnderismMod.id("icons/empty_slot_pirpell.png")
+                EnderismMod.id("icons/empty_slot_pirpell")
         );
 
         private static final List<Identifier> ANCIENT_SCRAP_ADDITION_ICONS = List.of(
-                EnderismMod.id("icons/empty_slot_ancient_scrap.png")
+                EnderismMod.id("icons/empty_slot_ancient_scrap")
         );
 
 

@@ -1,6 +1,7 @@
 package net.diamonddev.enderism.item.music;
 
 import com.google.gson.annotations.SerializedName;
+import net.minecraft.nbt.NbtCompound;
 
 import java.util.ArrayList;
 
@@ -18,10 +19,18 @@ public class InstrumentBean {
 
 
     public static class InstrumentItemModifierBean {
-        @SerializedName(MODIFIER_ID)
-        public String stringifiedId;
+        @SerializedName(ITEM)
+        public ItemBean item;
 
         @SerializedName(MODIFIER_PITCH)
         public float pitch = 1.0f;
+    }
+
+    public static class ItemBean {
+        @SerializedName(MODIFIER_ID)
+        public String stringifiedId;
+
+        @SerializedName(NBT)
+        public String nbtString = null;
     }
 }

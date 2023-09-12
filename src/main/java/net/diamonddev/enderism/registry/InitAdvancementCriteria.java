@@ -1,6 +1,6 @@
 package net.diamonddev.enderism.registry;
 
-import net.diamonddev.enderism.advancement.EatBoundCursedChorusAdvancementCriterion;
+import net.diamonddev.enderism.advancement.EatCursedChorusAdvancementCriterion;
 import net.diamonddev.enderism.advancement.UseCharmAdvancementCriterion;
 import net.diamonddev.enderism.advancement.UseInstrumentAdvancementCriterion;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
@@ -10,7 +10,7 @@ public class InitAdvancementCriteria implements RegistryInitializer {
 
     public static final UseCharmAdvancementCriterion USE_CHARM = new UseCharmAdvancementCriterion();
     public static final UseInstrumentAdvancementCriterion USE_INSTRUMENT = new UseInstrumentAdvancementCriterion();
-    public static final EatBoundCursedChorusAdvancementCriterion EAT_BOUND_CURSED_CHORUS = new EatBoundCursedChorusAdvancementCriterion();
+    public static final EatCursedChorusAdvancementCriterion EAT_BOUND_CURSED_CHORUS = new EatCursedChorusAdvancementCriterion();
 
     @Override
     public void register() {

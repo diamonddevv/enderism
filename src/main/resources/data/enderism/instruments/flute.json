@@ -4,7 +4,9 @@
   "default_sound": "minecraft:block.note_block.flute",
   "instrument_items": [
     {
-      "item": "enderism:purpur_flute"
+      "item": {
+        "id": "enderism:purpur_flute"
+      }
     }
   ]
 }

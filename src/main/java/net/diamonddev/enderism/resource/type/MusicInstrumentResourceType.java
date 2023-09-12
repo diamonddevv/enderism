@@ -20,7 +20,7 @@ public class MusicInstrumentResourceType implements CognitionResourceType {
             ITEMS = "instrument_items";
 
     public static final String // instrument id bean
-            MODIFIER_ID = "item", MODIFIER_PITCH = "pitch";
+            ITEM = "item", MODIFIER_ID = "id", NBT = "nbt", MODIFIER_PITCH = "pitch";
 
 
     public static InstrumentWrapper wrap(CognitionDataResource resource) {

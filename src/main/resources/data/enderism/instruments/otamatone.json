@@ -4,7 +4,9 @@
   "default_sound": "enderism:note.enderism.otamatone",
   "instrument_items": [
     {
-      "item": "enderism:vibratotamatone",
+      "item": {
+        "id": "enderism:vibratotamatone"
+      },
       "pitch": 0.75
     }
   ]

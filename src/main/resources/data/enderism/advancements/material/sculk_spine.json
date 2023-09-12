@@ -1,0 +1,33 @@
+{
+    "display": {
+        "icon": {
+            "item": "enderism:sculk_spine"
+        },
+        "title": {
+            "translate": "advancement.enderism.sculk_spine.title"
+        },
+        "description": {
+            "translate": "advancement.enderism.sculk_spine.desc"
+        }
+    },
+    "parent": "minecraft:adventure/avoid_vibration",
+    "criteria": {
+        "sculk_spine": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderism:sculk_spine"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "sculk_spine"
+        ]
+    ]
+}

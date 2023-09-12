@@ -6,6 +6,7 @@ import net.diamonddev.libgenetics.common.api.v1.interfaces.BlockRegistryHelper;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.sound.BlockSoundGroup;
 import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
 import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
@@ -17,7 +18,7 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
     public static Block PATTERNED_PIRPELL = new Block(blankSettings().sounds(BlockSoundGroup.METAL).strength(2.5f, 3f));
 
     // Purposeful Blocks
-    public static Block CHORUS_MAGNETITE = new Block(blankSettings().sounds(BlockSoundGroup.LODESTONE).luminance(8).strength(1.5f, 1.2f));
+    public static Block CHORUS_MAGNETITE = new Block(blankSettings().sounds(BlockSoundGroup.LODESTONE).luminance(8).strength(1.5f, 1.2f).pistonBehavior(PistonBehavior.IGNORE));
     public static FibrousChorusBlock FIBROUS_CHORUS = new FibrousChorusBlock(1.5f, 5f, blankSettings().strength(2.0f, 2.0f));
 
 
