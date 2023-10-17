@@ -1,0 +1,41 @@
+{
+    "schemaVersion": 1,
+    "id": "enderism",
+    "version": "${version}",
+    "name": "Enderism",
+    "description": "Mid to Endgame Expansion Mod",
+    "authors": [
+        "DiamondDev"
+    ],
+
+    "contact": {
+        "homepage": "https://diamonddevv.github.io/",
+        "issues": "https://github.com/diamonddevv/enderism/issues",
+        "sources": "https://github.com/diamonddevv/enderism"
+    },
+
+    "license": "CC-BY-NC-4.0",
+    "icon": "assets/enderism/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "dev.diamond.enderism.EnderismMod"
+        ],
+        "client": [
+            "dev.diamond.enderism.client.EnderismClient"
+        ],
+        "mm:early_risers": [
+            "dev.diamond.enderism.impl.AsmEarlyRiser"
+        ]
+    },
+    "mixins": [
+        "enderism.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.14.22",
+        "minecraft": "~1.20.2",
+        "java": ">=17",
+        "fabric-api": "*"
+    }
+}

@@ -5,3 +5,6 @@ extendable   class   net/minecraft/enchantment/EnchantmentTarget
 
 # Brewing Stand Potion Slot
 extendable  class   net/minecraft/screen/BrewingStandScreenHandler$PotionSlot
+
+# Loot Table pools
+accessible field net/minecraft/loot/LootTable pools Ljava/util/List;
