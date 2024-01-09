@@ -16,7 +16,7 @@ public class LootTableModifier implements RegistryInitializer {
     private static Identifier getModifierPath(Identifier modifyId) {
         return new Identifier(EnderismMod.modid, "modifier/" + modifyId.getNamespace() + "/" + modifyId.getPath());
     }
-    private static void iteratePools(LootTable.Builder supplier, List<LootPool> pools) {
+    private static void iteratePools(LootTable.Builder supplier, LootPool[] pools) {
         for (var pool : pools) {
             supplier.pool(pool);
         }
@@ -27,7 +27,7 @@ public class LootTableModifier implements RegistryInitializer {
         LootTableEvents.MODIFY.register(((resourceManager, lootManager, id, tableBuilder, source) -> {
             LootTable table = lootManager.getLootTable(getModifierPath(id));
             if (table != LootTable.EMPTY) {
-                List<LootPool> pools = table.pools;
+                LootPool[] pools = table.pools;
                 if (pools != null) iteratePools(tableBuilder, pools);
             }
         }));

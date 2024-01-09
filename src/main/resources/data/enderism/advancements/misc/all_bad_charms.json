@@ -1,0 +1,119 @@
+{
+  "parent": "enderism:misc/charming",
+  "requirements": [
+    ["slowness"],
+    ["mining_fatigue"],
+    ["instant_damage"],
+    ["nausea"],
+    ["blindness"],
+    ["hunger"],
+    ["weakness"],
+    ["poison"],
+    ["wither"],
+    ["levitation"],
+    ["bad_luck"],
+    ["darkness"]
+  ],
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.enderism.bad_charms.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "enderism:end_stone_charm"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.enderism.bad_charms.title"
+    }
+  },
+
+  "criteria": {
+    "slowness": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:slowness"
+      }
+    },
+    "mining_fatigue": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:mining_fatigue"
+      }
+    },
+    "instant_damage": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:instant_damage"
+      }
+    },
+    "nausea": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:nausea"
+      }
+    },
+    "blindness": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:blindness"
+      }
+    },
+    "hunger": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:hunger"
+      }
+    },
+    "weakness": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:weakness"
+      }
+    },
+    "poison": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:poison"
+      }
+    },
+    "wither": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:wither"
+      }
+    },
+    "levitation": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:levitation"
+      }
+    },
+    "bad_luck": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:unluck"
+      }
+    },
+    "darkness": {
+      "trigger": "enderism:use_charm",
+      "conditions": {
+        "charm_item": "enderism:wanderers_charm",
+        "effect": "minecraft:darkness"
+      }
+    }
+  }
+}

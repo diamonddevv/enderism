@@ -26,6 +26,8 @@ public class NbtStatusEffectInstanceComponent extends CerebellumNbtComponent<Sta
         builder.amp = compound.getInt(AMP);
         builder.dur = compound.getInt(DUR);
 
+        if (builder.effect.isInstant()) builder.dur = 0;
+
         return builder.build();
     }
 

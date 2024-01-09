@@ -93,7 +93,7 @@ public class CharmItem extends Item {
                 damageStack(stack, user);
                 setCooldownForAllCharms(user, this.cooldown);
 
-                if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.USE_CHARM.trigger(spe);
+                if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.USE_CHARM.trigger(spe, stack);
 
                 return new TypedActionResult<>(ActionResult.SUCCESS, stack);
             }

@@ -18,8 +18,8 @@ public abstract class AbstractManualTriggerAdvancementCriterion extends Abstract
     public abstract Identifier getId();
 
     @Override
-    protected AbstractManualTriggerAdvancementCriterion.Conditions conditionsFromJson(JsonObject json, Optional<LootContextPredicate> arg, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
-        return new Conditions(arg, json);
+    protected AbstractManualTriggerAdvancementCriterion.Conditions conditionsFromJson(JsonObject json, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        return new Conditions(getId(), playerPredicate, json);
     }
 
     public void trigger(ServerPlayerEntity player) {
@@ -42,8 +42,8 @@ public abstract class AbstractManualTriggerAdvancementCriterion extends Abstract
     public static class Conditions extends AbstractCriterionConditions {
         public final JsonObject json;
 
-        public Conditions(Optional<LootContextPredicate> playerPredicate, JsonObject json) {
-            super(playerPredicate);
+        public Conditions(Identifier id, LootContextPredicate playerPredicate, JsonObject json) {
+            super(id, playerPredicate);
             this.json = json;
         }
     }

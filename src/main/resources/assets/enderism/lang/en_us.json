@@ -129,5 +129,9 @@
   "advancement.enderism.cursed_chorus.title": "Bounce-back",
   "advancement.enderism.cursed_chorus.desc": "Eat a Cursed Chorus Fruit and teleport back somewhere",
   "advancement.enderism.sculk_spine.title": "Thanks, I'll be having that now",
-  "advancement.enderism.sculk_spine.desc": "Obtain a Sculk Spine"
+  "advancement.enderism.sculk_spine.desc": "Obtain a Sculk Spine",
+  "advancement.enderism.fibrous_chorus.title": "Cue the Cartoon Sound Effects",
+  "advancement.enderism.fibrous_chorus.desc": "Bounce on Fibrous Chorus",
+  "advancement.enderism.bad_charms.title": "I can't believe you've done this.",
+  "advancement.enderism.bad_charms.desc": "Use Wanderer's Charms containing every negative vanilla effect"
 }

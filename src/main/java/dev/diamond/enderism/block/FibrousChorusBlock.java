@@ -1,10 +1,12 @@
 package dev.diamond.enderism.block;
 
+import dev.diamond.enderism.registry.InitAdvancementCriteria;
 import dev.diamond.enderism.registry.InitSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -39,6 +41,7 @@ public class FibrousChorusBlock extends Block {
             super.onEntityLand(world, entity);
         } else {
             this.propel(entity);
+            if (entity instanceof ServerPlayerEntity spe) InitAdvancementCriteria.BOUNCE_ON_FIBROUS_CHORUS.trigger(spe);
         }
     }
 
