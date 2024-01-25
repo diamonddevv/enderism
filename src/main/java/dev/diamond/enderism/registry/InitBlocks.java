@@ -19,7 +19,7 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
 
     // Purposeful Blocks
     public static Block CHORUS_MAGNETITE = new Block(blankSettings().sounds(BlockSoundGroup.LODESTONE).luminance(8).strength(1.5f, 1.2f).pistonBehavior(PistonBehavior.IGNORE));
-    public static FibrousChorusBlock FIBROUS_CHORUS = new FibrousChorusBlock(1.5f, 5f, blankSettings().strength(2.0f, 2.0f));
+    public static FibrousChorusBlock FIBROUS_CHORUS = new FibrousChorusBlock(1.5f, InitConfig.ENDERISM.blockConfig.fibrousChorusMaxBounce, blankSettings().strength(2.0f, 2.0f));
 
 
     @Override

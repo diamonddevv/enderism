@@ -7,4 +7,4 @@ extendable   class   net/minecraft/enchantment/EnchantmentTarget
 extendable  class   net/minecraft/screen/BrewingStandScreenHandler$PotionSlot
 
 # Loot Table pools
-accessible field net/minecraft/loot/LootTable pools Ljava/util/List;
+accessible field net/minecraft/loot/LootTable pools [Lnet/minecraft/loot/LootPool;

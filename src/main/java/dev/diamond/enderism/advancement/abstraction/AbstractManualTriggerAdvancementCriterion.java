@@ -39,6 +39,25 @@ public abstract class AbstractManualTriggerAdvancementCriterion extends Abstract
         this.trigger(player, conditions -> canTrigger(conditions, ctx));
     }
 
+    public void trigger(ServerPlayerEntity player, JsonObject json) {
+
+        TriggerContext ctx = new TriggerContext();
+        ctx.player = player;
+        ctx.jsonData = json;
+
+        this.trigger(player, conditions -> canTrigger(conditions, ctx));
+    }
+
+    public void trigger(ServerPlayerEntity player, ItemStack stack, JsonObject json) {
+
+        TriggerContext ctx = new TriggerContext();
+        ctx.player = player;
+        ctx.usedItem = stack;
+        ctx.jsonData = json;
+
+        this.trigger(player, conditions -> canTrigger(conditions, ctx));
+    }
+
     public static class Conditions extends AbstractCriterionConditions {
         public final JsonObject json;
 
@@ -50,8 +69,8 @@ public abstract class AbstractManualTriggerAdvancementCriterion extends Abstract
 
     public static class TriggerContext {
         private ServerPlayerEntity player;
-
         private ItemStack usedItem;
+        private JsonObject jsonData;
 
         public ServerPlayerEntity getPlayer() {
             return player;
@@ -62,6 +81,10 @@ public abstract class AbstractManualTriggerAdvancementCriterion extends Abstract
         }
         public boolean hasUsedItem() {
             return usedItem != null;
+        }
+
+        public JsonObject getJson() {
+            return jsonData;
         }
 
     }

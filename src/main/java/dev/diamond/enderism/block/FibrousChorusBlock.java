@@ -40,14 +40,17 @@ public class FibrousChorusBlock extends Block {
         if (entity.bypassesLandingEffects()) {
             super.onEntityLand(world, entity);
         } else {
-            this.propel(entity);
-            if (entity instanceof ServerPlayerEntity spe) InitAdvancementCriteria.BOUNCE_ON_FIBROUS_CHORUS.trigger(spe);
+            if (Math.round(entity.getVelocity().y) < 0) {
+                this.propel(entity);
+                if (entity instanceof ServerPlayerEntity spe)
+                    InitAdvancementCriteria.BOUNCE_ON_FIBROUS_CHORUS.trigger(spe);
+            }
         }
     }
 
     private void propel(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
-        if (vec3d.y < 0.0) {
+        if (vec3d.y < 0) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
             entity.setVelocity(vec3d.x, Math.min(-vec3d.y * bounce / d, maxBounce), vec3d.z);
         }

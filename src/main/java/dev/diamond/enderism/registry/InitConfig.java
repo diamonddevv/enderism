@@ -36,6 +36,9 @@ public class InitConfig implements RegistryInitializer {
         @SerializedName("charms")
         public CharmConfig charmConfig = new CharmConfig();
 
+        @SerializedName("blocks")
+        public BlockConfig blockConfig = new BlockConfig();
+
         public static class CharmConfig {
             @SerializedName("charmCraftingUsesPotions")
             public boolean charmCraftsUsePotions = true;
@@ -52,6 +55,12 @@ public class InitConfig implements RegistryInitializer {
                 @SerializedName("effectIds") public ArrayList<String> disallowedEffects = new ArrayList<>();
                 @SerializedName("effectIdsIsWhitelist") public boolean whitelist = false;
             }
+        }
+
+
+        public static class BlockConfig {
+            @SerializedName("fibrousChorusMaxBounceStrength")
+            public float fibrousChorusMaxBounce = 5f;
         }
     }
 }

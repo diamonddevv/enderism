@@ -1,6 +1,8 @@
 package dev.diamond.enderism.item;
 
+import com.google.gson.JsonObject;
 import dev.diamond.enderism.EnderismMod;
+import dev.diamond.enderism.advancement.UseCharmAdvancementCriterion;
 import dev.diamond.enderism.mixin.StatusEffectAccessor;
 import dev.diamond.enderism.nbt.EnderismNbt;
 import dev.diamond.enderism.registry.InitAdvancementCriteria;
@@ -93,7 +95,8 @@ public class CharmItem extends Item {
                 damageStack(stack, user);
                 setCooldownForAllCharms(user, this.cooldown);
 
-                if (user instanceof ServerPlayerEntity spe) InitAdvancementCriteria.USE_CHARM.trigger(spe, stack);
+                if (user instanceof ServerPlayerEntity spe)
+                    InitAdvancementCriteria.USE_CHARM.trigger(spe, stack, UseCharmAdvancementCriterion.buildContextJson(true));
 
                 return new TypedActionResult<>(ActionResult.SUCCESS, stack);
             }

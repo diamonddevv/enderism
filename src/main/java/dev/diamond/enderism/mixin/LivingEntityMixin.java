@@ -2,10 +2,12 @@ package dev.diamond.enderism.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import dev.diamond.enderism.advancement.UseCharmAdvancementCriterion;
 import dev.diamond.enderism.item.CharmItem;
 import dev.diamond.enderism.item.ShulkerShellmetItem;
 import dev.diamond.enderism.item.music.InstrumentItem;
 import dev.diamond.enderism.nbt.EnderismNbt;
+import dev.diamond.enderism.registry.InitAdvancementCriteria;
 import dev.diamond.enderism.util.EnderismUtil;
 import dev.diamond.enderism.registry.InitEffects;
 import dev.diamond.enderism.registry.InitEnchants;
@@ -23,6 +25,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -134,6 +137,13 @@ public abstract class LivingEntityMixin extends Entity {
                     LivingEntity thisLivEn = (LivingEntity) (Object) this;
                     applyCharmEffectForStackIfCan(source.getStackInHand(Hand.MAIN_HAND), thisLivEn, source);
                     applyCharmEffectForStackIfCan(source.getStackInHand(Hand.OFF_HAND), thisLivEn, source);
+
+                    if (source instanceof ServerPlayerEntity spe) {
+                        InitAdvancementCriteria.USE_CHARM.trigger(spe, source.getStackInHand(Hand.MAIN_HAND),
+                                UseCharmAdvancementCriterion.buildContextJson(false));
+                        InitAdvancementCriteria.USE_CHARM.trigger(spe, source.getStackInHand(Hand.OFF_HAND),
+                                UseCharmAdvancementCriterion.buildContextJson(false));
+                    }
                 }
             }
         }
