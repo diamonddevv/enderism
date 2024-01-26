@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 }
 
-
+apply plugin: 'maven-publish'
 base.archivesName = project.archives_base_name
 version = "$project.version+${libs.versions.minecraft.get()}"
 group = project.maven_group

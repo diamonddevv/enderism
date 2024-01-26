@@ -3,6 +3,7 @@ package dev.diamond.enderism.item;
 import dev.diamond.enderism.nbt.EnderismNbt;
 import dev.diamond.enderism.registry.InitAdvancementCriteria;
 import dev.diamond.enderism.registry.InitBlocks;
+import dev.diamond.enderism.registry.InitGamerules;
 import dev.diamond.enderism.registry.InitSoundEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
@@ -105,8 +106,10 @@ public class CursedChorusItem extends Item {
 
         if (stack.getItem() instanceof CursedChorusItem) {
             if (target instanceof PlayerEntity player) {
-                target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), InitSoundEvents.CURSED_CHORUS_FRUIT_PLAYER_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
-                EnderismNbt.CursedChorusBindManager.setPlayerBind(player, stack);
+                if (target.getWorld().getGameRules().getBoolean(InitGamerules.CURSED_CHORUS_PLAYERBINDING) && !EnderismNbt.CursedChorusBindManager.isBound(stack)) {
+                    target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), InitSoundEvents.CURSED_CHORUS_FRUIT_PLAYER_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
+                    EnderismNbt.CursedChorusBindManager.setPlayerBind(player, stack);
+                }
             }
         }
 
@@ -116,19 +119,22 @@ public class CursedChorusItem extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         // Handle adding a Chorus Magnetite bind to the fruit
+        if (!EnderismNbt.CursedChorusBindManager.isBound(context.getStack())) {
 
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
-        BlockState blockstate = world.getBlockState(pos);
-        Block block = blockstate.getBlock();
-        ItemStack stack = context.getStack();
 
-        if (block == InitBlocks.CHORUS_MAGNETITE) {
-            EnderismNbt.CursedChorusBindManager.setMagnetiteBind(pos, stack);
-            Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
-            world.playSound(null, vec.x + 0.5, vec.y, vec.z + 0.5, InitSoundEvents.CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
-            for (int i = 0; i < 5; i++) {
-                world.addParticle(ParticleTypes.WITCH, vec.x + 0.5, vec.y + 0.5, vec.z + 0.5, 1, 1, 1);
+            World world = context.getWorld();
+            BlockPos pos = context.getBlockPos();
+            BlockState blockstate = world.getBlockState(pos);
+            Block block = blockstate.getBlock();
+            ItemStack stack = context.getStack();
+
+            if (block == InitBlocks.CHORUS_MAGNETITE) {
+                EnderismNbt.CursedChorusBindManager.setMagnetiteBind(pos, stack);
+                Vec3d vec = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
+                world.playSound(null, vec.x + 0.5, vec.y, vec.z + 0.5, InitSoundEvents.CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND, SoundCategory.BLOCKS, 1.5f, 2f);
+                for (int i = 0; i < 5; i++) {
+                    world.addParticle(ParticleTypes.WITCH, vec.x + 0.5, vec.y + 0.5, vec.z + 0.5, 1, 1, 1);
+                }
             }
         }
 
