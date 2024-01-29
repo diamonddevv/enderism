@@ -32,6 +32,18 @@
     "mixins": [
         "enderism.mixins.json"
     ],
+
+    "custom": {
+        "cardinal-components": [
+            "enderism:retributional_damage",
+            "enderism:retributive",
+            "enderism:sniping_arrow_origin",
+            "enderism:sniping",
+            "enderism:sniping_speed_ref",
+            "enderism:sniping_divergence_ref"
+        ]
+    },
+
     "depends": {
         "fabricloader": ">=0.15.3",
         "minecraft": "~1.20",

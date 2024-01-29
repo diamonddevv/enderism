@@ -66,6 +66,7 @@ repositories {
 	maven {
 		url "https://maven.terraformersmc.com/"
 	}
+
 }
 
 loom {
@@ -92,7 +93,7 @@ dependencies {
 	include modImplementation("com.github.Chocohead:Fabric-ASM:${project.fabricasm}")
 
 	// libGenetics
-	include modImplementation ("com.github.diamonddevv:libgenetics:${project.libgenetics}");
+	include modImplementation ("com.github.diamonddevv:libgenetics:${project.libgenetics}")
 
 	// Simple Trims - very buggy, so for now it is optional external dependency.
 	//include modImplementation("com.github.diamonddevv:simple-trims:${project.simple_trims_version}");
@@ -100,6 +101,10 @@ dependencies {
 	// Mixin Extras
 	include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extras_version}")))
 
+
+	// Includes Cardinal Components API as a Jar-in-Jar dependency
+	include modImplementation ("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
+	include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
 
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 

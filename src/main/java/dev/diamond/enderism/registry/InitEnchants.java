@@ -20,6 +20,9 @@ public class InitEnchants implements RegistryInitializer {
 
     public static Enchantment PEARLING = new PearlingEnchantment();
     public static Enchantment CANNONING = new CannoningEnchantment();
+    public static final Enchantment RETRIBUTIVE = new RetributiveEnchantment();
+    public static final Enchantment MULTICLIP = new MulticlipEnchantment();
+    public static final Enchantment SNIPING = new SnipingEnchantment();
 
     //public static Enchantment QUICK_STRIKE = new QuickStrikeEnchantment();
 

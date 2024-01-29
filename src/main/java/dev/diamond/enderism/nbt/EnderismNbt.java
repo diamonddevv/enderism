@@ -25,6 +25,8 @@ public class EnderismNbt {
 
     private static final NbtLongComponent FINISH_TIME = new NbtLongComponent("sheet_end_time");
 
+    public static final NbtIntComponent MULTICLIP_ARROWS = new NbtIntComponent("multiclipArrowCount");
+
     public static class InstrumentFinishTimeManager {
         public static long get(ItemStack stack) {
             return FINISH_TIME.read(stack.getOrCreateNbt());
@@ -110,5 +112,19 @@ public class EnderismNbt {
             CHARM_HAS_EFFECT.write(stack.getOrCreateNbt(), bl);
         }
 
+    }
+
+    public static class MulticlipProjectileManager {
+        public static int getProjectiles(ItemStack stack) {
+            return MULTICLIP_ARROWS.read(stack.getOrCreateNbt());
+        }
+
+        public static void setProjectiles(ItemStack stack, int count) {
+            MULTICLIP_ARROWS.write(stack.getOrCreateNbt(), count);
+        }
+
+        public static void decrementProjectileCount(ItemStack stack) {
+            setProjectiles(stack, getProjectiles(stack) - 1);
+        }
     }
 }

@@ -35,6 +35,7 @@ public class EnderismMod implements ModInitializer {
 		new InitPackets().register();
 		new InitBlocks().register();
 		new InitItems().register();
+		new InitDamageSources().register();
 		new InitEffects().register();
 		new InitEnchants().register();
 		new InitGamerules().register();
@@ -81,7 +82,8 @@ public class EnderismMod implements ModInitializer {
 			ItemGroupEvents.modifyEntriesEvent(BUILDING_BLOCKS).register(content -> {
 				content.addAfter(Items.NETHERITE_BLOCK, getBlockItem(InitBlocks.PIRPELL_BLOCK));
 
-				content.add(new ItemStack(getBlockItem(InitBlocks.PATTERNED_PIRPELL)));
+				content.add(getBlockItem(InitBlocks.PATTERNED_PIRPELL));
+				content.add(getBlockItem(InitBlocks.BAMBOO_SPIKE));
 			});
 
 			ItemGroupEvents.modifyEntriesEvent(FUNCTIONAL).register(content -> {
