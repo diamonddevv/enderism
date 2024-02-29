@@ -1,5 +1,6 @@
 package dev.diamond.enderism.enchantment;
 
+import dev.diamond.enderism.registry.InitEnchants;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
@@ -18,6 +19,6 @@ public class MulticlipEnchantment extends Enchantment {
     @Override
     protected boolean canAccept(Enchantment other) {
         return super.canAccept(other) &&
-                other != Enchantments.MULTISHOT;
+                other != Enchantments.MULTISHOT && other != InitEnchants.CANNONING && other != InitEnchants.PEARLING;
     }
 }

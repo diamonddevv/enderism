@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:arrow"
+        },
+        "title": {
+            "translate": "advancement.enderism.multiclip.title"
+        },
+        "description": {
+            "translate": "advancement.enderism.multiclip.desc"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:adventure/ol_betsy",
+    "criteria": {
+        "empty_clip": {
+            "trigger": "enderism:empty_multiclip"
+        }
+    },
+    "requirements": [
+        [
+            "empty_clip"
+        ]
+    ],
+    "rewards": {
+        "experience": 100
+    },
+    "sends_telemetry_event": true
+}

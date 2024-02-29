@@ -3,6 +3,7 @@ package dev.diamond.enderism.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.diamond.enderism.advancement.UseCharmAdvancementCriterion;
+import dev.diamond.enderism.cca.EnderismCCA;
 import dev.diamond.enderism.item.CharmItem;
 import dev.diamond.enderism.item.ShulkerShellmetItem;
 import dev.diamond.enderism.item.music.InstrumentItem;
@@ -36,6 +37,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -127,27 +129,33 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At("HEAD"))
     private void enderism$applyCharmEffect(DamageSource dmgsource, float amount, CallbackInfoReturnable<Float> cir) {
+        if (dmgsource.getSource() == null) return;
+
         if (dmgsource.getSource() instanceof LivingEntity || dmgsource.getSource() instanceof ProjectileEntity) {
             LivingEntity source = dmgsource.getSource() instanceof ProjectileEntity proj ? (LivingEntity) proj.getOwner() : (LivingEntity) dmgsource.getSource();
 
-            if (source != null) {
-                boolean b = true;
-                if (source instanceof PlayerEntity player) b = CharmItem.canUseAnyCharm(player);
-                if (b) {
-                    LivingEntity thisLivEn = (LivingEntity) (Object) this;
-                    applyCharmEffectForStackIfCan(source.getStackInHand(Hand.MAIN_HAND), thisLivEn, source);
-                    applyCharmEffectForStackIfCan(source.getStackInHand(Hand.OFF_HAND), thisLivEn, source);
 
-                    if (source instanceof ServerPlayerEntity spe) {
-                        InitAdvancementCriteria.USE_CHARM.trigger(spe, source.getStackInHand(Hand.MAIN_HAND),
-                                UseCharmAdvancementCriterion.buildContextJson(false));
-                        InitAdvancementCriteria.USE_CHARM.trigger(spe, source.getStackInHand(Hand.OFF_HAND),
-                                UseCharmAdvancementCriterion.buildContextJson(false));
+            if (source.getStackInHand(Hand.MAIN_HAND).getItem() instanceof CharmItem || source.getStackInHand(Hand.OFF_HAND).getItem() instanceof CharmItem) {
+                if (source != null) {
+                    boolean b = true;
+                    if (source instanceof PlayerEntity player) b = CharmItem.canUseAnyCharm(player);
+                    if (b) {
+                        LivingEntity thisLivEn = (LivingEntity) (Object) this;
+                        applyCharmEffectForStackIfCan(source.getStackInHand(Hand.MAIN_HAND), thisLivEn, source);
+                        applyCharmEffectForStackIfCan(source.getStackInHand(Hand.OFF_HAND), thisLivEn, source);
+
+                        if (source instanceof ServerPlayerEntity spe) {
+                            InitAdvancementCriteria.USE_CHARM.trigger(spe, source.getStackInHand(Hand.MAIN_HAND),
+                                    UseCharmAdvancementCriterion.buildContextJson(false));
+                            InitAdvancementCriteria.USE_CHARM.trigger(spe, source.getStackInHand(Hand.OFF_HAND),
+                                    UseCharmAdvancementCriterion.buildContextJson(false));
+                        }
                     }
                 }
             }
         }
     }
+
     private static void applyCharmEffectForStackIfCan(ItemStack stack, LivingEntity target, LivingEntity user) {
         if (stack.getItem() instanceof CharmItem) {
             CharmItem.damageStack(stack, user);
@@ -162,8 +170,8 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
-    private boolean enderism$redirectLevitationCheckWithShellmet(LivingEntity instance, StatusEffect effect) {
+    @WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/entity/effect/StatusEffect;)Z"))
+    private boolean enderism$redirectLevitationCheckWithShellmet(LivingEntity instance, StatusEffect effect, Operation<Boolean> original) {
         if (instance.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ShulkerShellmetItem) {
             if (!instance.isSneaking()) {
                 return false;
@@ -216,6 +224,28 @@ public abstract class LivingEntityMixin extends Entity {
                     getWorld().addParticle(ParticleTypes.NOTE, this.getX(), this.getY() + 2.2, this.getZ(), i / 24.0, 0.0, 0.0);
                 }
             }
+        }
+    }
+
+
+    @Inject(at = @At("HEAD"), method = "modifyAppliedDamage")
+    private void enderism$retributionalDamage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+        if (source.getSource() instanceof LivingEntity target) {
+            storeRetributionDmgIfPossible(target, amount);
+        }
+
+        if (source.getSource() instanceof ProjectileEntity projectileEntity) {
+            if (projectileEntity.getOwner() instanceof LivingEntity target) {
+                storeRetributionDmgIfPossible(target, amount);
+            }
+        }
+    }
+
+    @Unique
+    private static void storeRetributionDmgIfPossible(LivingEntity target, float damageDealt) {
+        if (target.hasStatusEffect(InitEffects.RETRIBUTION)) {
+            int lvl = target.getStatusEffect(InitEffects.RETRIBUTION).getAmplifier() + 1;
+            EnderismCCA.RetributionalDamageManager.addDmg(target, damageDealt * (.5 + (lvl / 10d)));
         }
     }
 }

@@ -16,6 +16,7 @@
         "ItemAccessor",
         "ItemStackMixin",
         "LivingEntityMixin",
+        "PersistentProjectileEntityMixin",
         "PlayerEntityMixin",
         "PlayerManagerMixin",
         "ServerWorldMixin",

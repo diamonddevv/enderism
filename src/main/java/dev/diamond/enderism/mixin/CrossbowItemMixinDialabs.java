@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.diamond.enderism.cca.EnderismCCA;
 import dev.diamond.enderism.nbt.EnderismNbt;
+import dev.diamond.enderism.registry.InitAdvancementCriteria;
 import dev.diamond.enderism.registry.InitEnchants;
 import net.diamonddev.libgenetics.common.api.v1.util.helper.EnchantHelper;
 import net.minecraft.client.item.TooltipContext;
@@ -16,6 +17,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -111,8 +113,6 @@ public abstract class CrossbowItemMixinDialabs {
         original.call(projEntity, x, y, z, speed, divergence);
     }
 
-
-
     @Inject(
             method = "loadProjectile",
             at = @At(
@@ -179,6 +179,13 @@ public abstract class CrossbowItemMixinDialabs {
         if (EnchantHelper.hasEnchantment(InitEnchants.MULTICLIP, stack)) { // if stack has multiclip
             if (EnderismNbt.MulticlipProjectileManager.getProjectiles(stack) > 0) { // if arrow count is greater than 0
                 EnderismNbt.MulticlipProjectileManager.decrementProjectileCount(stack); // decrement count
+
+                if (EnderismNbt.MulticlipProjectileManager.getProjectiles(stack) == 0) {
+                    if (entity instanceof ServerPlayerEntity spe) {
+                        InitAdvancementCriteria.EMPTY_MULTICLIP.trigger(spe, stack);
+                    }
+                }
+
                 ci.cancel(); // cancel
             }
         }

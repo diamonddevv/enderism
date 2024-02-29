@@ -20,9 +20,9 @@ public class InitEnchants implements RegistryInitializer {
 
     public static Enchantment PEARLING = new PearlingEnchantment();
     public static Enchantment CANNONING = new CannoningEnchantment();
-    public static final Enchantment RETRIBUTIVE = new RetributiveEnchantment();
-    public static final Enchantment MULTICLIP = new MulticlipEnchantment();
-    public static final Enchantment SNIPING = new SnipingEnchantment();
+    public static Enchantment RETRIBUTIVE = new RetributiveEnchantment();
+    public static Enchantment MULTICLIP = new MulticlipEnchantment();
+    public static Enchantment SNIPING = new SnipingEnchantment();
 
     //public static Enchantment QUICK_STRIKE = new QuickStrikeEnchantment();
 
@@ -35,6 +35,10 @@ public class InitEnchants implements RegistryInitializer {
 
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("pearling"), PEARLING);
         Registry.register(Registries.ENCHANTMENT, EnderismMod.id("cannoning"), CANNONING);
+
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("retributive"), RETRIBUTIVE);
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("sniping"), SNIPING);
+        Registry.register(Registries.ENCHANTMENT, EnderismMod.id("multiclip"), MULTICLIP);
 
         //Registry.register(Registries.ENCHANTMENT, EnderismMod.id("quick_strike"), QUICK_STRIKE);
     }

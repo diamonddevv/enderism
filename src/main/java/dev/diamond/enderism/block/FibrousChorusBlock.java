@@ -1,6 +1,7 @@
 package dev.diamond.enderism.block;
 
 import dev.diamond.enderism.registry.InitAdvancementCriteria;
+import dev.diamond.enderism.registry.InitGamerules;
 import dev.diamond.enderism.registry.InitSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,13 +17,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class FibrousChorusBlock extends Block {
-    private final float bounce;
-    private final float maxBounce;
 
-    public FibrousChorusBlock(float bounce, float maxBounce, Settings settings) {
+    public FibrousChorusBlock(Settings settings) {
         super(settings);
-        this.bounce = bounce;
-        this.maxBounce = maxBounce;
     }
 
     @Override
@@ -52,7 +49,7 @@ public class FibrousChorusBlock extends Block {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0) {
             double d = entity instanceof LivingEntity ? 1.0 : 0.8;
-            entity.setVelocity(vec3d.x, Math.min(-vec3d.y * bounce / d, maxBounce), vec3d.z);
+            entity.setVelocity(vec3d.x, Math.min(-vec3d.y * getBounce(entity.getWorld()) / d, getMaxBounce(entity.getWorld())), vec3d.z);
         }
     }
 
@@ -65,5 +62,13 @@ public class FibrousChorusBlock extends Block {
                 1.8f,
                 new Random().nextFloat(0.1f, 1.5f)
         );
+    }
+
+    public static double getBounce(World world) {
+        return world.getGameRules().getInt(InitGamerules.FIBROUS_CHORUS_BOUNCE_POWER_TIMES_HUNDRED) / 100f;
+    }
+
+    public static float getMaxBounce(World world) {
+        return world.getGameRules().getInt(InitGamerules.FIBROUS_CHORUS_MAX_BOUNCE_POWER_TIMES_HUNDRED) / 100f;
     }
 }

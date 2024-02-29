@@ -145,6 +145,8 @@
   "advancement.enderism.fibrous_chorus.desc": "Bounce on Fibrous Chorus",
   "advancement.enderism.bad_charms.title": "I can't believe you've done this.",
   "advancement.enderism.bad_charms.desc": "Use Wanderer's Charms containing every negative vanilla effect",
+  "advancement.enderism.multiclip.title": "The Name's Bond",
+  "advancement.enderism.multiclip.desc": "Fully load a crossbow with Multiclip, then fire all the projectiles",
 
   "enchantment.enderism.aerodynamic.desc": "Causes Elytra gliding to be faster",
   "enchantment.enderism.upthrust.desc": "Causes Elytra gliding to gain more height when going upwards",
@@ -157,8 +159,8 @@
   "enchantment.enderism.multiclip.desc": "Loads multiple shots at once, however increasing loading times",
   "enchantment.enderism.sniping.desc": "Increases Speed and Power of arrows shot, dealing more damage based on how far the shot was taken from the hit point",
 
-  "effect.enderism.choruskirmish.desc": "Gives users a small chance to spontaneously teleport when hit",
-  "effect.enderism.silencing.desc": "Causes user to emit no vibrations",
-  "effect.enderism.void_recall.desc": "Telports user back to safety after falling off of The End",
-  "effect.enderism.retribution.desc": "Damages users a fraction based on how much damage they deal during the effects duration"
+  "effect.enderism.choruskirmish.description": "Gives users a small chance to spontaneously teleport when hit",
+  "effect.enderism.silencing.description": "Causes user to emit no vibrations",
+  "effect.enderism.void_recall.description": "Telports user back to safety after falling off of The End",
+  "effect.enderism.retribution.description": "Damages users a fraction based on how much damage they deal during the effects duration"
 }

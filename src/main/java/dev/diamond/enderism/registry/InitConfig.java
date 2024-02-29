@@ -59,8 +59,6 @@ public class InitConfig implements RegistryInitializer {
 
 
         public static class BlockConfig {
-            @SerializedName("fibrousChorusMaxBounceStrength")
-            public float fibrousChorusMaxBounce = 5f;
         }
     }
 }

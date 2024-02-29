@@ -27,6 +27,9 @@
         ],
         "mm:early_risers": [
             "dev.diamond.enderism.impl.AsmEarlyRiser"
+        ],
+        "cardinal-components": [
+            "dev.diamond.enderism.cca.EnderismCCA"
         ]
     },
     "mixins": [
