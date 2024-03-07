@@ -84,10 +84,12 @@
   "effect.enderism.choruskirmish": "Choruskirmish",
   "effect.enderism.silencing": "Silencing",
   "effect.enderism.retribution": "Retribution",
+  "effect.enderism.charged": "Charged",
 
   "subtitle.enderism.cursed_chorus_bind": "Cursed Chorus Fruit binds",
   "subtitle.enderism.fibrous_chorus_bounce": "Fibrous Chorus bounces",
-  "subtitle.enderism.charm_use": "Charm resonates",
+  "subtitle.enderism.charm.use": "Charm resonates",
+  "subtitle.enderism.static_core.use": "Static Core discharges",
 
   "name.song.enderism.megalovania": "Song of Willpower",
   "name.song.enderism.rushe": "Song of Speed",
@@ -147,6 +149,8 @@
   "advancement.enderism.bad_charms.desc": "Use Wanderer's Charms containing every negative vanilla effect",
   "advancement.enderism.multiclip.title": "The Name's Bond",
   "advancement.enderism.multiclip.desc": "Fully load a crossbow with Multiclip, then fire all the projectiles",
+  "advancement.enderism.static_core.title": "Electric Avenue",
+  "advancement.enderism.static_core.desc": "Use a Static Core",
 
   "enchantment.enderism.aerodynamic.desc": "Causes Elytra gliding to be faster",
   "enchantment.enderism.upthrust.desc": "Causes Elytra gliding to gain more height when going upwards",
@@ -162,5 +166,6 @@
   "effect.enderism.choruskirmish.description": "Gives users a small chance to spontaneously teleport when hit",
   "effect.enderism.silencing.description": "Causes user to emit no vibrations",
   "effect.enderism.void_recall.description": "Telports user back to safety after falling off of The End",
-  "effect.enderism.retribution.description": "Damages users a fraction based on how much damage they deal during the effects duration"
+  "effect.enderism.retribution.description": "Damages users a fraction based on how much damage they deal during the effects duration",
+  "effect.enderism.charged.description": "Increases Attack Damage depending on the duration remaining to other entities that do not have this effect"
 }

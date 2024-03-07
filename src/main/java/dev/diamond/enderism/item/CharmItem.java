@@ -22,14 +22,12 @@ import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class CharmItem extends Item {
 
@@ -108,7 +106,9 @@ public class CharmItem extends Item {
     public static void applyEffect(ItemStack stack, LivingEntity target, LivingEntity user) {
         user.playSound(InitSoundEvents.CHARM_USE, 0.5f, user.getRandom().nextFloat());
         StatusEffectInstance instance = EnderismNbt.CharmEffectManager.get(stack);
-        target.addStatusEffect(instance, user);
+        if (instance.getEffectType().isInstant()) {
+            instance.getEffectType().applyInstantEffect(user, user, target, instance.getAmplifier(), 1f);
+        } else target.addStatusEffect(instance, user);
     }
 
     public static void damageStack(ItemStack stack, LivingEntity user) {

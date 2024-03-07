@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:adventure/root",
+  "requirements": [
+    [
+      "static"
+    ]
+  ],
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.enderism.static_core.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "enderism:static_core"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.enderism.static_core.title"
+    }
+  },
+
+  "criteria": {
+    "charm": {
+      "trigger": "enderism:use_item",
+      "conditions": {
+        "identifier": "enderism:static_core"
+      }
+    }
+  }
+}

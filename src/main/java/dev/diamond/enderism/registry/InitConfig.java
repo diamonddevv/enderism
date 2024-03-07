@@ -54,11 +54,21 @@ public class InitConfig implements RegistryInitializer {
                 @SerializedName("maxDurationSeconds") public int maxDurSecs = 90;
                 @SerializedName("effectIds") public ArrayList<String> disallowedEffects = new ArrayList<>();
                 @SerializedName("effectIdsIsWhitelist") public boolean whitelist = false;
+
+                @SerializedName("effectOverridesDictionary") public ArrayList<EffectOverride> overrides = new ArrayList<>();
             }
         }
 
 
         public static class BlockConfig {
+        }
+
+        public static class EffectOverride {
+            @SerializedName("effectId") public String id;
+            @SerializedName("maxDurationSecs") public int maxDurSecs;
+            @SerializedName("maxPotency") public int maxPotency;
+            @SerializedName("weight") public int weight;
+            @SerializedName("minEmeraldCost") public int minCost; // not functional yet
         }
     }
 }

@@ -12,6 +12,7 @@
         "CrossbowItemMixin",
         "CrossbowItemMixinDialabs",
         "ElytraItemMixin",
+        "ChannelingEnchantmentMixin",
         "EnderPearlItemMixin",
         "ItemAccessor",
         "ItemStackMixin",
@@ -21,6 +22,7 @@
         "PlayerManagerMixin",
         "ServerWorldMixin",
         "StatusEffectAccessor",
+        "TridentEntityMixin",
         "extension.ExtendableEnchantmentTarget"
     ],
     "client": [

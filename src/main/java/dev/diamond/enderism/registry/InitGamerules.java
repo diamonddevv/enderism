@@ -14,6 +14,8 @@ public class InitGamerules implements RegistryInitializer {
     public static GameRules.Key<GameRules.IntRule> RETRIBUTION_STRENGTH;
     public static GameRules.Key<GameRules.IntRule> FIBROUS_CHORUS_BOUNCE_POWER_TIMES_HUNDRED;
     public static GameRules.Key<GameRules.IntRule> FIBROUS_CHORUS_MAX_BOUNCE_POWER_TIMES_HUNDRED;
+    public static GameRules.Key<GameRules.IntRule> STATIC_CORE_LENGTH;
+    public static GameRules.Key<GameRules.IntRule> STATIC_CORE_STRENGTH;
 
     @Override
     public void register() {
@@ -24,5 +26,7 @@ public class InitGamerules implements RegistryInitializer {
         RETRIBUTION_STRENGTH = GameRuleRegistry.register("retributionStrength", GameRules.Category.MOBS, GameRuleFactory.createIntRule(0));
         FIBROUS_CHORUS_BOUNCE_POWER_TIMES_HUNDRED = GameRuleRegistry.register("fibrousChorusBouncePowerTimesHundred", GameRules.Category.MOBS, GameRuleFactory.createIntRule(150));
         FIBROUS_CHORUS_MAX_BOUNCE_POWER_TIMES_HUNDRED = GameRuleRegistry.register("fibrousChorusMaxBouncePowerTimesHundred", GameRules.Category.MOBS, GameRuleFactory.createIntRule(500));
+        STATIC_CORE_LENGTH = GameRuleRegistry.register("staticCoreDuration", GameRules.Category.MOBS, GameRuleFactory.createIntRule(20 * 30));
+        STATIC_CORE_STRENGTH = GameRuleRegistry.register("staticCoreAmplifier", GameRules.Category.MOBS, GameRuleFactory.createIntRule(0));
     }
 }

@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.diamond.enderism.advancement.UseCharmAdvancementCriterion;
 import dev.diamond.enderism.cca.EnderismCCA;
+import dev.diamond.enderism.effect.ChargedEffect;
 import dev.diamond.enderism.item.CharmItem;
 import dev.diamond.enderism.item.ShulkerShellmetItem;
 import dev.diamond.enderism.item.music.InstrumentItem;
@@ -41,7 +42,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -246,6 +246,19 @@ public abstract class LivingEntityMixin extends Entity {
         if (target.hasStatusEffect(InitEffects.RETRIBUTION)) {
             int lvl = target.getStatusEffect(InitEffects.RETRIBUTION).getAmplifier() + 1;
             EnderismCCA.RetributionalDamageManager.addDmg(target, damageDealt * (.5 + (lvl / 10d)));
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "modifyAppliedDamage", cancellable = true)
+    private void dialabs$injectStaticDamage(DamageSource source, float amount,
+                                            CallbackInfoReturnable<Float> cir) {
+        if (source.getSource() instanceof LivingEntity attacker) {
+            if (attacker.hasStatusEffect(InitEffects.CHARGED)) {
+                int dur = Objects.requireNonNull(attacker.getStatusEffect(InitEffects.CHARGED)).getDuration();
+                int amp = Objects.requireNonNull(attacker.getStatusEffect(InitEffects.CHARGED)).getAmplifier() + 1;
+
+                cir.setReturnValue(ChargedEffect.calculateDamage(amount, amp, dur, 0.1F, this.hasStatusEffect(InitEffects.CHARGED)));
+            }
         }
     }
 }

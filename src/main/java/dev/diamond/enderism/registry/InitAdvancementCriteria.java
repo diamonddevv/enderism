@@ -12,6 +12,7 @@ public class InitAdvancementCriteria implements RegistryInitializer {
     public static final EatCursedChorusAdvancementCriterion EAT_BOUND_CURSED_CHORUS = new EatCursedChorusAdvancementCriterion();
     public static final BounceOnFibrousChorusAdvancementCriterion BOUNCE_ON_FIBROUS_CHORUS = new BounceOnFibrousChorusAdvancementCriterion();
     public static final EmptyMulticlipAdvancementCriterion EMPTY_MULTICLIP = new EmptyMulticlipAdvancementCriterion();
+    public static final UseItemAdvancementCriterion USE_ITEM = new UseItemAdvancementCriterion();
 
     @Override
     public void register() {
@@ -20,6 +21,7 @@ public class InitAdvancementCriteria implements RegistryInitializer {
         reg(EAT_BOUND_CURSED_CHORUS);
         reg(BOUNCE_ON_FIBROUS_CHORUS);
         reg(EMPTY_MULTICLIP);
+        reg(USE_ITEM);
     }
 
     private static void reg(AbstractManualTriggerAdvancementCriterion adv) {

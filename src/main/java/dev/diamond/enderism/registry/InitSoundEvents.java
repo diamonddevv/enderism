@@ -25,6 +25,8 @@ public class InitSoundEvents implements RegistryInitializer {
     public static HashMap<String, SoundEvent> SHEET_RUSHE;
     public static HashMap<String, SoundEvent> SHEET_POLCOW;
 
+    public static SoundEvent STATIC_CORE_USE;
+
     @Override
     public void register() {
         CURSED_CHORUS_FRUIT_CHORUS_MAGNETITE_BIND = create("item.enderism.cursed_chorus.bind.chorus_magnetite");
@@ -47,6 +49,8 @@ public class InitSoundEvents implements RegistryInitializer {
         SHEET_POLCOW = createSheetMusic(EnderismMod.id("polcow"),
                 "otamatone"
         );
+
+        STATIC_CORE_USE = create("item.enderism.static_core.use");
     }
 
     private static SoundEvent create(String name) {
@@ -54,11 +58,16 @@ public class InitSoundEvents implements RegistryInitializer {
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
+
     public static HashMap<String, SoundEvent> createSheetMusic(Identifier songId, String... instruments) {
         HashMap<String, SoundEvent> hash = new HashMap<>();
+        addSheetMusic(hash, songId, instruments);
+        return hash;
+    }
+
+    public static void addSheetMusic(HashMap<String, SoundEvent> hash, Identifier songId, String... instruments) {
         for (String s : instruments) {
             hash.put(s, create(MusicSheetWrapper.getStringifiedSoundEventId(songId, s)));
         }
-        return hash;
     }
 }

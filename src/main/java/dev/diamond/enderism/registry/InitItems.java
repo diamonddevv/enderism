@@ -4,6 +4,7 @@ import dev.diamond.enderism.EnderismMod;
 import dev.diamond.enderism.item.CharmItem;
 import dev.diamond.enderism.item.CursedChorusItem;
 import dev.diamond.enderism.item.ShulkerShellmetItem;
+import dev.diamond.enderism.item.StaticCoreItem;
 import dev.diamond.enderism.item.material.AncientPlatedArmorMaterial;
 import dev.diamond.enderism.item.material.PirpellPlatedToolMaterial;
 import dev.diamond.enderism.item.music.InstrumentItem;
@@ -33,9 +34,11 @@ public class InitItems implements RegistryInitializer {
     public static MusicSheetItem MUSIC_SHEET = new MusicSheetItem(new FabricItemSettings().maxCount(1));
 
     public static CharmItem WANDERERS_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(75), 20 * 45);
-    public static CharmItem ENDSTONE_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(25), 20 * 15);
-    public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(38), 20 * 10);
-    public static CharmItem OBSIDIAN_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(50), 20 * 8);
+    public static CharmItem ENDSTONE_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(75), 20 * 10);
+    public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(100), 20 * 8);
+    public static CharmItem OBSIDIAN_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(150), 20 * 5);
+
+    public static StaticCoreItem STATIC_CORE = new StaticCoreItem(new FabricItemSettings().maxCount(16));
 
     public static Item PIRPELL_FRAGMENT = new Item(new FabricItemSettings());
     public static Item PIRPELL_INGOT = new Item(new FabricItemSettings());
@@ -67,6 +70,8 @@ public class InitItems implements RegistryInitializer {
         Registry.register(Registries.ITEM, EnderismMod.id("purpur_flute"), PURPUR_FLUTE);
         Registry.register(Registries.ITEM, EnderismMod.id("chorus_cello"), CHORUS_CELLO);
         Registry.register(Registries.ITEM, EnderismMod.id("vibratotamatone"), VIBRATOTAMATONE);
+
+        Registry.register(Registries.ITEM, EnderismMod.id("static_core"), STATIC_CORE);
 
         Registry.register(Registries.ITEM, EnderismMod.id("music_sheet"), MUSIC_SHEET);
 

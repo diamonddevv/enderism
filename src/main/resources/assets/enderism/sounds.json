@@ -25,9 +25,16 @@
   },
 
   "item.enderism.charm.use": {
-    "subtitle": "subtitle.enderism.charm_use",
+    "subtitle": "subtitle.enderism.charm.use",
     "sounds": [
-      "enderism:item/charm_use"
+      "enderism:item/charm/use1"
+    ]
+  },
+
+  "item.enderism.static_core.use": {
+    "subtitle": "subtitle.enderism.static_core.use",
+    "sounds": [
+      "enderism:item/static_core/use1"
     ]
   },
 

@@ -19,6 +19,7 @@
         "enderism:smithing/pirpell_plating/pickaxe",
         "enderism:smithing/pirpell_plating/hoe",
         "enderism:charm/obsidian_charm",
-        "enderism:conversions/pirpell_to_block"
+        "enderism:conversions/pirpell_to_block",
+        "enderism:conversions/ionised_iron_to_block"
     ]
 }

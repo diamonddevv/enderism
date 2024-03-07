@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "enderism:ionised_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "enderism:ionised_iron_block"
+  }
+}

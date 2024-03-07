@@ -27,8 +27,8 @@ import static net.minecraft.server.command.CommandManager.argument;
 
 public class InitCommands implements RegistryInitializer {
 
-    private static final LiteralArgumentBuilder<ServerCommandSource> SHCI_ROOT = CommandManager.literal("shci");
-    private static final LiteralArgumentBuilder<ServerCommandSource> SHEET_ROOT = CommandManager.literal("musicsheet");
+    private static final LiteralArgumentBuilder<ServerCommandSource> SHCI_ROOT = CommandManager.literal("shci").requires(s -> s.hasPermissionLevel(4));
+    private static final LiteralArgumentBuilder<ServerCommandSource> SHEET_ROOT = CommandManager.literal("musicsheet").requires(s -> s.hasPermissionLevel(4));
 
     @Override
     public void register() {

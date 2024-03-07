@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "enderism:ionised_iron_block"
+    }
+  ],
+  "result": {
+    "item": "enderism:ionised_iron_ingot",
+    "count": 9
+  }
+}
