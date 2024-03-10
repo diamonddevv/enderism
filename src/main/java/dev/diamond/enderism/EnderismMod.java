@@ -74,6 +74,7 @@ public class EnderismMod implements ModInitializer {
 				content.addAfter(InitItems.ANCIENT_SCRAP, InitItems.PIRPELL_FRAGMENT);
 				content.addAfter(InitItems.PIRPELL_FRAGMENT, InitItems.PIRPELL_INGOT);
 				content.addAfter(InitItems.PIRPELL_INGOT, InitItems.SCULK_SPINE);
+				content.addAfter(InitItems.SCULK_SPINE, InitItems.IONISED_IRON_INGOT);
 
 				content.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, InitItems.PIRPELL_PLATED_TOOL_UPGRADE);
 				content.addAfter(InitItems.PIRPELL_PLATED_TOOL_UPGRADE, InitItems.ANCIENT_PLATED_ARMOR_UPGRADE);
@@ -83,6 +84,7 @@ public class EnderismMod implements ModInitializer {
 				content.addAfter(Items.NETHERITE_BLOCK, getBlockItem(InitBlocks.PIRPELL_BLOCK));
 
 				content.addAfter(getBlockItem(InitBlocks.PIRPELL_BLOCK), getBlockItem(InitBlocks.PATTERNED_PIRPELL));
+				content.addAfter(getBlockItem(InitBlocks.PATTERNED_PIRPELL), getBlockItem(InitBlocks.IONISED_IRON_BLOCK));
 				//content.add(getBlockItem(InitBlocks.BAMBOO_SPIKE));
 			});
 
@@ -116,6 +118,9 @@ public class EnderismMod implements ModInitializer {
 				content.addAfter(InitItems.ANCIENT_NETHERITE_LEGGINGS, InitItems.ANCIENT_NETHERITE_BOOTS);
 
 				content.addAfter(Items.TURTLE_HELMET, InitItems.SHULKER_SHELLMET);
+
+				content.add(InitItems.LIGHTNING_BOTTLE);
+				content.add(InitItems.STATIC_CORE);
 
 				CharmItem.addAllCharms(content, InitItems.WANDERERS_CHARM);
 				CharmItem.addAllCharms(content, InitItems.ENDSTONE_CHARM);

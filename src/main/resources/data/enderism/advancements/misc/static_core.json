@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:adventure/root",
+  "parent": "enderism:misc/lightning_bottle",
   "requirements": [
     [
       "static"
@@ -22,11 +22,8 @@
   },
 
   "criteria": {
-    "charm": {
-      "trigger": "enderism:use_item",
-      "conditions": {
-        "identifier": "enderism:static_core"
-      }
+    "static": {
+      "trigger": "enderism:use_static_core"
     }
   }
 }

@@ -11,6 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
@@ -35,8 +36,8 @@ public class StaticCoreItem extends Item {
         player.getStackInHand(hand).decrement(1);
 
         player.getItemCooldownManager().set(this, COOLDOWN);
-        if (player instanceof ServerPlayerEntity) {
-            InitAdvancementCriteria.USE_ITEM.trigger((ServerPlayerEntity) player, player.getStackInHand(hand));
+        if (player instanceof ServerPlayerEntity spe) {
+            InitAdvancementCriteria.USE_STATIC_CORE.trigger(spe, player.getStackInHand(hand));
         }
 
         player.playSound(InitSoundEvents.STATIC_CORE_USE, 1.0f, random.nextFloat(0.5f, 1.5f));

@@ -28,9 +28,10 @@ public class EnderismMusicalInstrumentListener extends CognitionDataListener {
     }
 
     private static final String TRANSIENT_ID_FIELD = "transientId";
+
     public static final BiFunction<JsonObject, Gson, InstrumentWrapper> REMAPPER = (obj, gson) -> {
         InstrumentBean bean = gson.fromJson(obj, InstrumentBean.class); // new epic client based remapping
-        bean.nonSerializedIdentifier = obj.get("transientId").getAsString(); // we need to re-add the transient field because it's transient
+        bean.nonSerializedIdentifier = obj.get(TRANSIENT_ID_FIELD).getAsString(); // we need to re-add the transient field because it's transient
         return new InstrumentWrapper(bean);
     };
 
@@ -40,8 +41,8 @@ public class EnderismMusicalInstrumentListener extends CognitionDataListener {
             JsonObject json = cdr.getAsClass(JsonObject.class);
             boolean add = json.has(MusicInstrumentResourceType.ADDITIVE);
 
-            if (!add) json.addProperty("transientId", MusicInstrumentResourceType.getNSI(cdr.getId())); // we need to add the transient id because it is transient
-            else json.addProperty("transientId", json.get(MusicInstrumentResourceType.ADDITIVE).getAsString());
+            if (!add) json.addProperty(TRANSIENT_ID_FIELD, MusicInstrumentResourceType.getNSI(cdr.getId())); // we need to add the transient id because it is transient
+            else json.addProperty(TRANSIENT_ID_FIELD, json.get(MusicInstrumentResourceType.ADDITIVE).getAsString());
             return json;
         }).toList();
         arr.forEach(json -> json.addProperty(CognitionResourceManager.IDPARAM, InitResourceListener.INSTRUMENT_TYPE.getId().toString()));

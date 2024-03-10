@@ -244,13 +244,12 @@ public abstract class LivingEntityMixin extends Entity {
     @Unique
     private static void storeRetributionDmgIfPossible(LivingEntity target, float damageDealt) {
         if (target.hasStatusEffect(InitEffects.RETRIBUTION)) {
-            int lvl = target.getStatusEffect(InitEffects.RETRIBUTION).getAmplifier() + 1;
-            EnderismCCA.RetributionalDamageManager.addDmg(target, damageDealt * (.5 + (lvl / 10d)));
+            EnderismCCA.RetributionalDamageManager.addDmg(target, damageDealt);
         }
     }
 
     @Inject(at = @At("HEAD"), method = "modifyAppliedDamage", cancellable = true)
-    private void dialabs$injectStaticDamage(DamageSource source, float amount,
+    private void enderism$injectStaticDamage(DamageSource source, float amount,
                                             CallbackInfoReturnable<Float> cir) {
         if (source.getSource() instanceof LivingEntity attacker) {
             if (attacker.hasStatusEffect(InitEffects.CHARGED)) {

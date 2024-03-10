@@ -23,7 +23,7 @@ public class ChargedEffect extends StatusEffect {
         if (enemyHasChargedEffect) {
             return origin;
         } else {
-            return (base * ((durationInTicks / 20) * amplifier));
+            return origin + (base * ((durationInTicks / 20) * amplifier));
         }
 
         // 5s remain, amp 1, attacked w/out charged = 0.5dmg attack bonus

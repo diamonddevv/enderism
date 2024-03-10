@@ -19,6 +19,8 @@ public class RetributionEffect extends StatusEffect {
 
         // Apply Retibutional Damage
         double attributedDamage = EnderismCCA.RetributionalDamageManager.getDmg(entity);
+        int lvl = amplifier + 1;
+        attributedDamage *= (.5 + (lvl / 5d));
         entity.damage(InitDamageSources.get(entity, InitDamageSources.RETRIBUTION, null, null), (float) attributedDamage);
         EnderismCCA.RetributionalDamageManager.resetDmg(entity); // Reset Retributional Damage
     }

@@ -12,6 +12,11 @@
 
   "item.enderism.shulker_shellmet": "Shulker Shellmet",
 
+  "item.enderism.static_core": "Static Core",
+  "item.enderism.ionised_iron_ingot": "Ionised Iron Ingot",
+  "block.enderism.ionised_iron_block": "Ionised Iron Block",
+  "item.enderism.lightning_bottle": "Lightning in a Bottle",
+
   "item.minecraft.potion.effect.void_recall_short": "Potion of Void Recalling",
   "item.minecraft.potion.effect.void_recall_long": "Lengthened Potion of Void Recalling",
   "item.minecraft.splash_potion.effect.void_recall_short": "Splash Potion of Void Recalling",
@@ -149,6 +154,8 @@
   "advancement.enderism.bad_charms.desc": "Use Wanderer's Charms containing every negative vanilla effect",
   "advancement.enderism.multiclip.title": "The Name's Bond",
   "advancement.enderism.multiclip.desc": "Fully load a crossbow with Multiclip, then fire all the projectiles",
+  "advancement.enderism.lightning_bottle.title": "Energy Drink",
+  "advancement.enderism.lightning_bottle.desc": "Capture lightning in a bottle",
   "advancement.enderism.static_core.title": "Electric Avenue",
   "advancement.enderism.static_core.desc": "Use a Static Core",
 

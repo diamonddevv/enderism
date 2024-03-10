@@ -21,6 +21,7 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
     // Purposeful Blocks
     public static Block CHORUS_MAGNETITE = new Block(blankSettings().sounds(BlockSoundGroup.LODESTONE).luminance(8).strength(1.5f, 1.2f).pistonBehavior(PistonBehavior.IGNORE));
     public static FibrousChorusBlock FIBROUS_CHORUS = new FibrousChorusBlock(blankSettings().strength(2.0f, 2.0f));
+    public static Block IONISED_IRON_BLOCK = new Block(blankSettings().strength(10.0f, 8.0f));
     //public static BambooSpikeBlock BAMBOO_SPIKE = new BambooSpikeBlock(blankSettings().breakInstantly().burnable().strength(0.5f, 0.5f));
 
     @Override
@@ -29,6 +30,7 @@ public class InitBlocks implements RegistryInitializer, BlockRegistryHelper {
         registerBlockAndItem(FIBROUS_CHORUS, EnderismMod.id("fibrous_chorus"), new FabricItemSettings());
         registerBlockAndItem(PIRPELL_BLOCK, EnderismMod.id("pirpell_block"), new FabricItemSettings());
         registerBlockAndItem(PATTERNED_PIRPELL, EnderismMod.id("patterned_pirpell"), new FabricItemSettings());
+        registerBlockAndItem(IONISED_IRON_BLOCK, EnderismMod.id("ionised_iron_block"), new FabricItemSettings());
         //registerBlockAndItem(BAMBOO_SPIKE, EnderismMod.id("bamboo_spike"), new FabricItemSettings());
 
     }

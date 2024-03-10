@@ -67,7 +67,7 @@ public class InitConfig implements RegistryInitializer {
             @SerializedName("effectId") public String id;
             @SerializedName("maxDurationSecs") public int maxDurSecs;
             @SerializedName("maxPotency") public int maxPotency;
-            @SerializedName("weight") public int weight;
+            @SerializedName("weight") public int weight; // defaults to 50
             @SerializedName("minEmeraldCost") public int minCost; // not functional yet
         }
     }

@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:adventure/root",
+  "requirements": [
+    [
+      "bottle"
+    ]
+  ],
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.enderism.lightning_bottle.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "enderism:lightning_bottle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.enderism.lightning_bottle.title"
+    }
+  },
+
+  "criteria": {
+    "bottle": {
+      "trigger": "enderism:capture_lightning"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "resource_type": "enderism:lightning_recipe",
+
+    "from": "minecraft:iron_block",
+    "to": "enderism:ionised_iron_block"
+}

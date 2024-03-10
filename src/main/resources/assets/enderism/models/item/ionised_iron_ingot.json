@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "enderism:item/static_core"
+    "layer0": "enderism:item/ionised_iron_ingot"
   }
 }

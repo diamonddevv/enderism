@@ -1,10 +1,7 @@
 package dev.diamond.enderism.registry;
 
 import dev.diamond.enderism.EnderismMod;
-import dev.diamond.enderism.item.CharmItem;
-import dev.diamond.enderism.item.CursedChorusItem;
-import dev.diamond.enderism.item.ShulkerShellmetItem;
-import dev.diamond.enderism.item.StaticCoreItem;
+import dev.diamond.enderism.item.*;
 import dev.diamond.enderism.item.material.AncientPlatedArmorMaterial;
 import dev.diamond.enderism.item.material.PirpellPlatedToolMaterial;
 import dev.diamond.enderism.item.music.InstrumentItem;
@@ -38,7 +35,9 @@ public class InitItems implements RegistryInitializer {
     public static CharmItem PURPUR_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(100), 20 * 8);
     public static CharmItem OBSIDIAN_CHARM = new CharmItem(new FabricItemSettings().maxCount(1).maxDamage(150), 20 * 5);
 
+    public static Item IONISED_IRON_INGOT = new Item(new FabricItemSettings());
     public static StaticCoreItem STATIC_CORE = new StaticCoreItem(new FabricItemSettings().maxCount(16));
+    public static LightningBottleItem LIGHTNING_BOTTLE = new LightningBottleItem(new FabricItemSettings().maxCount(4));
 
     public static Item PIRPELL_FRAGMENT = new Item(new FabricItemSettings());
     public static Item PIRPELL_INGOT = new Item(new FabricItemSettings());
@@ -71,7 +70,9 @@ public class InitItems implements RegistryInitializer {
         Registry.register(Registries.ITEM, EnderismMod.id("chorus_cello"), CHORUS_CELLO);
         Registry.register(Registries.ITEM, EnderismMod.id("vibratotamatone"), VIBRATOTAMATONE);
 
+        Registry.register(Registries.ITEM, EnderismMod.id("ionised_iron_ingot"), IONISED_IRON_INGOT);
         Registry.register(Registries.ITEM, EnderismMod.id("static_core"), STATIC_CORE);
+        Registry.register(Registries.ITEM, EnderismMod.id("lightning_bottle"), LIGHTNING_BOTTLE);
 
         Registry.register(Registries.ITEM, EnderismMod.id("music_sheet"), MUSIC_SHEET);
 
