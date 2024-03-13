@@ -3,6 +3,7 @@ package dev.diamond.enderism.registry;
 import net.diamonddev.libgenetics.common.api.v1.interfaces.RegistryInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.fabric.mixin.gamerule.GameRulesIntRuleAccessor;
 import net.minecraft.world.GameRules;
 
 public class InitGamerules implements RegistryInitializer {
@@ -16,6 +17,7 @@ public class InitGamerules implements RegistryInitializer {
     public static GameRules.Key<GameRules.IntRule> FIBROUS_CHORUS_MAX_BOUNCE_POWER_TIMES_HUNDRED;
     public static GameRules.Key<GameRules.IntRule> STATIC_CORE_LENGTH;
     public static GameRules.Key<GameRules.IntRule> STATIC_CORE_STRENGTH;
+    public static GameRules.Key<GameRules.BooleanRule> AERODYNAMIC_DIVEBOMB;
 
     @Override
     public void register() {
@@ -28,5 +30,6 @@ public class InitGamerules implements RegistryInitializer {
         FIBROUS_CHORUS_MAX_BOUNCE_POWER_TIMES_HUNDRED = GameRuleRegistry.register("fibrousChorusMaxBouncePowerTimesHundred", GameRules.Category.MOBS, GameRuleFactory.createIntRule(500));
         STATIC_CORE_LENGTH = GameRuleRegistry.register("staticCoreDuration", GameRules.Category.MOBS, GameRuleFactory.createIntRule(30));
         STATIC_CORE_STRENGTH = GameRuleRegistry.register("staticCoreAmplifier", GameRules.Category.MOBS, GameRuleFactory.createIntRule(0));
+        AERODYNAMIC_DIVEBOMB = GameRuleRegistry.register("aerodynamicDivebomb", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
     }
 }

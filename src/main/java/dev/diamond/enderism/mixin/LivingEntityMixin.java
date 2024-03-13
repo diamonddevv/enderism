@@ -69,6 +69,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract boolean isFallFlying();
 
+    @Shadow private BlockPos lastBlockPos;
+
+    @Shadow public abstract int getRoll();
+
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -192,16 +196,46 @@ public abstract class LivingEntityMixin extends Entity {
         if (this.hasStackEquipped(EquipmentSlot.CHEST)) {
             if (InitEnchants.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
                 ItemStack stack = this.getEquippedStack(EquipmentSlot.CHEST);
-                if (ElytraItem.isUsable(stack)) {
-                    if (this.isFallFlying()) {
-                        int level = EnchantHelper.getEnchantmentLevel(stack, InitEnchants.AERODYNAMIC);
-                        double calc = (level * 0.00085) + 1;
-                        return original.call(instance, x, y, z).multiply(calc, 1, calc);
+                if (EnchantHelper.hasEnchantment(InitEnchants.AERODYNAMIC, stack)) {
+                    if (ElytraItem.isUsable(stack)) {
+                        if (this.isFallFlying()) {
+                            int level = EnchantHelper.getEnchantmentLevel(stack, InitEnchants.AERODYNAMIC);
+                            double calc = (level * 0.00085) + 1;
+                            return original.call(instance, x, y, z).multiply(calc, 1, calc);
+                        }
                     }
                 }
             }
         }
         return original.call(instance, x, y, z);
+    }
+
+
+    @Inject(
+            method = "tick",
+            at = @At(
+                    value = "TAIL"
+            )
+    )
+    private void enderism$aerodynamicDivebomb(CallbackInfo ci) {
+        if (this.hasStackEquipped(EquipmentSlot.CHEST)) {
+            if (InitEnchants.isEnchantableElytraItem(this.getEquippedStack(EquipmentSlot.CHEST).getItem())) {
+                ItemStack stack = this.getEquippedStack(EquipmentSlot.CHEST);
+                if (EnchantHelper.hasEnchantment(InitEnchants.AERODYNAMIC, stack)) {
+                    if (ElytraItem.isUsable(stack)) {
+                        if (this.isFallFlying()) {
+                            if (this.getPitch() < 0) {
+                                if (this.isOnGround()) {
+                                    int level = EnchantHelper.getEnchantmentLevel(stack, InitEnchants.AERODYNAMIC);
+                                    float calc = (level * 5) + 1;
+                                    getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), calc, World.ExplosionSourceType.NONE);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

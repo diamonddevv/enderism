@@ -65,10 +65,10 @@ public class InitConfig implements RegistryInitializer {
 
         public static class EffectOverride {
             @SerializedName("effectId") public String id;
-            @SerializedName("maxDurationSecs") public int maxDurSecs;
-            @SerializedName("maxPotency") public int maxPotency;
-            @SerializedName("weight") public int weight; // defaults to 50
-            @SerializedName("minEmeraldCost") public int minCost; // not functional yet
+            @SerializedName("maxDurationSecs") public int maxDurSecs = 120;
+            @SerializedName("maxPotency") public int maxPotency = 1;
+            @SerializedName("weight") public int weight = 50;
+            @SerializedName("minEmeraldCost") public int minCost = 30;
         }
     }
 }
